@@ -17,7 +17,7 @@
         },
         {
           "id": "Rell",
-          "tier": "Z"
+          "tier": "S"
         },
         {
           "id": "Jax",
@@ -365,131 +365,131 @@
       "champions": [
         {
           "id": "Braum",
-          "tier": "S"
+          "tier": "Z"
         },
         {
           "id": "Janna",
-          "tier": "S"
+          "tier": "Z"
         },
         {
           "id": "Thresh",
-          "tier": "S"
+          "tier": "Z"
         },
         {
           "id": "Leona",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Rell",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Nautilus",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Blitzcrank",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Alistar",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Lulu",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Zilean",
-          "tier": "A"
+          "tier": "S"
         },
         {
           "id": "Zyra",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Seraphine",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Karma",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Neeko",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Milio",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Rakan",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Yuumi",
-          "tier": "B"
+          "tier": "A"
         },
         {
           "id": "Maokai",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Swain",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Lux",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "TahmKench",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Soraka",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Poppy",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Senna",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Bard",
-          "tier": "C"
+          "tier": "B"
         },
         {
           "id": "Renata",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Taric",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Sona",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Morgana",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Brand",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Xerath",
-          "tier": "D"
+          "tier": "C"
         },
         {
           "id": "Pyke",
-          "tier": "D"
+          "tier": "C"
         }
       ]
     }
