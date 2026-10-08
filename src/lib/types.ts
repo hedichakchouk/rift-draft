@@ -23,5 +23,8 @@ export interface Champion {
   key: string     // numeric key, e.g. "21"
   name: string    // display name
   tags: string[]
+  info: { attack: number; defense: number; magic: number }
 }
 export interface Spell { name: string; image: string }
+
+export const LANE_SHORT: Record<Lane, string> = { top: 'TOP', jungle: 'JGL', mid: 'MID', bot: 'BOT', support: 'SUP' }

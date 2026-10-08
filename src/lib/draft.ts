@@ -1,4 +1,4 @@
-import { LANES, TIER_SCORE, type Lane, type Player } from './types'
+import { LANES, TIER_SCORE, type Champion, type Lane, type Player, type Tier } from './types'
 
 export interface Slot { player: string | null; champ: string | null }
 export type Draft = Record<Lane, Slot>
@@ -23,17 +23,13 @@ export function autoAssign(players: Player[]): Record<Lane, string | null> {
   const cur: (number | null)[] = []
   const rec = (i: number, score: number) => {
     if (i === LANES.length) {
-      if (score > best.score) {
-        best.score = score
-        best.pick = cur.map((x) => (x === null ? null : players[x].name))
-      }
+      if (score > best.score) { best.score = score; best.pick = cur.map((x) => (x === null ? null : players[x].name)) }
       return
     }
     let any = false
     for (let p = 0; p < players.length; p++) {
       if (used.has(p)) continue
-      any = true
-      used.add(p); cur[i] = p
+      any = true; used.add(p); cur[i] = p
       rec(i + 1, score + laneScore(players[p], LANES[i]))
       used.delete(p)
     }
@@ -41,6 +37,22 @@ export function autoAssign(players: Player[]): Record<Lane, string | null> {
   }
   rec(0, 0)
   return Object.fromEntries(LANES.map((l, i) => [l, best.pick[i] ?? null])) as Record<Lane, string | null>
+}
+
+export const poolTier = (p: Player | undefined, champId: string | null): Tier | undefined =>
+  p && champId ? p.champions.find((c) => c.id === champId)?.tier : undefined
+
+/** Damage balance (0 = all AD, 100 = all AP) and role tag counts for the placed champions. */
+export function teamStats(draft: Draft, byId: Map<string, Champion>) {
+  let ad = 0, ap = 0
+  const tags: Record<string, number> = {}
+  for (const l of LANES) {
+    const c = draft[l].champ ? byId.get(draft[l].champ!) : undefined
+    if (!c) continue
+    ad += c.info.attack; ap += c.info.magic
+    c.tags.forEach((t) => (tags[t] = (tags[t] ?? 0) + 1))
+  }
+  return { apShare: ad + ap === 0 ? null : Math.round((ap / (ad + ap)) * 100), tags }
 }
 
 export const encodeDraft = (d: Draft) => btoa(encodeURIComponent(JSON.stringify(d)))

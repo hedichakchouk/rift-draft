@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/components/DraftBoard.tsx","./src/components/Guess.tsx","./src/components/Sidebar.tsx","./src/components/TierList.tsx","./src/lib/ddragon.ts","./src/lib/draft.ts","./src/lib/types.ts"],"version":"5.9.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/DraftPage.tsx","./src/components/Guess.tsx","./src/components/RiftMap.tsx","./src/components/TierList.tsx","./src/lib/ddragon.ts","./src/lib/dnd.tsx","./src/lib/draft.ts","./src/lib/types.ts"],"version":"5.9.3"}

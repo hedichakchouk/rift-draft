@@ -6,37 +6,54 @@ interface Props { players: Player[]; byId: Map<string, Champion> }
 
 export default function TierList({ players, byId }: Props) {
   const [name, setName] = useState(players[0]?.name)
-  const p = players.find((x) => x.name === name) ?? players[0]
   const sorted = [...players].sort((a, b) => LANES.indexOf(a.lane) - LANES.indexOf(b.lane))
-  if (!p) return <p className="muted">No players yet — add some in src/data/players.json</p>
+  const p = players.find((x) => x.name === name) ?? sorted[0]
+  if (!p) return <p className="empty">No players yet — add some in <code>src/data/players.json</code></p>
 
   return (
-    <section>
-      <div className="toolbar"><h2>Squad Tier Lists</h2></div>
-      <div className="roles players-tabs">
+    <div className="tier-page">
+      <div className="roster">
         {sorted.map((x) => (
-          <button key={x.name} className={x.name === p.name ? 'on' : ''} onClick={() => setName(x.name)}>
-            {x.name} · {LANE_LABEL[x.lane]}
+          <button key={x.name} className={`roster-card ${x.name === p.name ? 'on' : ''}`} onClick={() => setName(x.name)}>
+            <span className="avatar">{x.name[0]}</span>
+            <span className="rc-name">{x.name}</span>
+            <span className="rc-lane">{LANE_LABEL[x.lane]}</span>
+            <span className="rc-count">{x.champions.length} champs</span>
           </button>
         ))}
       </div>
-      <h3>{p.name} <span className="muted">— {LANE_LABEL[p.lane]} · {p.champions.length} champions</span></h3>
-      {p.notes && <p className="muted">{p.notes}</p>}
-      {p.champions.length === 0 && <p className="muted">No champions added yet.</p>}
-      {TIERS.map((t) => {
-        const row = p.champions.filter((c) => c.tier === t)
-        if (row.length === 0 && (t === 'C' || t === 'D')) return null
-        return (
-          <div className="tier-row" key={t}>
-            <div className={`tier-label t-${t}`}>{t}<small>{TIER_HINT[t]}</small></div>
-            <div className="tier-players">
-              {row.map((c) => (
-                <img key={c.id} className="tier-champ" src={iconUrl(c.id)} alt={c.id} title={byId.get(c.id)?.name ?? c.id} loading="lazy" />
-              ))}
-            </div>
+
+      <section className="card">
+        <div className="card-head">
+          <div>
+            <h2>{p.name}'s tier list</h2>
+            <p className="sub">{LANE_LABEL[p.lane]} main · {p.champions.length} champions</p>
           </div>
-        )
-      })}
-    </section>
+        </div>
+        {p.notes && <p className="sub">{p.notes}</p>}
+        {p.champions.length === 0 && (
+          <p className="empty">No champions yet. Add them to <code>src/data/players.json</code> like <code>{`{ "id": "Ahri", "tier": "Z" }`}</code>.</p>
+        )}
+        <div className="tiers">
+          {TIERS.map((t) => {
+            const row = p.champions.filter((c) => c.tier === t)
+            if (row.length === 0 && (t === 'C' || t === 'D')) return null
+            return (
+              <div className="tier-row" key={t}>
+                <div className={`tier-label t-${t}`}><b>{t}</b><small>{TIER_HINT[t]}</small></div>
+                <div className="tier-champs">
+                  {row.map((c) => (
+                    <div className="champ" key={c.id} title={byId.get(c.id)?.name ?? c.id}>
+                      <img src={iconUrl(c.id)} alt={byId.get(c.id)?.name ?? c.id} loading="lazy" />
+                      <span>{byId.get(c.id)?.name ?? c.id}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </div>
   )
 }
