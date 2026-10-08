@@ -1,10 +1,487 @@
 {
-  "_help": "tier: Z = blind pick / best performance, S = confident, A = decent, B = can play but rather not (C/D optional). lane = main lane (top/jungle/mid/bot/support). champions use Data Dragon ids, e.g. MissFortune, LeeSin, KogMaw.",
+  "_help": "tier: Z = blind pick / best performance, S = confident, A = decent, B = can play but rather not (C/D optional). lane = main lane. champions use Data Dragon ids (e.g. MissFortune, MonkeyKing = Wukong). Faces: put public/avatars/<name in lowercase>.png",
   "players": [
-    { "name": "Bullet", "lane": "top", "champions": [] },
-    { "name": "Aster", "lane": "jungle", "champions": [] },
-    { "name": "Hama", "lane": "mid", "champions": [] },
-    { "name": "Omar", "lane": "bot", "champions": [] },
-    { "name": "Hach", "lane": "support", "champions": [] }
+    {
+      "name": "Bullet",
+      "lane": "top",
+      "champions": [
+        {
+          "id": "Camille",
+          "tier": "Z"
+        },
+        {
+          "id": "Zaahen",
+          "tier": "Z"
+        },
+        {
+          "id": "Ambessa",
+          "tier": "Z"
+        },
+        {
+          "id": "Jax",
+          "tier": "Z"
+        },
+        {
+          "id": "Jayce",
+          "tier": "S"
+        },
+        {
+          "id": "Malphite",
+          "tier": "S"
+        },
+        {
+          "id": "Renekton",
+          "tier": "S"
+        },
+        {
+          "id": "Mordekaiser",
+          "tier": "S"
+        },
+        {
+          "id": "MonkeyKing",
+          "tier": "S"
+        },
+        {
+          "id": "Kled",
+          "tier": "S"
+        },
+        {
+          "id": "Gwen",
+          "tier": "S"
+        },
+        {
+          "id": "Sett",
+          "tier": "A"
+        },
+        {
+          "id": "Gragas",
+          "tier": "A"
+        },
+        {
+          "id": "DrMundo",
+          "tier": "A"
+        },
+        {
+          "id": "Shen",
+          "tier": "A"
+        },
+        {
+          "id": "Vladimir",
+          "tier": "A"
+        },
+        {
+          "id": "Kayle",
+          "tier": "A"
+        },
+        {
+          "id": "Pantheon",
+          "tier": "A"
+        },
+        {
+          "id": "Ryze",
+          "tier": "A"
+        },
+        {
+          "id": "Volibear",
+          "tier": "A"
+        },
+        {
+          "id": "Fiora",
+          "tier": "A"
+        },
+        {
+          "id": "Ornn",
+          "tier": "B"
+        },
+        {
+          "id": "Maokai",
+          "tier": "B"
+        },
+        {
+          "id": "Chogath",
+          "tier": "B"
+        },
+        {
+          "id": "Gnar",
+          "tier": "B"
+        },
+        {
+          "id": "Trundle",
+          "tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "Aster",
+      "lane": "jungle",
+      "champions": [
+        {
+          "id": "Kayn",
+          "tier": "Z"
+        },
+        {
+          "id": "XinZhao",
+          "tier": "Z"
+        },
+        {
+          "id": "Diana",
+          "tier": "S"
+        },
+        {
+          "id": "DrMundo",
+          "tier": "S"
+        },
+        {
+          "id": "Ambessa",
+          "tier": "S"
+        },
+        {
+          "id": "Vi",
+          "tier": "S"
+        },
+        {
+          "id": "Chogath",
+          "tier": "A"
+        },
+        {
+          "id": "RekSai",
+          "tier": "A"
+        },
+        {
+          "id": "Naafiri",
+          "tier": "A"
+        },
+        {
+          "id": "Elise",
+          "tier": "A"
+        },
+        {
+          "id": "Jax",
+          "tier": "A"
+        },
+        {
+          "id": "Khazix",
+          "tier": "A"
+        },
+        {
+          "id": "Belveth",
+          "tier": "B"
+        },
+        {
+          "id": "Nocturne",
+          "tier": "B"
+        },
+        {
+          "id": "Sejuani",
+          "tier": "B"
+        },
+        {
+          "id": "MonkeyKing",
+          "tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "Hama",
+      "lane": "mid",
+      "champions": [
+        {
+          "id": "Zed",
+          "tier": "Z"
+        },
+        {
+          "id": "Akali",
+          "tier": "Z"
+        },
+        {
+          "id": "Kassadin",
+          "tier": "S"
+        },
+        {
+          "id": "Naafiri",
+          "tier": "S"
+        },
+        {
+          "id": "Yone",
+          "tier": "S"
+        },
+        {
+          "id": "Yasuo",
+          "tier": "S"
+        },
+        {
+          "id": "Sylas",
+          "tier": "S"
+        },
+        {
+          "id": "Diana",
+          "tier": "S"
+        },
+        {
+          "id": "Irelia",
+          "tier": "A"
+        },
+        {
+          "id": "Veigar",
+          "tier": "A"
+        },
+        {
+          "id": "Leblanc",
+          "tier": "A"
+        },
+        {
+          "id": "Lissandra",
+          "tier": "A"
+        },
+        {
+          "id": "Ahri",
+          "tier": "A"
+        },
+        {
+          "id": "Kayle",
+          "tier": "A"
+        },
+        {
+          "id": "Syndra",
+          "tier": "A"
+        },
+        {
+          "id": "Orianna",
+          "tier": "B"
+        },
+        {
+          "id": "Lux",
+          "tier": "B"
+        },
+        {
+          "id": "Aurora",
+          "tier": "B"
+        },
+        {
+          "id": "Malzahar",
+          "tier": "B"
+        },
+        {
+          "id": "Vladimir",
+          "tier": "B"
+        },
+        {
+          "id": "Galio",
+          "tier": "B"
+        },
+        {
+          "id": "Ekko",
+          "tier": "B"
+        },
+        {
+          "id": "Fizz",
+          "tier": "B"
+        },
+        {
+          "id": "Viktor",
+          "tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "Omar",
+      "lane": "bot",
+      "champions": [
+        {
+          "id": "Lux",
+          "tier": "Z"
+        },
+        {
+          "id": "MissFortune",
+          "tier": "Z"
+        },
+        {
+          "id": "Jhin",
+          "tier": "Z"
+        },
+        {
+          "id": "Ezreal",
+          "tier": "S"
+        },
+        {
+          "id": "Jinx",
+          "tier": "S"
+        },
+        {
+          "id": "Ziggs",
+          "tier": "S"
+        },
+        {
+          "id": "Veigar",
+          "tier": "S"
+        },
+        {
+          "id": "Brand",
+          "tier": "S"
+        },
+        {
+          "id": "Twitch",
+          "tier": "A"
+        },
+        {
+          "id": "Sivir",
+          "tier": "A"
+        },
+        {
+          "id": "Tristana",
+          "tier": "A"
+        },
+        {
+          "id": "Syndra",
+          "tier": "A"
+        },
+        {
+          "id": "Yasuo",
+          "tier": "B"
+        },
+        {
+          "id": "Ashe",
+          "tier": "B"
+        },
+        {
+          "id": "Smolder",
+          "tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "Hach",
+      "lane": "support",
+      "champions": [
+        {
+          "id": "Braum",
+          "tier": "S"
+        },
+        {
+          "id": "Janna",
+          "tier": "S"
+        },
+        {
+          "id": "Thresh",
+          "tier": "S"
+        },
+        {
+          "id": "Leona",
+          "tier": "A"
+        },
+        {
+          "id": "Rell",
+          "tier": "A"
+        },
+        {
+          "id": "Nautilus",
+          "tier": "A"
+        },
+        {
+          "id": "Blitzcrank",
+          "tier": "A"
+        },
+        {
+          "id": "Alistar",
+          "tier": "A"
+        },
+        {
+          "id": "Lulu",
+          "tier": "A"
+        },
+        {
+          "id": "Zilean",
+          "tier": "A"
+        },
+        {
+          "id": "Nami",
+          "tier": "B"
+        },
+        {
+          "id": "Seraphine",
+          "tier": "B"
+        },
+        {
+          "id": "Karma",
+          "tier": "B"
+        },
+        {
+          "id": "Neeko",
+          "tier": "B"
+        },
+        {
+          "id": "Milio",
+          "tier": "B"
+        },
+        {
+          "id": "Rakan",
+          "tier": "B"
+        },
+        {
+          "id": "Yuumi",
+          "tier": "B"
+        },
+        {
+          "id": "Maokai",
+          "tier": "C"
+        },
+        {
+          "id": "Swain",
+          "tier": "C"
+        },
+        {
+          "id": "Lux",
+          "tier": "C"
+        },
+        {
+          "id": "TahmKench",
+          "tier": "C"
+        },
+        {
+          "id": "Soraka",
+          "tier": "C"
+        },
+        {
+          "id": "Poppy",
+          "tier": "C"
+        },
+        {
+          "id": "Senna",
+          "tier": "C"
+        },
+        {
+          "id": "Bard",
+          "tier": "C"
+        },
+        {
+          "id": "Renata",
+          "tier": "D"
+        },
+        {
+          "id": "Taric",
+          "tier": "D"
+        },
+        {
+          "id": "Sona",
+          "tier": "D"
+        },
+        {
+          "id": "Morgana",
+          "tier": "D"
+        },
+        {
+          "id": "Zyra",
+          "tier": "D"
+        },
+        {
+          "id": "Xerath",
+          "tier": "D"
+        },
+        {
+          "id": "Pyke",
+          "tier": "D"
+        }
+      ]
+    }
   ]
 }

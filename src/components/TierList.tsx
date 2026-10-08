@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Avatar from './Avatar'
 import { iconUrl } from '../lib/ddragon'
 import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
@@ -15,7 +16,7 @@ export default function TierList({ players, byId }: Props) {
       <div className="roster">
         {sorted.map((x) => (
           <button key={x.name} className={`roster-card ${x.name === p.name ? 'on' : ''}`} onClick={() => setName(x.name)}>
-            <span className="avatar">{x.name[0]}</span>
+            <Avatar key={x.name} name={x.name} size={46} />
             <span className="rc-name">{x.name}</span>
             <span className="rc-lane">{LANE_LABEL[x.lane]}</span>
             <span className="rc-count">{x.champions.length} champs</span>
@@ -25,9 +26,12 @@ export default function TierList({ players, byId }: Props) {
 
       <section className="card">
         <div className="card-head">
-          <div>
-            <h2>{p.name}'s tier list</h2>
-            <p className="sub">{LANE_LABEL[p.lane]} main · {p.champions.length} champions</p>
+          <div className="who">
+            <Avatar key={p.name} name={p.name} size={64} />
+            <div>
+              <h2>{p.name}'s tier list</h2>
+              <p className="sub">{LANE_LABEL[p.lane]} main · {p.champions.length} champions</p>
+            </div>
           </div>
         </div>
         {p.notes && <p className="sub">{p.notes}</p>}

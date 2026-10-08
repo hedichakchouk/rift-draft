@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import Avatar from './Avatar'
 import RiftMap from './RiftMap'
 import { DndProvider, useDnd } from '../lib/dnd'
 import { iconUrl } from '../lib/ddragon'
@@ -127,6 +128,7 @@ function Board({ players, byId, draft, setDraft, tapLane, selected, setFocus }: 
               </div>
               <div className="plate">
                 <span className="lane-tag">{LANE_SHORT[l]}</span>
+                {p && <Avatar key={p.name} name={p.name} size={26} />}
                 <select
                   value={s.player ?? ''}
                   onChange={(e) => { setDraft((d) => ({ ...d, [l]: { ...d[l], player: e.target.value || null } })); if (e.target.value) setFocus(e.target.value) }}
@@ -170,6 +172,7 @@ function Board({ players, byId, draft, setDraft, tapLane, selected, setFocus }: 
   )
 }
 
+const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '')
 const ROLES = ['All', 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']
 
 function Picker({ players, champs, draft, selected, setSelected, focus, setFocus }: Props & {
@@ -182,7 +185,7 @@ function Picker({ players, champs, draft, selected, setSelected, focus, setFocus
   const placed = new Set(LANES.map((l) => draft[l].champ).filter(Boolean))
   const list = useMemo(
     () => champs.filter((c) =>
-      c.name.toLowerCase().includes(q.toLowerCase()) &&
+      (norm(c.name).includes(norm(q)) || norm(c.id).includes(norm(q))) &&
       (role === 'All' || c.tags.includes(role)) &&
       (!pool || pool.some((e) => e.id === c.id))),
     [champs, q, role, pool],
@@ -197,11 +200,12 @@ function Picker({ players, champs, draft, selected, setSelected, focus, setFocus
           <button key={p.name} className={focus === p.name ? 'on' : ''} onClick={() => setFocus(p.name)} title={`${p.name}'s pool`}>{p.name}</button>
         ))}
       </div>
-      <input className="search" placeholder="Search champion…" value={q} onChange={(e) => setQ(e.target.value)} />
+      <input className="search" type="search" placeholder="Search champion…" value={q} onChange={(e) => setQ(e.target.value)} autoComplete="off" spellCheck={false} />
       <div className="chips">
         {ROLES.map((r) => <button key={r} className={role === r ? 'on' : ''} onClick={() => setRole(r)}>{r}</button>)}
       </div>
       {pool && pool.length === 0 && <p className="empty">{focus} has no champions yet. Add them in <code>src/data/players.json</code>.</p>}
+      {list.length === 0 && !(pool && pool.length === 0) && <p className="empty">No champion matches “{q}”.</p>}
       <div className="grid">
         {list.map((c) => {
           const t = pool?.find((e) => e.id === c.id)?.tier
