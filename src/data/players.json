@@ -1,0 +1,15 @@
+{
+  "_help": "Add players here. tier: S/A/B/C/D. lanes = how good they are per lane. champions = their pool (id = Data Dragon id, e.g. 'MissFortune', 'Ahri', 'LeeSin').",
+  "players": [
+    {
+      "name": "Example Player",
+      "tier": "A",
+      "lanes": { "top": "C", "jungle": "B", "mid": "A", "bot": "S", "support": "B" },
+      "champions": [
+        { "id": "Ahri", "tier": "S" },
+        { "id": "Jinx", "tier": "A" }
+      ],
+      "notes": "Replace me with real data"
+    }
+  ]
+}
