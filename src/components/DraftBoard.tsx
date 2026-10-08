@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { iconUrl } from '../lib/ddragon'
-import { autoAssign, decodeDraft, emptyDraft, encodeDraft, type Draft } from '../lib/draft'
+import { autoAssign, decodeDraft, defaultDraft, encodeDraft, laneTier, type Draft } from '../lib/draft'
 import { LANES, LANE_LABEL, type Champion, type Lane, type Player } from '../lib/types'
 
 interface Props {
@@ -19,13 +19,13 @@ const POS: Record<Lane, { left: number; top: number }> = {
   support: { left: 90, top: 62 },
 }
 
-function initial(): Draft {
+function initial(players: Player[]): Draft {
   const m = location.hash.match(/[?&]d=([^&]+)/)
-  return (m && decodeDraft(m[1])) || emptyDraft()
+  return (m && decodeDraft(m[1])) || defaultDraft(players)
 }
 
 export default function DraftBoard({ players, byId, selected, clearSelected }: Props) {
-  const [draft, setDraft] = useState<Draft>(initial)
+  const [draft, setDraft] = useState<Draft>(() => initial(players))
   const [copied, setCopied] = useState(false)
   const [over, setOver] = useState<Lane | null>(null)
 
@@ -59,7 +59,7 @@ export default function DraftBoard({ players, byId, selected, clearSelected }: P
         <h2>Draft Board</h2>
         <div className="btns">
           <button onClick={autoFill}>✨ Auto best lineup</button>
-          <button onClick={() => setDraft(emptyDraft())}>Clear</button>
+          <button onClick={() => setDraft(defaultDraft(players))}>Clear</button>
           <button onClick={share}>{copied ? 'Copied!' : '🔗 Share link'}</button>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function DraftBoard({ players, byId, selected, clearSelected }: P
               </select>
               {p && (
                 <div className="slot-meta">
-                  <span className={`chip t-${p.lanes[l] ?? 'none'}`}>{LANE_LABEL[l].slice(0, 3)} {p.lanes[l] ?? '–'}</span>
+                  <span className={`chip t-${laneTier(p, l) === 'main' ? 'S' : laneTier(p, l) ?? 'none'}`}>{laneTier(p, l) === 'main' ? 'main lane' : laneTier(p, l) ? `flex ${laneTier(p, l)}` : 'off-lane'}</span>
                   {s.champ && <span className={`chip t-${poolTier ?? 'none'}`} title="Player's tier on this champion">{poolTier ? `${champ?.name} ${poolTier}` : 'off-pool'}</span>}
                 </div>
               )}

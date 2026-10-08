@@ -1,15 +1,10 @@
 {
-  "_help": "Add players here. tier: S/A/B/C/D. lanes = how good they are per lane. champions = their pool (id = Data Dragon id, e.g. 'MissFortune', 'Ahri', 'LeeSin').",
+  "_help": "tier: Z = blind pick / best performance, S = confident, A = decent, B = can play but rather not (C/D optional). lane = main lane (top/jungle/mid/bot/support). champions use Data Dragon ids, e.g. MissFortune, LeeSin, KogMaw.",
   "players": [
-    {
-      "name": "Example Player",
-      "tier": "A",
-      "lanes": { "top": "C", "jungle": "B", "mid": "A", "bot": "S", "support": "B" },
-      "champions": [
-        { "id": "Ahri", "tier": "S" },
-        { "id": "Jinx", "tier": "A" }
-      ],
-      "notes": "Replace me with real data"
-    }
+    { "name": "Bullet", "lane": "top", "champions": [] },
+    { "name": "Aster", "lane": "jungle", "champions": [] },
+    { "name": "Hama", "lane": "mid", "champions": [] },
+    { "name": "Omar", "lane": "bot", "champions": [] },
+    { "name": "Hach", "lane": "support", "champions": [] }
   ]
 }

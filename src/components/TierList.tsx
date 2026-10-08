@@ -1,49 +1,37 @@
 import { useState } from 'react'
 import { iconUrl } from '../lib/ddragon'
-import { LANES, LANE_LABEL, TIERS, type Champion, type Lane, type Player, type Tier } from '../lib/types'
+import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
 interface Props { players: Player[]; byId: Map<string, Champion> }
 
 export default function TierList({ players, byId }: Props) {
-  const [view, setView] = useState<'overall' | Lane>('overall')
-  const tierOf = (p: Player): Tier | undefined => (view === 'overall' ? p.tier : p.lanes[view])
+  const [name, setName] = useState(players[0]?.name)
+  const p = players.find((x) => x.name === name) ?? players[0]
+  const sorted = [...players].sort((a, b) => LANES.indexOf(a.lane) - LANES.indexOf(b.lane))
+  if (!p) return <p className="muted">No players yet — add some in src/data/players.json</p>
 
   return (
     <section>
-      <div className="toolbar">
-        <h2>Squad Tier List</h2>
-        <select value={view} onChange={(e) => setView(e.target.value as any)}>
-          <option value="overall">Overall</option>
-          {LANES.map((l) => <option key={l} value={l}>{LANE_LABEL[l]}</option>)}
-        </select>
+      <div className="toolbar"><h2>Squad Tier Lists</h2></div>
+      <div className="roles players-tabs">
+        {sorted.map((x) => (
+          <button key={x.name} className={x.name === p.name ? 'on' : ''} onClick={() => setName(x.name)}>
+            {x.name} · {LANE_LABEL[x.lane]}
+          </button>
+        ))}
       </div>
+      <h3>{p.name} <span className="muted">— {LANE_LABEL[p.lane]} · {p.champions.length} champions</span></h3>
+      {p.notes && <p className="muted">{p.notes}</p>}
+      {p.champions.length === 0 && <p className="muted">No champions added yet.</p>}
       {TIERS.map((t) => {
-        const row = players.filter((p) => tierOf(p) === t)
+        const row = p.champions.filter((c) => c.tier === t)
+        if (row.length === 0 && (t === 'C' || t === 'D')) return null
         return (
           <div className="tier-row" key={t}>
-            <div className={`tier-label t-${t}`}>{t}</div>
+            <div className={`tier-label t-${t}`}>{t}<small>{TIER_HINT[t]}</small></div>
             <div className="tier-players">
-              {row.length === 0 && <span className="muted">—</span>}
-              {row.map((p) => (
-                <div className="player-card" key={p.name}>
-                  <strong>{p.name}</strong>
-                  <div className="lane-chips">
-                    {LANES.map((l) => (
-                      <span key={l} className={`chip t-${p.lanes[l] ?? 'none'}`} title={LANE_LABEL[l]}>
-                        {LANE_LABEL[l].slice(0, 3)} {p.lanes[l] ?? '–'}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="pool">
-                    {p.champions.map((c) => (
-                      <span className="pool-champ" key={c.id} title={`${byId.get(c.id)?.name ?? c.id} (${c.tier})`}>
-                        <img src={iconUrl(c.id)} alt={c.id} loading="lazy" />
-                        <i className={`t-${c.tier}`}>{c.tier}</i>
-                      </span>
-                    ))}
-                  </div>
-                  {p.notes && <small className="muted">{p.notes}</small>}
-                </div>
+              {row.map((c) => (
+                <img key={c.id} className="tier-champ" src={iconUrl(c.id)} alt={c.id} title={byId.get(c.id)?.name ?? c.id} loading="lazy" />
               ))}
             </div>
           </div>

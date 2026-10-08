@@ -1,5 +1,5 @@
 :root { --bg:#0b0f17; --panel:#141b29; --line:#26324a; --text:#e6ebf5; --muted:#8a96ad; --accent:#c8aa6e;
-  --S:#ff6b6b; --A:#ffb454; --B:#f2e04d; --C:#7bd88f; --D:#5fb0ff; }
+   }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:14px/1.45 system-ui, sans-serif; }
 header { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); background:var(--panel); position:sticky; top:0; z-index:5; }
@@ -17,7 +17,7 @@ aside { position:sticky; top:70px; max-height:calc(100vh - 90px); overflow:auto;
 .tier-row { display:flex; gap:10px; margin-bottom:8px; }
 .tier-label { width:56px; min-height:64px; display:grid; place-items:center; font-size:26px; font-weight:800; color:#111; border-radius:8px; flex:none; }
 .tier-players { flex:1; display:flex; flex-wrap:wrap; gap:8px; background:#0e1522; border:1px solid var(--line); border-radius:8px; padding:8px; align-items:flex-start; }
-.t-S{background:var(--S)} .t-A{background:var(--A)} .t-B{background:var(--B)} .t-C{background:var(--C)} .t-D{background:var(--D)} .t-none{background:#2a3347;color:var(--muted)}
+.t-Z{background:#ff7f7f} .t-S{background:#ffbf7f} .t-A{background:#ffdf7f} .t-B{background:#ffff7f} .t-C{background:#bfff7f} .t-D{background:#7fff7f} .t-none{background:#2a3347;color:var(--muted)}
 .player-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px; min-width:200px; max-width:320px; display:flex; flex-direction:column; gap:6px; }
 .lane-chips { display:flex; gap:4px; flex-wrap:wrap; }
 .chip { font-size:11px; font-weight:700; padding:1px 6px; border-radius:10px; color:#111; }
@@ -46,3 +46,9 @@ aside input { width:100%; }
 .guess .options .good { background:#2e9e5b; color:#fff; }
 .guess .result { font-weight:700; text-align:center; } .guess .next, .guess .play { width:100%; margin-top:8px; }
 .score { color:var(--muted); font-size:12px; }
+
+.tier-label { color:#111; text-align:center; line-height:1.1; } .tier-label small { display:block; font-size:10px; font-weight:600; }
+.tier-champ { width:56px; height:56px; border-radius:6px; }
+.players-tabs button { padding:4px 10px; }
+.cell { position:relative; display:block; } .cell i { position:absolute; right:0; bottom:0; font-style:normal; font-size:10px; font-weight:800; color:#111; padding:0 3px; border-radius:4px; }
+.grid .cell img { display:block; }

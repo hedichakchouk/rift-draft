@@ -38,7 +38,7 @@ export default function App() {
             <DraftBoard players={players} byId={byId} selected={selected} clearSelected={() => setSelected(null)} />
           )}
         </main>
-        <Sidebar champs={champs} selected={selected} onSelect={setSelected} />
+        <Sidebar players={players} champs={champs} selected={selected} onSelect={setSelected} />
       </div>
     </div>
   )

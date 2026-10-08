@@ -5,7 +5,16 @@ export type Draft = Record<Lane, Slot>
 export const emptyDraft = (): Draft =>
   Object.fromEntries(LANES.map((l) => [l, { player: null, champ: null }])) as Draft
 
-const laneScore = (p: Player, l: Lane) => (p.lanes[l] ? TIER_SCORE[p.lanes[l]!] : 0)
+export const laneTier = (p: Player, l: Lane) => (p.lane === l ? ('main' as const) : p.flexLanes?.[l])
+const laneScore = (p: Player, l: Lane) =>
+  p.lane === l ? 10 : p.flexLanes?.[l] ? TIER_SCORE[p.flexLanes[l]!] : 0
+
+/** Default lineup: each player on their main lane. */
+export function defaultDraft(players: Player[]): Draft {
+  const d = emptyDraft()
+  for (const l of LANES) d[l].player = players.find((p) => p.lane === l)?.name ?? null
+  return d
+}
 
 /** Best assignment of players to the 5 lanes (brute force; fine for a friend-group sized roster). */
 export function autoAssign(players: Player[]): Record<Lane, string | null> {
