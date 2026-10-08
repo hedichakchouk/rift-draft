@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T16:36:03.966Z",
+ "updated": "2026-10-08T16:54:03.615Z",
  "source": "op.gg (EUW ranked, current season)",
  "players": {
   "Hach": {
@@ -1553,6 +1553,240 @@
      "kills": 19,
      "deaths": 14,
      "assists": 19,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  },
+  "Rapo": {
+   "riotId": "Rapo#0302",
+   "level": null,
+   "solo": {
+    "tier": "MASTER",
+    "division": "I",
+    "lp": 999,
+    "wins": 715,
+    "losses": 673
+   },
+   "flex": null,
+   "games": 1388,
+   "wins": 715,
+   "lanes": {},
+   "champions": {
+    "Ezreal": {
+     "games": 191,
+     "wins": 99,
+     "kills": 1184.2,
+     "deaths": 840.4,
+     "assists": 1317.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Caitlyn": {
+     "games": 174,
+     "wins": 90,
+     "kills": 1287.6,
+     "deaths": 991.8,
+     "assists": 1113.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jinx": {
+     "games": 169,
+     "wins": 100,
+     "kills": 1216.8,
+     "deaths": 811.2,
+     "assists": 1149.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Aurora": {
+     "games": 150,
+     "wins": 83,
+     "kills": 1035,
+     "deaths": 615,
+     "assists": 975,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Tristana": {
+     "games": 147,
+     "wins": 71,
+     "kills": 1131.9,
+     "deaths": 793.8,
+     "assists": 764.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kaisa": {
+     "games": 100,
+     "wins": 54,
+     "kills": 850,
+     "deaths": 520,
+     "assists": 620,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Corki": {
+     "games": 74,
+     "wins": 37,
+     "kills": 614.2,
+     "deaths": 392.2,
+     "assists": 495.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Yunara": {
+     "games": 69,
+     "wins": 36,
+     "kills": 489.9,
+     "deaths": 393.3,
+     "assists": 414,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Syndra": {
+     "games": 65,
+     "wins": 32,
+     "kills": 331.5,
+     "deaths": 318.5,
+     "assists": 429,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Senna": {
+     "games": 44,
+     "wins": 19,
+     "kills": 189.2,
+     "deaths": 246.4,
+     "assists": 629.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ashe": {
+     "games": 31,
+     "wins": 16,
+     "kills": 170.5,
+     "deaths": 179.8,
+     "assists": 260.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Varus": {
+     "games": 27,
+     "wins": 15,
+     "kills": 202.5,
+     "deaths": 129.6,
+     "assists": 151.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sivir": {
+     "games": 23,
+     "wins": 12,
+     "kills": 117.3,
+     "deaths": 112.7,
+     "assists": 193.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ziggs": {
+     "games": 22,
+     "wins": 13,
+     "kills": 112.2,
+     "deaths": 110,
+     "assists": 169.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gnar": {
+     "games": 22,
+     "wins": 6,
+     "kills": 68.2,
+     "deaths": 92.4,
+     "assists": 88,
+     "cs": 0,
+     "minutes": 0
+    },
+    "JarvanIV": {
+     "games": 16,
+     "wins": 7,
+     "kills": 75.2,
+     "deaths": 81.6,
+     "assists": 177.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Smolder": {
+     "games": 13,
+     "wins": 5,
+     "kills": 80.6,
+     "deaths": 75.4,
+     "assists": 75.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Aphelios": {
+     "games": 13,
+     "wins": 4,
+     "kills": 62.4,
+     "deaths": 88.4,
+     "assists": 58.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lucian": {
+     "games": 10,
+     "wins": 6,
+     "kills": 66,
+     "deaths": 68,
+     "assists": 89,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Xayah": {
+     "games": 9,
+     "wins": 4,
+     "kills": 72,
+     "deaths": 51.3,
+     "assists": 52.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zeri": {
+     "games": 4,
+     "wins": 2,
+     "kills": 34,
+     "deaths": 28,
+     "assists": 23.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Rakan": {
+     "games": 3,
+     "wins": 1,
+     "kills": 2.1,
+     "deaths": 20.1,
+     "assists": 53.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Graves": {
+     "games": 3,
+     "wins": 1,
+     "kills": 26.1,
+     "deaths": 15.9,
+     "assists": 12,
+     "cs": 0,
+     "minutes": 0
+    },
+    "MissFortune": {
+     "games": 2,
+     "wins": 0,
+     "kills": 22,
+     "deaths": 15,
+     "assists": 4,
      "cs": 0,
      "minutes": 0
     }

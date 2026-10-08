@@ -358,6 +358,91 @@
       ]
     },
     {
+      "name": "Rapo",
+      "lane": "bot",
+      "riotId": "Rapo#0302",
+      "region": "euw1",
+      "champions": [
+        {
+          "id": "Jinx",
+          "tier": "Z"
+        },
+        {
+          "id": "Aurora",
+          "tier": "Z"
+        },
+        {
+          "id": "Kaisa",
+          "tier": "Z"
+        },
+        {
+          "id": "Ezreal",
+          "tier": "S"
+        },
+        {
+          "id": "Caitlyn",
+          "tier": "S"
+        },
+        {
+          "id": "Corki",
+          "tier": "S"
+        },
+        {
+          "id": "Yunara",
+          "tier": "S"
+        },
+        {
+          "id": "Tristana",
+          "tier": "A"
+        },
+        {
+          "id": "Syndra",
+          "tier": "A"
+        },
+        {
+          "id": "Ashe",
+          "tier": "A"
+        },
+        {
+          "id": "Varus",
+          "tier": "A"
+        },
+        {
+          "id": "Sivir",
+          "tier": "A"
+        },
+        {
+          "id": "Ziggs",
+          "tier": "A"
+        },
+        {
+          "id": "Senna",
+          "tier": "B"
+        },
+        {
+          "id": "JarvanIV",
+          "tier": "B"
+        },
+        {
+          "id": "Lucian",
+          "tier": "B"
+        },
+        {
+          "id": "Gnar",
+          "tier": "C"
+        },
+        {
+          "id": "Smolder",
+          "tier": "C"
+        },
+        {
+          "id": "Aphelios",
+          "tier": "C"
+        }
+      ],
+      "notes": "Tier list auto-built from op.gg ranked winrate and games played (Z = best winrate on 100+ games). Adjust to taste."
+    },
+    {
       "name": "Hach",
       "lane": "support",
       "riotId": "hach#1710",
