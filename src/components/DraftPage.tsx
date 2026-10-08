@@ -12,11 +12,11 @@ interface Props { players: Player[]; champs: Champion[]; byId: Map<string, Champ
 
 // Position of each lane slot on the map (% of the map box).
 const POS: Record<Lane, { left: number; top: number }> = {
-  top: { left: 12, top: 24 },
+  top: { left: 14, top: 22 },
   jungle: { left: 30, top: 62 },
   mid: { left: 50, top: 46 },
-  bot: { left: 60, top: 82 },
-  support: { left: 85, top: 66 },
+  bot: { left: 62, top: 80 },
+  support: { left: 86, top: 64 },
 }
 
 function initial(players: Player[]): Draft {
