@@ -1,1 +1,1563 @@
-{ "updated": null, "players": {} }
+{
+ "updated": "2026-10-08T16:36:03.966Z",
+ "source": "op.gg (EUW ranked, current season)",
+ "players": {
+  "Hach": {
+   "riotId": "hach#1710",
+   "level": null,
+   "solo": {
+    "tier": "DIAMOND",
+    "division": "I",
+    "lp": 50,
+    "wins": 272,
+    "losses": 240
+   },
+   "flex": null,
+   "games": 512,
+   "wins": 272,
+   "lanes": {},
+   "champions": {
+    "Braum": {
+     "games": 71,
+     "wins": 48,
+     "kills": 92.3,
+     "deaths": 326.6,
+     "assists": 1249.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Janna": {
+     "games": 58,
+     "wins": 31,
+     "kills": 58,
+     "deaths": 272.6,
+     "assists": 864.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Thresh": {
+     "games": 43,
+     "wins": 22,
+     "kills": 73.1,
+     "deaths": 245.1,
+     "assists": 632.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lulu": {
+     "games": 34,
+     "wins": 20,
+     "kills": 20.4,
+     "deaths": 163.2,
+     "assists": 554.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Leona": {
+     "games": 34,
+     "wins": 16,
+     "kills": 37.4,
+     "deaths": 214.2,
+     "assists": 459,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zac": {
+     "games": 26,
+     "wins": 13,
+     "kills": 93.6,
+     "deaths": 117,
+     "assists": 322.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nautilus": {
+     "games": 24,
+     "wins": 12,
+     "kills": 45.6,
+     "deaths": 172.8,
+     "assists": 396,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Karma": {
+     "games": 17,
+     "wins": 7,
+     "kills": 20.4,
+     "deaths": 91.8,
+     "assists": 268.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Milio": {
+     "games": 15,
+     "wins": 8,
+     "kills": 12,
+     "deaths": 61.5,
+     "assists": 238.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Alistar": {
+     "games": 15,
+     "wins": 7,
+     "kills": 21,
+     "deaths": 96,
+     "assists": 205.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Rell": {
+     "games": 15,
+     "wins": 7,
+     "kills": 21,
+     "deaths": 88.5,
+     "assists": 250.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Seraphine": {
+     "games": 13,
+     "wins": 7,
+     "kills": 26,
+     "deaths": 59.8,
+     "assists": 171.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zilean": {
+     "games": 11,
+     "wins": 4,
+     "kills": 28.6,
+     "deaths": 51.7,
+     "assists": 196.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Blitzcrank": {
+     "games": 10,
+     "wins": 7,
+     "kills": 15,
+     "deaths": 44,
+     "assists": 147,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Samira": {
+     "games": 10,
+     "wins": 7,
+     "kills": 115,
+     "deaths": 53,
+     "assists": 66,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Maokai": {
+     "games": 10,
+     "wins": 6,
+     "kills": 22,
+     "deaths": 69,
+     "assists": 169,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sion": {
+     "games": 10,
+     "wins": 5,
+     "kills": 37,
+     "deaths": 51,
+     "assists": 54,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nocturne": {
+     "games": 9,
+     "wins": 6,
+     "kills": 68.4,
+     "deaths": 39.6,
+     "assists": 123.3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nami": {
+     "games": 9,
+     "wins": 5,
+     "kills": 12.6,
+     "deaths": 53.1,
+     "assists": 128.7,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Neeko": {
+     "games": 8,
+     "wins": 7,
+     "kills": 18.4,
+     "deaths": 44.8,
+     "assists": 102.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "TahmKench": {
+     "games": 7,
+     "wins": 3,
+     "kills": 16.1,
+     "deaths": 44.8,
+     "assists": 81.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Caitlyn": {
+     "games": 6,
+     "wins": 2,
+     "kills": 40.2,
+     "deaths": 39,
+     "assists": 21,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ahri": {
+     "games": 5,
+     "wins": 4,
+     "kills": 32,
+     "deaths": 22,
+     "assists": 20,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lux": {
+     "games": 4,
+     "wins": 2,
+     "kills": 38,
+     "deaths": 37.2,
+     "assists": 74,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Swain": {
+     "games": 4,
+     "wins": 2,
+     "kills": 16,
+     "deaths": 26,
+     "assists": 48,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Elise": {
+     "games": 3,
+     "wins": 1,
+     "kills": 15.9,
+     "deaths": 26.1,
+     "assists": 33.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "JarvanIV": {
+     "games": 3,
+     "wins": 1,
+     "kills": 20.1,
+     "deaths": 15,
+     "assists": 35.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Xerath": {
+     "games": 3,
+     "wins": 1,
+     "kills": 14.1,
+     "deaths": 12,
+     "assists": 30,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Veigar": {
+     "games": 3,
+     "wins": 1,
+     "kills": 14.1,
+     "deaths": 29.1,
+     "assists": 42,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Rakan": {
+     "games": 3,
+     "wins": 0,
+     "kills": 6,
+     "deaths": 15,
+     "assists": 36.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sejuani": {
+     "games": 2,
+     "wins": 2,
+     "kills": 14,
+     "deaths": 15,
+     "assists": 40,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Soraka": {
+     "games": 2,
+     "wins": 2,
+     "kills": 0,
+     "deaths": 7,
+     "assists": 40,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jhin": {
+     "games": 2,
+     "wins": 1,
+     "kills": 10,
+     "deaths": 21,
+     "assists": 9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ekko": {
+     "games": 2,
+     "wins": 0,
+     "kills": 11,
+     "deaths": 15,
+     "assists": 8,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  },
+  "Bullet": {
+   "riotId": "BulletProof#7050",
+   "level": null,
+   "solo": {
+    "tier": "DIAMOND",
+    "division": "II",
+    "lp": 50,
+    "wins": 237,
+    "losses": 189
+   },
+   "flex": null,
+   "games": 426,
+   "wins": 237,
+   "lanes": {},
+   "champions": {
+    "Camille": {
+     "games": 117,
+     "wins": 70,
+     "kills": 971.1,
+     "deaths": 725.4,
+     "assists": 737.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Malphite": {
+     "games": 51,
+     "wins": 28,
+     "kills": 244.8,
+     "deaths": 249.9,
+     "assists": 433.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ambessa": {
+     "games": 38,
+     "wins": 15,
+     "kills": 269.8,
+     "deaths": 209,
+     "assists": 250.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zaahen": {
+     "games": 29,
+     "wins": 19,
+     "kills": 200.1,
+     "deaths": 176.9,
+     "assists": 165.3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jayce": {
+     "games": 27,
+     "wins": 15,
+     "kills": 213.3,
+     "deaths": 164.7,
+     "assists": 186.3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jax": {
+     "games": 27,
+     "wins": 14,
+     "kills": 194.4,
+     "deaths": 162,
+     "assists": 135,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Mordekaiser": {
+     "games": 23,
+     "wins": 14,
+     "kills": 135.7,
+     "deaths": 138,
+     "assists": 105.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kled": {
+     "games": 20,
+     "wins": 12,
+     "kills": 176,
+     "deaths": 82,
+     "assists": 160,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gwen": {
+     "games": 16,
+     "wins": 11,
+     "kills": 116.8,
+     "deaths": 86.4,
+     "assists": 88,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sett": {
+     "games": 10,
+     "wins": 6,
+     "kills": 64,
+     "deaths": 63,
+     "assists": 74,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sylas": {
+     "games": 7,
+     "wins": 5,
+     "kills": 51.1,
+     "deaths": 34.3,
+     "assists": 65.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Renekton": {
+     "games": 7,
+     "wins": 4,
+     "kills": 51.1,
+     "deaths": 39.2,
+     "assists": 55.3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Varus": {
+     "games": 7,
+     "wins": 2,
+     "kills": 44.8,
+     "deaths": 44.1,
+     "assists": 44.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kayle": {
+     "games": 5,
+     "wins": 1,
+     "kills": 33,
+     "deaths": 35,
+     "assists": 28,
+     "cs": 0,
+     "minutes": 0
+    },
+    "DrMundo": {
+     "games": 4,
+     "wins": 3,
+     "kills": 13.2,
+     "deaths": 19.2,
+     "assists": 31.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Veigar": {
+     "games": 4,
+     "wins": 2,
+     "kills": 42,
+     "deaths": 36,
+     "assists": 32,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gragas": {
+     "games": 4,
+     "wins": 2,
+     "kills": 10,
+     "deaths": 18,
+     "assists": 21.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Volibear": {
+     "games": 4,
+     "wins": 1,
+     "kills": 21.2,
+     "deaths": 35.2,
+     "assists": 18,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Shen": {
+     "games": 3,
+     "wins": 2,
+     "kills": 6,
+     "deaths": 9,
+     "assists": 27,
+     "cs": 0,
+     "minutes": 0
+    },
+    "XinZhao": {
+     "games": 3,
+     "wins": 2,
+     "kills": 24.9,
+     "deaths": 9.9,
+     "assists": 15.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "JarvanIV": {
+     "games": 2,
+     "wins": 2,
+     "kills": 16,
+     "deaths": 10,
+     "assists": 28,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Graves": {
+     "games": 2,
+     "wins": 1,
+     "kills": 20,
+     "deaths": 12,
+     "assists": 21,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Chogath": {
+     "games": 2,
+     "wins": 1,
+     "kills": 14,
+     "deaths": 10,
+     "assists": 13,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ornn": {
+     "games": 2,
+     "wins": 1,
+     "kills": 8,
+     "deaths": 12,
+     "assists": 27,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Vladimir": {
+     "games": 2,
+     "wins": 0,
+     "kills": 3,
+     "deaths": 10,
+     "assists": 5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lissandra": {
+     "games": 2,
+     "wins": 0,
+     "kills": 10,
+     "deaths": 16,
+     "assists": 9,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  },
+  "Aster": {
+   "riotId": "BigBallsDragon#0001",
+   "level": null,
+   "solo": {
+    "tier": "DIAMOND",
+    "division": "II",
+    "lp": 58,
+    "wins": 288,
+    "losses": 259
+   },
+   "flex": null,
+   "games": 547,
+   "wins": 288,
+   "lanes": {},
+   "champions": {
+    "Kayn": {
+     "games": 182,
+     "wins": 101,
+     "kills": 1619.8,
+     "deaths": 764.4,
+     "assists": 1292.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Diana": {
+     "games": 48,
+     "wins": 25,
+     "kills": 398.4,
+     "deaths": 240,
+     "assists": 408,
+     "cs": 0,
+     "minutes": 0
+    },
+    "XinZhao": {
+     "games": 45,
+     "wins": 22,
+     "kills": 265.5,
+     "deaths": 198,
+     "assists": 369,
+     "cs": 0,
+     "minutes": 0
+    },
+    "JarvanIV": {
+     "games": 25,
+     "wins": 14,
+     "kills": 190,
+     "deaths": 115,
+     "assists": 287.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Vi": {
+     "games": 23,
+     "wins": 8,
+     "kills": 200.1,
+     "deaths": 110.4,
+     "assists": 179.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Belveth": {
+     "games": 22,
+     "wins": 13,
+     "kills": 184.8,
+     "deaths": 101.2,
+     "assists": 180.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "DrMundo": {
+     "games": 21,
+     "wins": 11,
+     "kills": 105,
+     "deaths": 77.7,
+     "assists": 161.7,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ambessa": {
+     "games": 20,
+     "wins": 12,
+     "kills": 176,
+     "deaths": 84,
+     "assists": 188,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Khazix": {
+     "games": 13,
+     "wins": 7,
+     "kills": 110.5,
+     "deaths": 41.6,
+     "assists": 58.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Naafiri": {
+     "games": 13,
+     "wins": 7,
+     "kills": 133.9,
+     "deaths": 63.7,
+     "assists": 93.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Shyvana": {
+     "games": 10,
+     "wins": 6,
+     "kills": 78,
+     "deaths": 31,
+     "assists": 68,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Graves": {
+     "games": 9,
+     "wins": 5,
+     "kills": 90.9,
+     "deaths": 52.2,
+     "assists": 79.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jhin": {
+     "games": 9,
+     "wins": 5,
+     "kills": 74.7,
+     "deaths": 42.3,
+     "assists": 64.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jax": {
+     "games": 9,
+     "wins": 4,
+     "kills": 72,
+     "deaths": 34.2,
+     "assists": 62.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Viego": {
+     "games": 9,
+     "wins": 1,
+     "kills": 95.4,
+     "deaths": 60.3,
+     "assists": 48.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Elise": {
+     "games": 8,
+     "wins": 6,
+     "kills": 60,
+     "deaths": 36,
+     "assists": 59.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sylas": {
+     "games": 7,
+     "wins": 5,
+     "kills": 56,
+     "deaths": 32.9,
+     "assists": 53.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Talon": {
+     "games": 6,
+     "wins": 3,
+     "kills": 58.2,
+     "deaths": 33,
+     "assists": 49.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "RekSai": {
+     "games": 6,
+     "wins": 2,
+     "kills": 43.2,
+     "deaths": 22.2,
+     "assists": 31.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gwen": {
+     "games": 5,
+     "wins": 4,
+     "kills": 33,
+     "deaths": 30,
+     "assists": 45,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nocturne": {
+     "games": 5,
+     "wins": 3,
+     "kills": 36,
+     "deaths": 22,
+     "assists": 28,
+     "cs": 0,
+     "minutes": 0
+    },
+    "AurelionSol": {
+     "games": 5,
+     "wins": 3,
+     "kills": 54,
+     "deaths": 23,
+     "assists": 50,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nasus": {
+     "games": 5,
+     "wins": 2,
+     "kills": 43,
+     "deaths": 17,
+     "assists": 38,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lillia": {
+     "games": 4,
+     "wins": 3,
+     "kills": 31.2,
+     "deaths": 11.2,
+     "assists": 38,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jinx": {
+     "games": 4,
+     "wins": 3,
+     "kills": 28,
+     "deaths": 17.2,
+     "assists": 30,
+     "cs": 0,
+     "minutes": 0
+    },
+    "MonkeyKing": {
+     "games": 4,
+     "wins": 2,
+     "kills": 33.2,
+     "deaths": 12,
+     "assists": 38,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Chogath": {
+     "games": 4,
+     "wins": 2,
+     "kills": 29.2,
+     "deaths": 16,
+     "assists": 31.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Hecarim": {
+     "games": 4,
+     "wins": 1,
+     "kills": 37.2,
+     "deaths": 23.2,
+     "assists": 62,
+     "cs": 0,
+     "minutes": 0
+    },
+    "MasterYi": {
+     "games": 4,
+     "wins": 1,
+     "kills": 30,
+     "deaths": 22,
+     "assists": 11.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Galio": {
+     "games": 3,
+     "wins": 2,
+     "kills": 18,
+     "deaths": 12,
+     "assists": 20.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ahri": {
+     "games": 2,
+     "wins": 1,
+     "kills": 9,
+     "deaths": 6,
+     "assists": 11,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Volibear": {
+     "games": 2,
+     "wins": 0,
+     "kills": 9,
+     "deaths": 15,
+     "assists": 24,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  },
+  "Hama": {
+   "riotId": "Skyvanat#akali",
+   "level": null,
+   "solo": {
+    "tier": "MASTER",
+    "division": "I",
+    "lp": 0,
+    "wins": 342,
+    "losses": 301
+   },
+   "flex": null,
+   "games": 643,
+   "wins": 342,
+   "lanes": {},
+   "champions": {
+    "Naafiri": {
+     "games": 97,
+     "wins": 50,
+     "kills": 1076.7,
+     "deaths": 640.2,
+     "assists": 591.7,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zed": {
+     "games": 96,
+     "wins": 61,
+     "kills": 1056,
+     "deaths": 518.4,
+     "assists": 566.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Akali": {
+     "games": 79,
+     "wins": 49,
+     "kills": 916.4,
+     "deaths": 474,
+     "assists": 402.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Diana": {
+     "games": 55,
+     "wins": 37,
+     "kills": 594,
+     "deaths": 341,
+     "assists": 357.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Yone": {
+     "games": 41,
+     "wins": 22,
+     "kills": 328,
+     "deaths": 278.8,
+     "assists": 213.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jinx": {
+     "games": 36,
+     "wins": 22,
+     "kills": 306,
+     "deaths": 230.4,
+     "assists": 291.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kassadin": {
+     "games": 32,
+     "wins": 14,
+     "kills": 288,
+     "deaths": 166.4,
+     "assists": 176,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sylas": {
+     "games": 31,
+     "wins": 14,
+     "kills": 313.1,
+     "deaths": 226.3,
+     "assists": 217,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Veigar": {
+     "games": 22,
+     "wins": 11,
+     "kills": 211.2,
+     "deaths": 127.6,
+     "assists": 165,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ahri": {
+     "games": 22,
+     "wins": 9,
+     "kills": 176,
+     "deaths": 125.4,
+     "assists": 158.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Yasuo": {
+     "games": 19,
+     "wins": 9,
+     "kills": 155.8,
+     "deaths": 121.6,
+     "assists": 104.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Syndra": {
+     "games": 12,
+     "wins": 7,
+     "kills": 66,
+     "deaths": 50.4,
+     "assists": 57.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Viktor": {
+     "games": 11,
+     "wins": 8,
+     "kills": 84.7,
+     "deaths": 57.2,
+     "assists": 106.7,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kaisa": {
+     "games": 9,
+     "wins": 1,
+     "kills": 97.2,
+     "deaths": 66.6,
+     "assists": 66.6,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Vayne": {
+     "games": 8,
+     "wins": 5,
+     "kills": 83.2,
+     "deaths": 55.2,
+     "assists": 68.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Irelia": {
+     "games": 6,
+     "wins": 3,
+     "kills": 54,
+     "deaths": 54,
+     "assists": 30,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Tristana": {
+     "games": 6,
+     "wins": 2,
+     "kills": 67.8,
+     "deaths": 36,
+     "assists": 34.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lissandra": {
+     "games": 5,
+     "wins": 3,
+     "kills": 27,
+     "deaths": 26,
+     "assists": 48,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Galio": {
+     "games": 5,
+     "wins": 3,
+     "kills": 17,
+     "deaths": 32,
+     "assists": 68,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Malzahar": {
+     "games": 5,
+     "wins": 2,
+     "kills": 28,
+     "deaths": 34,
+     "assists": 34,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jhin": {
+     "games": 5,
+     "wins": 1,
+     "kills": 36,
+     "deaths": 31,
+     "assists": 43,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Smolder": {
+     "games": 4,
+     "wins": 2,
+     "kills": 44,
+     "deaths": 26,
+     "assists": 36,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Malphite": {
+     "games": 4,
+     "wins": 1,
+     "kills": 19.2,
+     "deaths": 27.2,
+     "assists": 27.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ekko": {
+     "games": 3,
+     "wins": 1,
+     "kills": 17.1,
+     "deaths": 15,
+     "assists": 12.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kayle": {
+     "games": 3,
+     "wins": 1,
+     "kills": 9,
+     "deaths": 21,
+     "assists": 15,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gwen": {
+     "games": 3,
+     "wins": 1,
+     "kills": 21.9,
+     "deaths": 27.9,
+     "assists": 12,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Orianna": {
+     "games": 2,
+     "wins": 1,
+     "kills": 16,
+     "deaths": 11,
+     "assists": 17,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Leblanc": {
+     "games": 2,
+     "wins": 0,
+     "kills": 22,
+     "deaths": 9,
+     "assists": 9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jax": {
+     "games": 2,
+     "wins": 0,
+     "kills": 4,
+     "deaths": 18,
+     "assists": 3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Aurora": {
+     "games": 2,
+     "wins": 0,
+     "kills": 12,
+     "deaths": 13,
+     "assists": 11,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Vladimir": {
+     "games": 2,
+     "wins": 0,
+     "kills": 9,
+     "deaths": 15,
+     "assists": 9,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  },
+  "Omar": {
+   "riotId": "Meat Grinder#topG",
+   "level": null,
+   "solo": {
+    "tier": "MASTER",
+    "division": "I",
+    "lp": 263,
+    "wins": 1056,
+    "losses": 1084
+   },
+   "flex": null,
+   "games": 2140,
+   "wins": 1056,
+   "lanes": {},
+   "champions": {
+    "Urgot": {
+     "games": 905,
+     "wins": 475,
+     "kills": 6063.5,
+     "deaths": 4977.5,
+     "assists": 4344,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Lux": {
+     "games": 314,
+     "wins": 169,
+     "kills": 1821.2,
+     "deaths": 1758.4,
+     "assists": 2920.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sion": {
+     "games": 181,
+     "wins": 90,
+     "kills": 579.2,
+     "deaths": 1086,
+     "assists": 1321.3,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Naafiri": {
+     "games": 110,
+     "wins": 50,
+     "kills": 781,
+     "deaths": 649,
+     "assists": 638,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Malphite": {
+     "games": 95,
+     "wins": 43,
+     "kills": 351.5,
+     "deaths": 522.5,
+     "assists": 579.5,
+     "cs": 0,
+     "minutes": 0
+    },
+    "DrMundo": {
+     "games": 93,
+     "wins": 41,
+     "kills": 399.9,
+     "deaths": 511.5,
+     "assists": 530.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Pantheon": {
+     "games": 66,
+     "wins": 30,
+     "kills": 475.2,
+     "deaths": 396,
+     "assists": 475.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nasus": {
+     "games": 62,
+     "wins": 22,
+     "kills": 229.4,
+     "deaths": 359.6,
+     "assists": 365.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "TahmKench": {
+     "games": 38,
+     "wins": 13,
+     "kills": 121.6,
+     "deaths": 212.8,
+     "assists": 258.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Nocturne": {
+     "games": 35,
+     "wins": 15,
+     "kills": 178.5,
+     "deaths": 238,
+     "assists": 294,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Chogath": {
+     "games": 34,
+     "wins": 18,
+     "kills": 200.6,
+     "deaths": 214.2,
+     "assists": 190.4,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Kennen": {
+     "games": 24,
+     "wins": 10,
+     "kills": 108,
+     "deaths": 153.6,
+     "assists": 136.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Volibear": {
+     "games": 14,
+     "wins": 2,
+     "kills": 50.4,
+     "deaths": 96.6,
+     "assists": 72.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zaahen": {
+     "games": 13,
+     "wins": 6,
+     "kills": 74.1,
+     "deaths": 93.6,
+     "assists": 85.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Mel": {
+     "games": 11,
+     "wins": 4,
+     "kills": 82.5,
+     "deaths": 69.3,
+     "assists": 55,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Brand": {
+     "games": 10,
+     "wins": 5,
+     "kills": 29,
+     "deaths": 54,
+     "assists": 44,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Shaco": {
+     "games": 9,
+     "wins": 8,
+     "kills": 83.7,
+     "deaths": 57.6,
+     "assists": 135,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gragas": {
+     "games": 9,
+     "wins": 4,
+     "kills": 36.9,
+     "deaths": 62.1,
+     "assists": 46.8,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Sylas": {
+     "games": 8,
+     "wins": 6,
+     "kills": 64,
+     "deaths": 67.2,
+     "assists": 87.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Garen": {
+     "games": 8,
+     "wins": 3,
+     "kills": 54.4,
+     "deaths": 52.8,
+     "assists": 23.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jhin": {
+     "games": 8,
+     "wins": 2,
+     "kills": 56,
+     "deaths": 67.2,
+     "assists": 75.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Mordekaiser": {
+     "games": 7,
+     "wins": 4,
+     "kills": 37.1,
+     "deaths": 30.8,
+     "assists": 25.2,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Braum": {
+     "games": 5,
+     "wins": 3,
+     "kills": 5,
+     "deaths": 39,
+     "assists": 88,
+     "cs": 0,
+     "minutes": 0
+    },
+    "MissFortune": {
+     "games": 5,
+     "wins": 2,
+     "kills": 47,
+     "deaths": 30,
+     "assists": 34,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ezreal": {
+     "games": 5,
+     "wins": 2,
+     "kills": 39,
+     "deaths": 34,
+     "assists": 35,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Amumu": {
+     "games": 5,
+     "wins": 0,
+     "kills": 14,
+     "deaths": 37,
+     "assists": 45,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ziggs": {
+     "games": 4,
+     "wins": 4,
+     "kills": 28,
+     "deaths": 26,
+     "assists": 52,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Singed": {
+     "games": 3,
+     "wins": 3,
+     "kills": 18,
+     "deaths": 21.9,
+     "assists": 18,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ivern": {
+     "games": 3,
+     "wins": 3,
+     "kills": 14.1,
+     "deaths": 9,
+     "assists": 48,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Gangplank": {
+     "games": 3,
+     "wins": 1,
+     "kills": 21.9,
+     "deaths": 23.1,
+     "assists": 20.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Syndra": {
+     "games": 3,
+     "wins": 1,
+     "kills": 21.9,
+     "deaths": 15,
+     "assists": 18,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Maokai": {
+     "games": 3,
+     "wins": 1,
+     "kills": 9,
+     "deaths": 17.1,
+     "assists": 15.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Jinx": {
+     "games": 3,
+     "wins": 1,
+     "kills": 21,
+     "deaths": 15.9,
+     "assists": 26.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Teemo": {
+     "games": 3,
+     "wins": 1,
+     "kills": 18.9,
+     "deaths": 27.9,
+     "assists": 8.1,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Galio": {
+     "games": 3,
+     "wins": 1,
+     "kills": 9.9,
+     "deaths": 18,
+     "assists": 18.9,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Zed": {
+     "games": 3,
+     "wins": 0,
+     "kills": 29.1,
+     "deaths": 27.9,
+     "assists": 18,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Khazix": {
+     "games": 2,
+     "wins": 2,
+     "kills": 20,
+     "deaths": 15,
+     "assists": 14,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Yasuo": {
+     "games": 2,
+     "wins": 1,
+     "kills": 9,
+     "deaths": 18,
+     "assists": 13,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Varus": {
+     "games": 2,
+     "wins": 1,
+     "kills": 19,
+     "deaths": 23,
+     "assists": 24,
+     "cs": 0,
+     "minutes": 0
+    },
+    "Ekko": {
+     "games": 2,
+     "wins": 1,
+     "kills": 19,
+     "deaths": 14,
+     "assists": 19,
+     "cs": 0,
+     "minutes": 0
+    }
+   },
+   "mastery": []
+  }
+ }
+}
