@@ -36,6 +36,44 @@ export default function TierList({ players, byId, stats }: Props) {
             </div>
           </div>
         </div>
+        {ps && (() => {
+          const rk = bestRank(ps)
+          const top = Object.entries(ps.champions).sort((x, y) => y[1].games - x[1].games).slice(0, 8)
+          const wr = Math.round((ps.wins / Math.max(ps.games, 1)) * 100)
+          const [gn, tag] = ps.riotId.split('#')
+          const url = `https://op.gg/lol/summoners/euw/${encodeURIComponent(gn)}-${encodeURIComponent(tag)}`
+          return (
+            <div className="opgg">
+              <div className="opgg-head">
+                <div>
+                  <b>OP.GG</b> · {ps.riotId} · EUW
+                  <div className="sub">Updated {stats?.updated ? new Date(stats.updated).toLocaleDateString() : '—'} · ranked season stats</div>
+                </div>
+                <a className="btn" href={url} target="_blank" rel="noreferrer">Open on op.gg ↗</a>
+              </div>
+              <div className="opgg-kpis">
+                <div className="stat"><span className="stat-label">Rank</span><strong>{rankLabel(rk)}{rk && rk.tier !== 'MASTER' && rk.tier !== 'GRANDMASTER' && rk.tier !== 'CHALLENGER' ? ` · ${rk.lp} LP` : ''}</strong></div>
+                <div className="stat"><span className="stat-label">Win rate</span><strong>{wr}%</strong></div>
+                <div className="stat"><span className="stat-label">Games</span><strong>{ps.wins}W {ps.games - ps.wins}L</strong></div>
+              </div>
+              <div className="opgg-top">
+                <span className="stat-label">Most played</span>
+                <div className="opgg-champs">
+                  {top.map(([id, c]) => {
+                    const w = winrate(c)!
+                    return (
+                      <div className="opgg-champ" key={id} title={`${byId.get(id)?.name ?? id}: ${c.wins}W ${c.games - c.wins}L · KDA ${kda(c)}`}>
+                        <img src={iconUrl(id)} alt="" loading="lazy" />
+                        <span>{byId.get(id)?.name ?? id}</span>
+                        <small className={w >= 55 ? 'hi' : w < 45 ? 'lo' : ''}>{w}% · {c.games}g · {kda(c)} KDA</small>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )
+        })()}
         {p.notes && <p className="sub">{p.notes}</p>}
         {p.champions.length === 0 && (
           <p className="empty">No champions yet. Add them to <code>src/data/players.json</code> like <code>{`{ "id": "Ahri", "tier": "Z" }`}</code>.</p>

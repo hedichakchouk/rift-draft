@@ -194,3 +194,12 @@ footer { text-align: center; color: var(--muted); font-size: 11.5px; padding: 18
 .map { background: #000; }
 img.map-bg { object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .map-shade { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%); pointer-events: none; }
+
+/* ---------- op.gg panel ---------- */
+.opgg { background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 10px 0 16px; display: flex; flex-direction: column; gap: 10px; }
+.opgg-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap; } .opgg-head b { color: var(--gold2); letter-spacing: .06em; }
+.opgg-kpis { display: flex; gap: 10px; flex-wrap: wrap; }
+.opgg-champs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 6px; }
+.opgg-champ { display: grid; grid-template-columns: 34px 1fr; column-gap: 8px; align-items: center; background: rgba(255,255,255,.04); border: 1px solid var(--line2); border-radius: 10px; padding: 6px 8px; font-size: 13px; font-weight: 600; }
+.opgg-champ img { width: 34px; height: 34px; border-radius: 8px; grid-row: span 2; }
+.opgg-champ small { font-size: 11px; color: var(--muted); font-weight: 500; } .opgg-champ small.hi { color: #3ddc97; } .opgg-champ small.lo { color: #ff8a8a; }
