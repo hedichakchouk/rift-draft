@@ -8,22 +8,38 @@ interface Props { players: Player[]; byId: Map<string, Champion>; stats?: Stats 
 
 export default function TierList({ players, byId, stats }: Props) {
   const [name, setName] = useState(players[0]?.name)
-  const sorted = [...players].sort((a, b) => LANES.indexOf(a.lane) - LANES.indexOf(b.lane))
+  // one roster card per lane; lanes with several players (e.g. Omar / Rapo on Bot) get a switch
+  const groups = LANES.map((l) => players.filter((x) => x.lane === l)).filter((g) => g.length)
+  const [chosen, setChosen] = useState<Record<string, string>>({})
+  const activeOf = (g: Player[]) => g.find((x) => x.name === chosen[g[0].lane]) ?? g[0]
+  const sorted = groups.map(activeOf)
   const p = players.find((x) => x.name === name) ?? sorted[0]
+  const pick = (g: Player[], who: Player) => { setChosen((c) => ({ ...c, [who.lane]: who.name })); setName(who.name) }
   const ps = p ? stats?.players[p.name] : undefined
   if (!p) return <p className="empty">No players yet — add some in <code>src/data/players.json</code></p>
 
   return (
     <div className="tier-page">
       <div className="roster">
-        {sorted.map((x) => (
-          <button key={x.name} className={`roster-card ${x.name === p.name ? 'on' : ''}`} onClick={() => setName(x.name)}>
-            <Avatar key={x.name} name={x.name} size={46} />
-            <span className="rc-name">{x.name}</span>
-            <span className="rc-lane">{LANE_LABEL[x.lane]}</span>
-            <span className="rc-count">{x.champions.length} champs</span>
-          </button>
-        ))}
+        {groups.map((g) => {
+          const x = activeOf(g)
+          const on = g.some((y) => y.name === p.name)
+          return (
+            <div key={x.lane} className={`roster-card ${on ? 'on' : ''}`}>
+              <button className="rc-main" onClick={() => pick(g, x)}>
+                <Avatar key={x.name} name={x.name} size={46} />
+                <span className="rc-name">{x.name}</span>
+                <span className="rc-lane">{LANE_LABEL[x.lane]}</span>
+                <span className="rc-count">{x.champions.length} champs</span>
+              </button>
+              {g.length > 1 && (
+                <div className="rc-switch" role="group" aria-label={`${LANE_LABEL[x.lane]} player`}>
+                  {g.map((y) => <button key={y.name} className={y.name === x.name ? 'on' : ''} onClick={() => pick(g, y)}>{y.name}</button>)}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
 
       <section className="card">
