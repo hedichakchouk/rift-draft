@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import Avatar from './Avatar'
 import RiftMap from './RiftMap'
+import Verdict from './Verdict'
+import { winrate, type Stats } from '../lib/stats'
 import { DndProvider, useDnd } from '../lib/dnd'
 import { iconUrl } from '../lib/ddragon'
 import { decodeDraft, defaultDraft, encodeDraft, laneTier, poolTier, teamStats, type Draft } from '../lib/draft'
 import { LANES, LANE_LABEL, LANE_SHORT, TIER_HINT, type Champion, type Lane, type Player } from '../lib/types'
 
-interface Props { players: Player[]; champs: Champion[]; byId: Map<string, Champion> }
+interface Props { players: Player[]; champs: Champion[]; byId: Map<string, Champion>; stats: Stats | null }
 
 // Position of each lane slot on the map (% of the map box).
 const POS: Record<Lane, { left: number; top: number }> = {
@@ -75,13 +77,13 @@ export default function DraftPage(props: Props) {
   )
 }
 
-function Board({ players, byId, draft, setDraft, tapLane, selected, setFocus }: Props & {
+function Board({ players, byId, stats, draft, setDraft, tapLane, selected, setFocus }: Props & {
   draft: Draft; setDraft: (d: Draft | ((d: Draft) => Draft)) => void; tapLane: (l: Lane) => void; selected: string | null; setFocus: (s: string) => void
 }) {
   const { start, over } = useDnd()
   const [copied, setCopied] = useState(false)
   const used = new Set(LANES.map((l) => draft[l].player).filter(Boolean))
-  const stats = useMemo(() => teamStats(draft, byId), [draft, byId])
+  const team = useMemo(() => teamStats(draft, byId), [draft, byId])
   const placed = LANES.filter((l) => draft[l].champ).length
 
   const share = async () => {
@@ -146,28 +148,29 @@ function Board({ players, byId, draft, setDraft, tapLane, selected, setFocus }: 
         })}
       </div>
 
-      <div className="stats">
+      <div className="team">
         <div className="stat">
           <span className="stat-label">Champions</span>
           <strong>{placed}/5</strong>
         </div>
         <div className="stat grow">
           <span className="stat-label">Damage mix</span>
-          {stats.apShare === null ? <strong>—</strong> : (
-            <div className="dmg" title={`${100 - stats.apShare}% AD · ${stats.apShare}% AP`}>
-              <div className="ad" style={{ width: `${100 - stats.apShare}%` }}>{100 - stats.apShare >= 18 && `AD ${100 - stats.apShare}%`}</div>
-              <div className="ap" style={{ width: `${stats.apShare}%` }}>{stats.apShare >= 18 && `AP ${stats.apShare}%`}</div>
+          {team.apShare === null ? <strong>—</strong> : (
+            <div className="dmg" title={`${100 - team.apShare}% AD · ${team.apShare}% AP`}>
+              <div className="ad" style={{ width: `${100 - team.apShare}%` }}>{100 - team.apShare >= 18 && `AD ${100 - team.apShare}%`}</div>
+              <div className="ap" style={{ width: `${team.apShare}%` }}>{team.apShare >= 18 && `AP ${team.apShare}%`}</div>
             </div>
           )}
         </div>
         <div className="stat grow">
           <span className="stat-label">Comp</span>
           <div className="tags">
-            {Object.keys(stats.tags).length === 0 ? <strong>—</strong> :
-              Object.entries(stats.tags).map(([t, n]) => <span key={t} className="tag">{t} ×{n}</span>)}
+            {Object.keys(team.tags).length === 0 ? <strong>—</strong> :
+              Object.entries(team.tags).map(([t, n]) => <span key={t} className="tag">{t} ×{n}</span>)}
           </div>
         </div>
       </div>
+      <Verdict draft={draft} players={players} byId={byId} stats={stats} />
     </section>
   )
 }
@@ -175,7 +178,7 @@ function Board({ players, byId, draft, setDraft, tapLane, selected, setFocus }: 
 const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g, '')
 const ROLES = ['All', 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank']
 
-function Picker({ players, champs, draft, selected, setSelected, focus, setFocus }: Props & {
+function Picker({ players, champs, stats, draft, selected, setSelected, focus, setFocus }: Props & {
   draft: Draft; selected: string | null; setSelected: (s: string | null) => void; focus: string; setFocus: (s: string) => void
 }) {
   const { start, dragging } = useDnd()
@@ -219,6 +222,7 @@ function Picker({ players, champs, draft, selected, setSelected, focus, setFocus
             >
               <img src={iconUrl(c.id)} alt={c.name} loading="lazy" draggable={false} />
               {t && <i className={`badge t-${t}`}>{t}</i>}
+              {(() => { const cs = stats?.players[focus]?.champions[c.id]; const w = winrate(cs); return cs && w !== null && cs.games >= 3 ? <span className={`wrtag ${w < 45 ? 'lo' : ''}`} title={`${w}% over ${cs.games} ranked games`}>{w}%</span> : null })()}
             </button>
           )
         })}

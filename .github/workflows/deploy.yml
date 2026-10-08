@@ -2,6 +2,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '17 */6 * * *'   # refresh EUW stats every 6 hours
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +21,11 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Refresh player stats from the Riot API
+        run: node scripts/fetch-stats.mjs
+        continue-on-error: true
+        env:
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

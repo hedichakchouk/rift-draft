@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import Avatar from './Avatar'
 import { iconUrl } from '../lib/ddragon'
+import { bestRank, kda, rankLabel, winrate, type Stats } from '../lib/stats'
 import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
-interface Props { players: Player[]; byId: Map<string, Champion> }
+interface Props { players: Player[]; byId: Map<string, Champion>; stats?: Stats | null }
 
-export default function TierList({ players, byId }: Props) {
+export default function TierList({ players, byId, stats }: Props) {
   const [name, setName] = useState(players[0]?.name)
   const sorted = [...players].sort((a, b) => LANES.indexOf(a.lane) - LANES.indexOf(b.lane))
   const p = players.find((x) => x.name === name) ?? sorted[0]
+  const ps = p ? stats?.players[p.name] : undefined
   if (!p) return <p className="empty">No players yet — add some in <code>src/data/players.json</code></p>
 
   return (
@@ -30,7 +32,7 @@ export default function TierList({ players, byId }: Props) {
             <Avatar key={p.name} name={p.name} size={64} />
             <div>
               <h2>{p.name}'s tier list</h2>
-              <p className="sub">{LANE_LABEL[p.lane]} main · {p.champions.length} champions</p>
+              <p className="sub">{LANE_LABEL[p.lane]} main · {p.champions.length} champions{ps ? <> · <span className="rank-pill">{rankLabel(bestRank(ps))}</span> · {ps.games} ranked games, {Math.round((ps.wins / Math.max(ps.games, 1)) * 100)}% WR</> : null}</p>
             </div>
           </div>
         </div>
@@ -50,6 +52,7 @@ export default function TierList({ players, byId }: Props) {
                     <div className="champ" key={c.id} title={byId.get(c.id)?.name ?? c.id}>
                       <img src={iconUrl(c.id)} alt={byId.get(c.id)?.name ?? c.id} loading="lazy" />
                       <span>{byId.get(c.id)?.name ?? c.id}</span>
+                      {(() => { const cs = ps?.champions[c.id]; const w = winrate(cs); return cs && w !== null ? <span className={`wr ${w >= 55 ? 'hi' : w < 45 ? 'lo' : ''}`} title={`KDA ${kda(cs)}`}>{w}% · {cs.games}g</span> : null })()}
                     </div>
                   ))}
                 </div>

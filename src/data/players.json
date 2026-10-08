@@ -4,6 +4,8 @@
     {
       "name": "Bullet",
       "lane": "top",
+      "riotId": "BulletProof#7050",
+      "region": "euw1",
       "champions": [
         {
           "id": "Camille",
@@ -114,6 +116,8 @@
     {
       "name": "Aster",
       "lane": "jungle",
+      "riotId": "BigBallsDragon#0001",
+      "region": "euw1",
       "champions": [
         {
           "id": "Kayn",
@@ -184,6 +188,8 @@
     {
       "name": "Hama",
       "lane": "mid",
+      "riotId": "Skyvanat#akali",
+      "region": "euw1",
       "champions": [
         {
           "id": "Zed",
@@ -286,6 +292,8 @@
     {
       "name": "Omar",
       "lane": "bot",
+      "riotId": "Meat Grinder#topG",
+      "region": "euw1",
       "champions": [
         {
           "id": "Lux",
@@ -352,6 +360,8 @@
     {
       "name": "Hach",
       "lane": "support",
+      "riotId": "hach#1710",
+      "region": "euw1",
       "champions": [
         {
           "id": "Braum",

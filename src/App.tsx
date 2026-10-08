@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import playersData from './data/players.json'
 import { loadChampions } from './lib/ddragon'
+import { loadStats, type Stats } from './lib/stats'
 import type { Champion, Player } from './lib/types'
 import TierList from './components/TierList'
 import DraftPage from './components/DraftPage'
@@ -32,6 +33,8 @@ export default function App() {
   const [page, setPage] = useState<Page>(fromHash)
   const [champs, setChamps] = useState<Champion[]>([])
   const [error, setError] = useState('')
+  const [stats, setStats] = useState<Stats | null>(null)
+  useEffect(() => { loadStats().then(setStats) }, [])
   useEffect(() => { loadChampions().then(setChamps).catch((e) => setError(String(e))) }, [])
   useEffect(() => {
     const on = () => setPage(fromHash())
@@ -55,8 +58,8 @@ export default function App() {
       </header>
       <main className="page">
         {error && <p className="err banner">Couldn't load champions from Riot Data Dragon: {error}</p>}
-        {page === 'draft' && <DraftPage players={players} champs={champs} byId={byId} />}
-        {page === 'tiers' && <TierList players={players} byId={byId} />}
+        {page === 'draft' && <DraftPage players={players} champs={champs} byId={byId} stats={stats} />}
+        {page === 'tiers' && <TierList players={players} byId={byId} stats={stats} />}
         {page === 'guess' && <Guess champs={champs} />}
       </main>
       <footer>Hach Draft · Champion data &amp; art © Riot Games · Not affiliated with Riot Games</footer>
