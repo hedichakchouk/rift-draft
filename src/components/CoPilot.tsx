@@ -4,6 +4,7 @@ import BuildPanel from './laning/BuildPanel'
 import { LaneIcon, MetaTier } from './ui/kit'
 import { iconUrl, loadDetail, type ChampDetail } from '../lib/ddragon'
 import { loadChampMeta, loadMetaIndex, type ChampMeta, type MetaIndex } from '../lib/meta'
+import { renderPlan } from '../lib/planImage'
 import { assignLanes, banSuggestions, candidateIds, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
 import { setCoachContext, setCoachData } from '../lib/profile'
 import { LANES, LANE_SHORT, type Champion, type Lane, type Player } from '../lib/types'
@@ -218,7 +219,7 @@ export default function CoPilot({ players, champs, byId }: Props) {
         </aside>
       </div>
 
-      {myPick && <Plan id={myPick} lane={me} meta={metas.get(myPick) ?? null} byId={byId} foe={foe ? byId.get(foe.id)?.name : undefined} enemyAp={enemyRead.n >= 2 ? Math.round((enemyRead.ap / Math.max(1, enemyRead.ap + enemyRead.ad)) * 100) : null} />}
+      {myPick && <Plan id={myPick} lane={me} meta={metas.get(myPick) ?? null} byId={byId} foe={foe ? byId.get(foe.id)?.name : undefined} enemyLines={enemyRead.lines.map((l) => l.text)} bans={banRecs.slice(0, 3).map((b) => byId.get(b.id)?.name ?? b.id)} recs={recs.filter((r) => r.id !== myPick).slice(0, 3).map((r) => byId.get(r.id)?.name ?? r.id)} player={player?.name} enemyAp={enemyRead.n >= 2 ? Math.round((enemyRead.ap / Math.max(1, enemyRead.ap + enemyRead.ad)) * 100) : null} />}
     </div>
   )
 }
@@ -265,7 +266,8 @@ function ReadCard({ title, read, empty }: { title: string; read: ReturnType<type
 }
 
 /** After lock-in: the whole game plan on one card (runes, spells, skills, build) plus what to do about their comp. */
-function Plan({ id, lane, meta, byId, foe, enemyAp }: { id: string; lane: Lane; meta: ChampMeta | null; byId: Map<string, Champion>; foe?: string; enemyAp: number | null }) {
+function Plan({ id, lane, meta, byId, foe, enemyAp, enemyLines, bans, recs, player }: { id: string; lane: Lane; meta: ChampMeta | null; byId: Map<string, Champion>; foe?: string; enemyAp: number | null; enemyLines: string[]; bans: string[]; recs: string[]; player?: string }) {
+  const [busy, setBusy] = useState(false)
   const [detail, setDetail] = useState<ChampDetail | null>(null)
   useEffect(() => { setDetail(null); loadDetail(id).then(setDetail).catch(() => {}) }, [id])
   const name = byId.get(id)?.name ?? id
@@ -273,7 +275,17 @@ function Plan({ id, lane, meta, byId, foe, enemyAp }: { id: string; lane: Lane; 
   const tip = enemyAp === null ? null : enemyAp <= 25 ? 'Enemy is mostly AD: swap a defensive slot to armor (Plated Steelcaps / Randuin / Thornmail style).' : enemyAp >= 75 ? 'Enemy is mostly AP: take a magic resist item early (Mercury\'s Treads / Wit\'s End / Force of Nature style).' : null
   return (
     <section className="cp-plan">
-      <div className="card-head"><h2>Game plan: {name} {foe ? `vs ${foe}` : ''}</h2></div>
+      <div className="card-head"><h2>Game plan: {name} {foe ? `vs ${foe}` : ''}</h2>
+        <button className="btn gold" disabled={busy} onClick={async () => {
+          setBusy(true)
+          const blob = await renderPlan({ name, id, lane, foe, player, build: lm?.build ?? null, enemyLines, bans, recs })
+          setBusy(false)
+          if (!blob) return
+          const file = new File([blob], `game-plan-${name}.png`, { type: 'image/png' })
+          try { if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: `Game plan: ${name}` }); return } } catch { /* fall through to download */ }
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000)
+        }}>{busy ? 'Drawing…' : 'Share as image'}</button>
+      </div>
       {tip && <p className="cp-tip">{tip}</p>}
       <BuildPanel build={lm?.build ?? null} detail={detail} name={name} />
     </section>
