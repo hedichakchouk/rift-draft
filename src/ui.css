@@ -509,3 +509,30 @@ details.more[open] summary { color: var(--gold2); }
 .gx-opts { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
 .sfx-hidden { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .sfx-video { width: min(560px, 100%); border-radius: 12px; }
+
+/* Guess v3: roomier layout */
+.guess-page.guess-page { max-width: 1040px; gap: 22px; }
+.guess-page .modes.gx { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+.guess-page .modes.gx .mode { padding: 14px 16px; column-gap: 12px; row-gap: 3px; }
+.guess-page .modes.gx .mode small { line-height: 1.35; }
+.guess-page .guess-card { padding: clamp(16px, 2.6vw, 30px); }
+.guess-page .guess-card .pills { margin-bottom: 20px; gap: 12px; }
+.guess-page .guess-card .stage { min-height: 320px; margin-bottom: 4px; }
+.guess-page .guess-card .options { gap: 16px; margin-top: 22px; }
+.guess-page .guess-card .opt { padding: 18px 20px; font-size: 16px; gap: 14px; min-height: 64px; border-radius: 14px; }
+.guess-page .guess-card .opt img { width: 36px; height: 36px; border-radius: 50%; }
+.guess-page .guess-card .opt kbd { padding: 3px 9px; font-size: 12px; }
+.guess-page .guess-card .actions { margin-top: 24px; gap: 12px; }
+.guess-page .guess-card .actions .btn { padding: 10px 20px; }
+.guess-page .guess-card .cl-input { margin-top: 20px; gap: 10px; }
+.guess-page .guess-card .cl-input .search { padding: 14px 16px; font-size: 16px; }
+.guess-page .guess-card .cl-help { line-height: 1.6; margin-bottom: 18px; }
+.guess-page .guess-card .cl-table { gap: 12px; margin-top: 22px; }
+.guess-page .guess-card .cl-row { grid-template-columns: 110px repeat(4, minmax(120px, 1fr)); gap: 12px; min-width: 700px; }
+.guess-page .guess-card .cl-cell { padding: 16px 10px; font-size: 14px; gap: 8px; border-radius: 12px; }
+.guess-page .guess-card .cl-champ img { width: 56px; height: 56px; }
+.guess-page .guess-card .cl-champ small { font-size: 12px; }
+.guess-page .gx-opts { margin-top: -6px; }
+@media (max-width: 520px) { .guess-page .guess-card .opt { padding: 16px; } .guess-page .guess-card .stage { min-height: 220px; } }
+.guess-page .modes.gx { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 640px) { .guess-page .modes.gx { grid-template-columns: repeat(2, 1fr); } }

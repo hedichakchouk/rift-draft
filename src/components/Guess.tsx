@@ -168,7 +168,7 @@ function Choice({ mode, champs, typed }: { mode: Exclude<Mode, 'clues'>; champs:
             <div className="options">
               {round.options.map((o, i) => (
                 <button key={o.id} disabled={done} className={`opt ${done && o.id === round.answer.id ? 'good' : ''} ${done && o.id === picked && o.id !== round.answer.id ? 'bad' : ''}`} onClick={() => guess(o)}>
-                  <kbd>{i + 1}</kbd>{o.name}
+                  <kbd>{i + 1}</kbd>{done && <img src={iconUrl(o.id)} alt="" />}<span>{o.name}</span>
                 </button>
               ))}
             </div>
