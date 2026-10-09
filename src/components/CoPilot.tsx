@@ -138,9 +138,10 @@ export default function CoPilot({ players, champs, byId }: Props) {
     if (!scan?.res) return
     setEnemy(assignLanes(idx, scan.res.enemy.slice(0, 5).map((f) => ({ id: f.id, lane: 'top' as Lane }))))
     setAlly(assignLanes(idx, scan.res.ally.slice(0, 5).map((f) => ({ id: f.id, lane: 'top' as Lane }))))
+    setBans(scan.res.bans.map((f) => f.id).filter((id, i, a) => a.indexOf(id) === i).slice(0, 10))
     setLocked(null); setScan(null)
   }
-  const dropScan = (side: 'ally' | 'enemy', i: number) => setScan((x) => (x && x.res ? { ...x, res: { ...x.res, [side]: x.res[side].filter((_, j) => j !== i) } } : x))
+  const dropScan = (side: 'ally' | 'enemy' | 'bans', i: number) => setScan((x) => (x && x.res ? { ...x, res: { ...x.res, [side]: x.res[side].filter((_, j) => j !== i) } } : x))
 
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && matches[0]) add(matches[0].id)
@@ -196,20 +197,20 @@ export default function CoPilot({ players, champs, byId }: Props) {
       {scan && (
         <section className="card cp-scan">
           <div className="card-head">
-            <div><h2>Screenshot reader</h2><p className="sub">{scan.busy ? `${scan.msg} ${Math.round(scan.pct * 100)}%` : scan.err ? scan.err : scan.res && scan.res.ally.length + scan.res.enemy.length === 0 ? 'No champion names found. Try a sharper, full-screen screenshot.' : 'Check the champions, remove any wrong ones, then apply. Bans are not read yet.'}</p></div>
+            <div><h2>Screenshot reader</h2><p className="sub">{scan.busy ? `${scan.msg} ${Math.round(scan.pct * 100)}%` : scan.err ? scan.err : scan.res && scan.res.ally.length + scan.res.enemy.length + scan.res.bans.length === 0 ? 'No champions found. Use a full champ select screenshot of the League client.' : 'Check the champions, remove any wrong ones, then apply.'}</p></div>
             <div className="btns">
-              {scan.res && scan.res.ally.length + scan.res.enemy.length > 0 && <button className="btn gold" onClick={applyScan}>Apply to draft</button>}
+              {scan.res && scan.res.ally.length + scan.res.enemy.length + scan.res.bans.length > 0 && <button className="btn gold" onClick={applyScan}>Apply to draft</button>}
               <button className="btn" onClick={() => setScan(null)}>Close</button>
             </div>
           </div>
           <div className="cp-scan-body">
             <img src={scan.thumb} alt="" />
             {scan.busy && <div className="bar"><i style={{ width: `${scan.pct * 100}%` }} /></div>}
-            {scan.res && (['ally', 'enemy'] as const).map((side) => (
+            {scan.res && (['ally', 'enemy', 'bans'] as const).map((side) => (
               <div key={side} className={`cp-team ${side === 'ally' ? 'a' : 'e'}`}>
-                <span className="stat-label">{side === 'ally' ? 'Left team' : 'Right team'}</span>
+                <span className="stat-label">{side === 'ally' ? 'Left team' : side === 'enemy' ? 'Right team' : 'Bans'}</span>
                 <div className="cp-slots">{scan.res![side].length === 0 && <em className="sub">none found</em>}{scan.res![side].map((f, i) => (
-                  <div key={f.id} className="cp-pick"><button className="pic" onClick={() => dropScan(side, i)} title={`${byId.get(f.id)?.name} - click to remove`}><img src={iconUrl(f.id)} alt="" /><i>×</i></button><span className="lane">{byId.get(f.id)?.name}</span></div>
+                  <div key={f.slot} className="cp-pick"><button className="pic" onClick={() => dropScan(side, i)} title={`${byId.get(f.id)?.name} - click to remove`}><img src={iconUrl(f.id)} alt="" /><i>×</i></button><span className="lane" title={`match ${f.conf}`}>{byId.get(f.id)?.name}</span></div>
                 ))}</div>
               </div>
             ))}
