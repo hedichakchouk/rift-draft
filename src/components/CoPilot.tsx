@@ -4,7 +4,7 @@ import BuildPanel from './laning/BuildPanel'
 import { LaneIcon, MetaTier } from './ui/kit'
 import { iconUrl, loadDetail, type ChampDetail } from '../lib/ddragon'
 import { loadChampMeta, loadMetaIndex, type ChampMeta, type MetaIndex } from '../lib/meta'
-import { banSuggestions, candidateIds, guessLane, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
+import { assignLanes, banSuggestions, candidateIds, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
 import { setCoachContext, setCoachData } from '../lib/profile'
 import { LANES, LANE_SHORT, type Champion, type Lane, type Player } from '../lib/types'
 
@@ -84,21 +84,19 @@ export default function CoPilot({ players, champs, byId }: Props) {
 
   const add = (id: string, to: Target = target) => {
     if (to === 'ban') { if (bans.length < 10) setBans((b) => [...b, id]) }
-    else if (to === 'enemy') { if (enemy.length < 5) setEnemy((e) => [...e, { id, lane: guessLane(idx, id, e.map((x) => x.lane)) }]) }
-    else if (ally.length < 5) setAlly((a) => {
-      const lanes = a.map((x) => x.lane)
-      return [...a, { id, lane: guessLane(idx, id, lanes) }]
-    })
+    else if (to === 'enemy') { if (enemy.length < 5) setEnemy((e) => assignLanes(idx, [...e, { id, lane: 'top' }])) }
+    else if (ally.length < 5) setAlly((a) => assignLanes(idx, [...a.map((x) => (x.lane === me ? { ...x, manual: true } : x)), { id, lane: 'top' }]))
     setQ(''); input.current?.focus()
   }
   // Locking my pick puts it into my lane on the ally team.
   const lockMine = (id: string) => {
     setLocked(id)
-    setAlly((a) => [...a.filter((x) => x.lane !== me && x.id !== id), { id, lane: me }])
+    setAlly((a) => [...a.filter((x) => x.lane !== me && x.id !== id), { id, lane: me, manual: true }])
   }
   const cycleLane = (team: Target, i: number) => {
     const set = team === 'enemy' ? setEnemy : setAlly
     set((arr) => {
+      arr = arr.map((x, j) => (j === i ? { ...x, manual: true } : x))
       const used = arr.map((x, j) => (j === i ? null : x.lane))
       const cur = LANES.indexOf(arr[i].lane)
       let nxt = cur

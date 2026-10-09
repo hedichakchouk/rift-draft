@@ -1,7 +1,7 @@
 import { LANES, type Champion, type Lane, type Player, type Tier } from './types'
 import { vsWinRate, type ChampMeta, type MetaIndex } from './meta'
 
-export interface Pick { id: string; lane: Lane }
+export interface Pick { id: string; lane: Lane; manual?: boolean }
 export interface CoState { me: Lane; player: Player | null; ally: Pick[]; enemy: Pick[]; bans: string[] }
 export interface Rec { id: string; score: number; reasons: { tone: 'good' | 'warn' | 'bad' | 'neutral'; text: string }[]; vs: number | null; vsGames: number; tier: string | null; wr: number | null; poolTier?: Tier }
 export interface BanRec { id: string; avg: number; beats: number; of: number; names: string[] }
@@ -160,4 +160,26 @@ export function readTeam(picks: Pick[], byId: Map<string, Champion>, enemy: bool
     }
   }
   return { ad, ap, frontline, tags, n: champs.length, lines }
+}
+
+/** Re-solve lanes for a whole team: best total fit, keeping lanes the user set by hand. */
+export function assignLanes(idx: MetaIndex | null, picks: Pick[]): Pick[] {
+  if (!idx || picks.length === 0) return picks
+  const fixedLanes = new Set(picks.filter((p) => p.manual).map((p) => p.lane))
+  const free = picks.map((p, i) => i).filter((i) => !picks[i].manual)
+  const lanes = LANES.filter((l) => !fixedLanes.has(l))
+  const fit = (id: string, l: Lane) => idx.tier[l]?.find((r) => r[0] === id)?.[6] ?? 0
+  let best = -1, bestAs: Lane[] = []
+  const used = new Set<Lane>(), cur: Lane[] = []
+  const rec = (k: number, sc: number) => {
+    if (k === free.length) { if (sc > best) { best = sc; bestAs = [...cur] } return }
+    for (const l of lanes) {
+      if (used.has(l)) continue
+      used.add(l); cur[k] = l
+      rec(k + 1, sc + fit(picks[free[k]].id, l))
+      used.delete(l)
+    }
+  }
+  rec(0, 0)
+  return picks.map((p, i) => { const k = free.indexOf(i); return k < 0 ? p : { ...p, lane: bestAs[k] ?? p.lane } })
 }
