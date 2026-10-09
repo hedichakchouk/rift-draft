@@ -575,3 +575,4 @@ details.more[open] summary { color: var(--gold2); }
 .fg-clip figcaption button { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 12px; }
 .fg-clip .btn { margin: 20px; }
 .fg-add { display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; margin: 8px 0; } @media (max-width: 640px) { .fg-add { grid-template-columns: 1fr; } }
+.fg-hl { margin-top: 26px; } .fg-hl .fg-clips { padding: 0; }
