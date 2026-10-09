@@ -576,3 +576,4 @@ details.more[open] summary { color: var(--gold2); }
 .fg-clip .btn { margin: 20px; }
 .fg-add { display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; margin: 8px 0; } @media (max-width: 640px) { .fg-add { grid-template-columns: 1fr; } }
 .fg-hl { margin-top: 26px; } .fg-hl .fg-clips { padding: 0; }
+.fg-hl .fg-clipgrid { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }

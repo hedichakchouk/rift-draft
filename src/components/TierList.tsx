@@ -159,7 +159,6 @@ export default function TierList({ players, byId, stats }: Props) {
           <div className="fg-list">
             {(stats?.flexGames ?? []).slice(0, 10).map((g, i) => <GameCard key={i} g={g} byId={byId} clips={clips} />)}
           </div>
-          <section className="fg-hl"><div className="card-head"><div><h2>Highlights</h2><p className="sub">Clips from our games, from the Hach YouTube channel.</p></div></div><ClipBox id="highlights" clips={clips} /></section>
           {(() => { const gs = (stats?.flexGames ?? []).slice(0, 10); const w = gs.filter((g) => g.win).length; return gs.length ? <p className="sub">Squad record: {w}W {gs.length - w}L</p> : null })()}
         </section>
       )}
@@ -180,7 +179,7 @@ function Row({ p, byId }: { p: FlexPlayer; byId: Map<string, { name: string }> }
   )
 }
 
-function ClipBox({ id, clips }: { id: string; clips: ReturnType<typeof useClips> }) {
+export function ClipBox({ id, clips }: { id: string; clips: ReturnType<typeof useClips> }) {
   const [url, setUrl] = useState(''), [title, setTitle] = useState('')
   const list = clips.get(id)
   const add = () => { if (!/^https?:\/\//i.test(url.trim())) return; clips.add(id, { title: title.trim() || 'Clip', url: url.trim() }); setUrl(''); setTitle('') }

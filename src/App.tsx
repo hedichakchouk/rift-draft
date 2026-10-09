@@ -6,6 +6,7 @@ import type { Champion, Player } from './lib/types'
 import TierList from './components/TierList'
 import DraftPage from './components/DraftPage'
 import Guess from './components/Guess'
+import Highlights from './components/Highlights'
 import Laning from './components/laning/Laning'
 import Coach from './components/Coach'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -14,16 +15,17 @@ import { Icon } from './components/ui/kit'
 import { useVisitor } from './lib/profile'
 
 const players = playersData.players as Player[]
-type Page = 'draft' | 'tiers' | 'laning' | 'guess'
+type Page = 'draft' | 'tiers' | 'laning' | 'clips' | 'guess'
 const PAGES: { id: Page; label: string; short: string; icon: JSX.Element }[] = [
   { id: 'draft', label: 'Draft', short: 'Draft', icon: Icon.map },
   { id: 'tiers', label: 'Tier Lists', short: 'Tiers', icon: Icon.crown },
   { id: 'laning', label: 'Laning', short: 'Laning', icon: Icon.swords },
+  { id: 'clips', label: 'Highlights', short: 'Clips', icon: Icon.play },
   { id: 'guess', label: 'Guess the Champ', short: 'Guess', icon: Icon.eye },
 ]
 const fromHash = (): Page => {
   const h = location.hash.replace('#', '')
-  return h.startsWith('tiers') ? 'tiers' : h.startsWith('laning') ? 'laning' : h.startsWith('guess') ? 'guess' : 'draft'
+  return h.startsWith('tiers') ? 'tiers' : h.startsWith('laning') ? 'laning' : h.startsWith('clips') ? 'clips' : h.startsWith('guess') ? 'guess' : 'draft'
 }
 
 function Logo() {
@@ -91,6 +93,7 @@ export default function App() {
         {page === 'draft' && <DraftPage players={players} champs={champs} byId={byId} stats={stats} />}
         {page === 'tiers' && <TierList players={players} byId={byId} stats={stats} />}
         {page === 'laning' && <Laning players={players} champs={champs} byId={byId} stats={stats} />}
+        {page === 'clips' && <Highlights />}
         {page === 'guess' && <Guess champs={champs} />}
       </ErrorBoundary></main>
       <footer>Hach Draft · Champion data &amp; art © Riot Games · Matchup data from lolalytics · Not affiliated with Riot Games</footer>
