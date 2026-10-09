@@ -135,3 +135,15 @@ export async function loadSummoners(): Promise<Map<number, SummonerInfo>> {
   for (const s of Object.values<any>(d.data)) m.set(Number(s.key), { key: Number(s.key), name: s.name, image: s.image.full, desc: s.description })
   return (sumCache = m)
 }
+
+export interface Skin { num: number; name: string }
+const skinCache = new Map<string, Skin[]>()
+/** Skins of a champion (num 0 is the default skin, named "default"). */
+export async function loadSkins(id: string): Promise<Skin[]> {
+  if (skinCache.has(id)) return skinCache.get(id)!
+  if (!version) version = (await (await fetch(`${BASE}/api/versions.json`)).json())[0]
+  const d = (await (await fetch(`${BASE}/cdn/${version}/data/en_US/champion/${id}.json`)).json()).data[id]
+  const out: Skin[] = d.skins.map((s: { num: number; name: string }) => ({ num: s.num, name: s.num === 0 ? d.name : s.name }))
+  skinCache.set(id, out)
+  return out
+}
