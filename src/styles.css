@@ -242,3 +242,4 @@ img.map-bg { object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .lp-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; } .lp-tips h3, .laning h3 { margin: 0 0 6px; font-size: 15px; color: var(--gold2); } .lp-tips ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
 .lp-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 @media (max-width: 760px) { .lp-pickers { grid-template-columns: 1fr; } .lp-vs { justify-self: center; } }
+a.btn { text-decoration: none; display: inline-block; }
