@@ -3,6 +3,7 @@ import Avatar from './Avatar'
 import RiftMap from './RiftMap'
 import Verdict from './Verdict'
 import { winrate, type Stats } from '../lib/stats'
+import { setCoachContext } from '../lib/profile'
 import { DndProvider, useDnd } from '../lib/dnd'
 import { iconUrl } from '../lib/ddragon'
 import { decodeDraft, defaultDraft, encodeDraft, laneTier, poolTier, teamStats, type Draft } from '../lib/draft'
@@ -31,6 +32,10 @@ export default function DraftPage(props: Props) {
   const [focus, setFocus] = useState<string>('') // player whose pool the picker shows
 
   useEffect(() => { history.replaceState(null, '', `#draft?d=${encodeDraft(draft)}`) }, [draft])
+  useEffect(() => {
+    const lanes = LANES.map((l) => `${LANE_LABEL[l]}: ${draft[l].player ?? '?'} on ${draft[l].champ ? props.byId.get(draft[l].champ!)?.name ?? draft[l].champ : '(empty)'}`)
+    setCoachContext(`Page: Draft board (squad flex draft). Current draft - ${lanes.join('; ')}.`)
+  }, [draft, props.byId])
 
   const place = (lane: Lane, id: string) =>
     setDraft((d) => {

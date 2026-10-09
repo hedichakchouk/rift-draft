@@ -1,2 +1,7 @@
 node_modules
 dist
+
+Claude outputs/
+worker/node_modules
+worker/.wrangler
+.wrangler

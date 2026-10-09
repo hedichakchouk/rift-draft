@@ -14,6 +14,8 @@ export interface ChampEntry { id: string; tier: Tier }
 export interface Player {
   name: string
   lane: Lane                              // main lane
+  riotId?: string                         // Name#TAG
+  region?: string
   flexLanes?: Partial<Record<Lane, Tier>> // optional: other lanes they can play
   champions: ChampEntry[]
   notes?: string

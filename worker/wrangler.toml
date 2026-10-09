@@ -1,0 +1,7 @@
+name = "hach-draft-api"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://hedichakchouk.github.io,http://localhost:5173"
+MODEL = "claude-sonnet-5-5"
