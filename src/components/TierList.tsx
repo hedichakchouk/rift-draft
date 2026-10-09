@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Avatar from './Avatar'
 import { LaneIcon, Seg, rankCrestUrl } from './ui/kit'
 import { iconUrl } from '../lib/ddragon'
-import { gameKey, toEmbed, useClips, type Clip } from '../lib/clips'
+import { gameKey, siteName, toEmbed, useClips, type Clip } from '../lib/clips'
 import { kda, rankLine, rankWr, winrate, type FlexGame, type FlexPlayer, type RankInfo, type Stats } from '../lib/stats'
 import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
@@ -186,20 +186,20 @@ export function ClipBox({ id, clips }: { id: string; clips: ReturnType<typeof us
   return (
     <div className="fg-clips">
       <h4>Clips</h4>
-      {!list.length && <p className="sub">No clips for this game yet. Paste a YouTube, Streamable, Twitch clip or .mp4 link below.</p>}
+      {!list.length && <p className="sub">No clips for this game yet. Paste a YouTube, Streamable, Twitch, Outplayed or Kick link below.</p>}
       <div className="fg-clipgrid">
         {list.map((c: Clip & { mine: boolean }) => { const e = toEmbed(c.url); return (
           <figure key={c.url} className="fg-clip">
             {e.kind === 'iframe' && <iframe src={e.src} title={c.title} loading="lazy" allowFullScreen allow="autoplay; fullscreen; picture-in-picture" />}
             {e.kind === 'video' && <video src={e.src} controls preload="metadata" playsInline />}
             {e.kind === 'link' && (c.thumb
-              ? <a className="fg-thumb" href={c.url} target="_blank" rel="noreferrer" title="Watch on Kick"><img src={c.thumb} alt={c.title} loading="lazy" /><span className="fg-play">▶</span><small>Watch on Kick</small></a>
-              : <a className="btn" href={c.url} target="_blank" rel="noreferrer">Open clip</a>)}
+              ? <a className="fg-thumb" href={c.url} target="_blank" rel="noreferrer" title={`Watch on ${siteName(c.url)}`}><img src={c.thumb} alt={c.title} loading="lazy" /><span className="fg-play">▶</span><small>Watch on {siteName(c.url)}</small></a>
+              : <a className="btn" href={c.url} target="_blank" rel="noreferrer">Open on {siteName(c.url)}</a>)}
             <figcaption><span>{c.title}</span>{c.mine && <button onClick={() => clips.remove(id, c.url)} title="Remove (only on this browser)">Remove</button>}</figcaption>
           </figure>) })}
       </div>
       <div className="fg-add">
-        <input className="search" placeholder="Clip link (YouTube, Streamable, Twitch, .mp4)" value={url} onChange={(e) => setUrl(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
+        <input className="search" placeholder="Clip link (YouTube, Streamable, Twitch, Outplayed, Kick, .mp4)" value={url} onChange={(e) => setUrl(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
         <input className="search" placeholder="Title (optional)" value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
         <button className="btn gold" onClick={add}>Add clip</button>
       </div>

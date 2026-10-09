@@ -43,3 +43,13 @@ export function toEmbed(raw: string): Embed {
   if (/\.(mp4|webm)(\?|$)/i.test(u.pathname + u.search)) return { kind: 'video', src: u.toString() }
   return { kind: 'link' }
 }
+
+/** Friendly name of the site a clip link lives on. */
+export function siteName(raw: string): string {
+  try { const h = new URL(raw).hostname.replace(/^www\./, '')
+    if (h.endsWith('kick.com')) return 'Kick'
+    if (h.endsWith('outplayed.tv')) return 'Outplayed'
+    if (h.endsWith('medal.tv')) return 'Medal'
+    if (h.endsWith('youtube.com') || h === 'youtu.be') return 'YouTube'
+    return h } catch { return 'the site' }
+}
