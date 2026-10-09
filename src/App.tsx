@@ -6,17 +6,19 @@ import type { Champion, Player } from './lib/types'
 import TierList from './components/TierList'
 import DraftPage from './components/DraftPage'
 import Guess from './components/Guess'
+import Laning from './components/Laning'
 
 const players = playersData.players as Player[]
-type Page = 'draft' | 'tiers' | 'guess'
+type Page = 'draft' | 'tiers' | 'laning' | 'guess'
 const PAGES: { id: Page; label: string }[] = [
   { id: 'draft', label: 'Draft' },
   { id: 'tiers', label: 'Tier Lists' },
+  { id: 'laning', label: 'Laning' },
   { id: 'guess', label: 'Guess the Champ' },
 ]
 const fromHash = (): Page => {
   const h = location.hash.replace('#', '')
-  return h.startsWith('tiers') ? 'tiers' : h.startsWith('guess') ? 'guess' : 'draft'
+  return h.startsWith('tiers') ? 'tiers' : h.startsWith('laning') ? 'laning' : h.startsWith('guess') ? 'guess' : 'draft'
 }
 
 function Logo() {
@@ -60,6 +62,7 @@ export default function App() {
         {error && <p className="err banner">Couldn't load champions from Riot Data Dragon: {error}</p>}
         {page === 'draft' && <DraftPage players={players} champs={champs} byId={byId} stats={stats} />}
         {page === 'tiers' && <TierList players={players} byId={byId} stats={stats} />}
+        {page === 'laning' && <Laning players={players} champs={champs} byId={byId} />}
         {page === 'guess' && <Guess champs={champs} />}
       </main>
       <footer>Hach Draft · Champion data &amp; art © Riot Games · Not affiliated with Riot Games</footer>

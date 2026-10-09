@@ -28,3 +28,49 @@ export async function loadSpells(id: string): Promise<Spell[]> {
   spellCache.set(id, spells)
   return spells
 }
+
+// ---------- laning page data ----------
+export const itemUrl = (id: string) => `${BASE}/cdn/${version || '16.20.1'}/img/item/${id}.png`
+export const passiveUrl = (file: string) => `${BASE}/cdn/${version || '16.20.1'}/img/passive/${file}`
+
+export interface ItemInfo { id: string; name: string; gold: number; plain: string; desc: string }
+let itemsCache: Map<string, ItemInfo> | null = null
+/** All purchasable Summoner's Rift items, keyed by lower-case name. */
+export async function loadItems(): Promise<Map<string, ItemInfo>> {
+  if (itemsCache) return itemsCache
+  if (!version) version = (await (await fetch(`${BASE}/api/versions.json`)).json())[0]
+  const d = await (await fetch(`${BASE}/cdn/${version}/data/en_US/item.json`)).json()
+  const m = new Map<string, ItemInfo>()
+  for (const [id, it] of Object.entries<any>(d.data)) {
+    if (!it.gold?.purchasable || it.maps?.['11'] === false) continue
+    const key = String(it.name).toLowerCase()
+    const prev = m.get(key)
+    if (prev && prev.gold >= it.gold.total) continue // keep the most expensive variant of duplicate names
+    m.set(key, { id, name: it.name, gold: it.gold.total, plain: it.plaintext ?? '', desc: String(it.description ?? '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() })
+  }
+  return (itemsCache = m)
+}
+
+export interface ChampDetail {
+  id: string; name: string; title: string; tags: string[]
+  stats: Record<string, number>
+  info: { attack: number; defense: number; magic: number; difficulty: number }
+  spells: { id: string; name: string; description: string; cooldownBurn: string; rangeBurn: string; costBurn: string; image: string }[]
+  passive: { name: string; description: string; image: string }
+  allytips: string[]; enemytips: string[]
+}
+const detailCache = new Map<string, ChampDetail>()
+export async function loadDetail(id: string): Promise<ChampDetail> {
+  if (detailCache.has(id)) return detailCache.get(id)!
+  if (!version) version = (await (await fetch(`${BASE}/api/versions.json`)).json())[0]
+  const d = (await (await fetch(`${BASE}/cdn/${version}/data/en_US/champion/${id}.json`)).json()).data[id]
+  const strip = (s: string) => String(s).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+  const out: ChampDetail = {
+    id, name: d.name, title: d.title, tags: d.tags, stats: d.stats, info: d.info,
+    spells: d.spells.map((s: any) => ({ id: s.id, name: s.name, description: strip(s.description), cooldownBurn: s.cooldownBurn, rangeBurn: s.rangeBurn, costBurn: s.costBurn, image: s.image.full })),
+    passive: { name: d.passive.name, description: strip(d.passive.description), image: d.passive.image.full },
+    allytips: d.allytips ?? [], enemytips: d.enemytips ?? [],
+  }
+  detailCache.set(id, out)
+  return out
+}
