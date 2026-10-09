@@ -601,3 +601,9 @@ details.more[open] summary { color: var(--gold2); }
 .support-btn { border: 1px solid var(--gold); color: var(--gold2); background: linear-gradient(180deg, rgba(20,30,50,.96), rgba(8,13,24,.96)); box-shadow: 0 6px 22px rgba(0,0,0,.5), inset 0 0 0 1px rgba(200,170,110,.15); font-family: inherit; letter-spacing: .04em; text-transform: uppercase; font-size: 12.5px; }
 .support-btn:hover { box-shadow: 0 6px 26px rgba(200,170,110,.3), inset 0 0 0 1px rgba(200,170,110,.35); color: #f3dfa8; }
 .support-btn svg { color: var(--gold); }
+.coffee { margin-bottom: 12px; padding: 12px; border-radius: 12px; border: 1px solid rgba(200,170,110,.3); background: rgba(200,170,110,.06); }
+.coffee h4 { margin: 0 0 10px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold2); }
+.coffee-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; margin-bottom: 8px; }
+.coffee-opt { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 6px; border-radius: 10px; border: 1px solid var(--gold); background: rgba(8,13,24,.9); text-decoration: none; color: var(--text, #e8e6df); transition: transform .15s, box-shadow .15s; }
+.coffee-opt:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(200,170,110,.3); }
+.coffee-opt b { font-size: 15px; } .coffee-opt span { font-size: 12px; color: var(--gold2); }

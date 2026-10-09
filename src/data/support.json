@@ -1,7 +1,32 @@
 {
   "title": "Support Hach",
-  "message": "Enjoying the site, the draft tools or the clips? Follow, subscribe or send a tip on Kick. It keeps the site free and helps me make more.",
+  "message": "Enjoying the site, the draft tools or the clips? Your support keeps it free and helps me make more.",
+  "coffee": {
+    "label": "Buy me a coffee",
+    "options": [
+      {
+        "cups": 1,
+        "price": "3 €",
+        "url": ""
+      },
+      {
+        "cups": 3,
+        "price": "9 €",
+        "url": ""
+      },
+      {
+        "cups": 5,
+        "price": "15 €",
+        "url": ""
+      }
+    ],
+    "customUrl": ""
+  },
   "links": [
-    { "label": "Support on Kick", "url": "https://kick.com/hachfit", "primary": true }
+    {
+      "label": "Support on Kick",
+      "url": "https://kick.com/hachfit",
+      "primary": false
+    }
   ]
 }
