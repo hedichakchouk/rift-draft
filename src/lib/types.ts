@@ -25,7 +25,7 @@ export interface Champion {
   key: string     // numeric key, e.g. "21"
   name: string    // display name
   tags: string[]
-  info: { attack: number; defense: number; magic: number }
+  info: { attack: number; defense: number; magic: number; difficulty?: number }
 }
 export interface Spell { name: string; image: string }
 

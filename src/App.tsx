@@ -8,6 +8,7 @@ import DraftPage from './components/DraftPage'
 import Guess from './components/Guess'
 import Highlights from './components/Highlights'
 import Support from './components/Support'
+import Account from './components/Account'
 import Laning from './components/laning/Laning'
 import Coach from './components/Coach'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -16,17 +17,18 @@ import { Icon } from './components/ui/kit'
 import { useVisitor } from './lib/profile'
 
 const players = playersData.players as Player[]
-type Page = 'draft' | 'tiers' | 'laning' | 'clips' | 'guess'
+type Page = 'draft' | 'tiers' | 'laning' | 'account' | 'clips' | 'guess'
 const PAGES: { id: Page; label: string; short: string; icon: JSX.Element }[] = [
   { id: 'draft', label: 'Draft', short: 'Draft', icon: Icon.map },
   { id: 'tiers', label: 'Tier Lists', short: 'Tiers', icon: Icon.crown },
   { id: 'laning', label: 'Laning', short: 'Laning', icon: Icon.swords },
+  { id: 'account', label: 'My Account', short: 'Account', icon: Icon.user },
   { id: 'clips', label: 'Highlights', short: 'Clips', icon: Icon.play },
   { id: 'guess', label: 'Guess the Champ', short: 'Guess', icon: Icon.eye },
 ]
 const fromHash = (): Page => {
   const h = location.hash.replace('#', '')
-  return h.startsWith('tiers') ? 'tiers' : h.startsWith('laning') ? 'laning' : h.startsWith('clips') ? 'clips' : h.startsWith('guess') ? 'guess' : 'draft'
+  return h.startsWith('tiers') ? 'tiers' : h.startsWith('laning') ? 'laning' : h.startsWith('account') ? 'account' : h.startsWith('clips') ? 'clips' : h.startsWith('guess') ? 'guess' : 'draft'
 }
 
 function Logo() {
@@ -94,6 +96,7 @@ export default function App() {
         {page === 'draft' && <DraftPage players={players} champs={champs} byId={byId} stats={stats} />}
         {page === 'tiers' && <TierList players={players} byId={byId} stats={stats} />}
         {page === 'laning' && <Laning players={players} champs={champs} byId={byId} stats={stats} />}
+        {page === 'account' && <Account champs={champs} byId={byId} stats={stats} />}
         {page === 'clips' && <Highlights />}
         {page === 'guess' && <Guess champs={champs} />}
       </ErrorBoundary></main>

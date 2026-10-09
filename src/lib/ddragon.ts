@@ -8,7 +8,7 @@ export async function loadChampions(): Promise<Champion[]> {
   version = versions[0]
   const data = await (await fetch(`${BASE}/cdn/${version}/data/en_US/champion.json`)).json()
   return (Object.values(data.data) as any[])
-    .map((c) => ({ id: c.id, key: c.key, name: c.name, tags: c.tags, info: c.info }) as Champion)
+    .map((c) => ({ id: c.id, key: c.key, name: c.name, tags: c.tags, info: { ...c.info } }) as Champion)
     .sort((a, b) => a.name.localeCompare(b.name))
 }
 
