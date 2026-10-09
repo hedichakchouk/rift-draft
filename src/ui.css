@@ -596,3 +596,4 @@ details.more[open] summary { color: var(--gold2); }
 .support-go { display: block; text-align: center; }
 @media (max-width: 600px) { .support-btn span { display: none; } .support-btn { padding: 12px; } }
 @media (prefers-reduced-motion: reduce) { .support-btn svg { animation: none; } }
+.support-go + .support-go { margin-top: 8px; }

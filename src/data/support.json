@@ -1,5 +1,7 @@
 {
-  "paypal": "",
-  "currency": "EUR",
-  "amounts": [3, 5, 10]
+  "title": "Support Hach",
+  "message": "Enjoying the site, the draft tools or the clips? Follow, subscribe or send a tip on Kick. It keeps the site free and helps me make more.",
+  "links": [
+    { "label": "Support on Kick", "url": "https://kick.com/hachfit", "primary": true }
+  ]
 }
