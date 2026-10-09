@@ -5,6 +5,7 @@ import { LaneIcon, MetaTier } from './ui/kit'
 import { iconUrl, loadDetail, type ChampDetail } from '../lib/ddragon'
 import { loadChampMeta, loadMetaIndex, type ChampMeta, type MetaIndex } from '../lib/meta'
 import { renderPlan } from '../lib/planImage'
+import { scanScreenshot, type ScanResult } from '../lib/scan'
 import { assignLanes, banSuggestions, candidateIds, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
 import { setCoachContext, setCoachData } from '../lib/profile'
 import { LANES, LANE_SHORT, type Champion, type Lane, type Player } from '../lib/types'
@@ -29,6 +30,8 @@ export default function CoPilot({ players, champs, byId }: Props) {
   const [q, setQ] = useState('')
   const [locked, setLocked] = useState<string | null>(null)
   const input = useRef<HTMLInputElement>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
+  const [scan, setScan] = useState<{ busy: boolean; msg: string; pct: number; res: ScanResult | null; err: string; thumb: string } | null>(null)
   const player = players.find((p) => p.name === playerName) ?? null
 
   useEffect(() => { loadMetaIndex().then(setIdx) }, [])
@@ -112,6 +115,33 @@ export default function CoPilot({ players, champs, byId }: Props) {
     if (p) setMe(p.lane)
   }
 
+  const runScan = async (file: Blob) => {
+    const thumb = URL.createObjectURL(file)
+    setScan({ busy: true, msg: 'Reading the screenshot…', pct: 0.02, res: null, err: '', thumb })
+    try {
+      const res = await scanScreenshot(file, champs, (msg, pct) => setScan((x) => (x ? { ...x, msg, pct } : x)))
+      setScan((x) => (x ? { ...x, busy: false, res, pct: 1 } : x))
+    } catch (e) {
+      setScan((x) => (x ? { ...x, busy: false, err: e instanceof Error ? e.message : 'Could not read this image' } : x))
+    }
+  }
+  const takeImage = (files?: FileList | DataTransferItemList | null) => {
+    const f = files ? Array.from(files as ArrayLike<File | DataTransferItem>).map((i) => ('getAsFile' in i ? i.getAsFile() : i)).find((x): x is File => !!x && x.type.startsWith('image/')) : null
+    if (f) runScan(f)
+  }
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => { if (e.clipboardData?.files.length) takeImage(e.clipboardData.files) }
+    window.addEventListener('paste', onPaste)
+    return () => window.removeEventListener('paste', onPaste)
+  }, [champs]) // eslint-disable-line react-hooks/exhaustive-deps
+  const applyScan = () => {
+    if (!scan?.res) return
+    setEnemy(assignLanes(idx, scan.res.enemy.slice(0, 5).map((f) => ({ id: f.id, lane: 'top' as Lane }))))
+    setAlly(assignLanes(idx, scan.res.ally.slice(0, 5).map((f) => ({ id: f.id, lane: 'top' as Lane }))))
+    setLocked(null); setScan(null)
+  }
+  const dropScan = (side: 'ally' | 'enemy', i: number) => setScan((x) => (x && x.res ? { ...x, res: { ...x.res, [side]: x.res[side].filter((_, j) => j !== i) } } : x))
+
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && matches[0]) add(matches[0].id)
     if (e.key === 'Tab' && !e.shiftKey && !q) { /* default */ }
@@ -148,6 +178,11 @@ export default function CoPilot({ players, champs, byId }: Props) {
             ref={input} className="search cp-search" type="search" placeholder={`Type a champion, Enter adds to ${target === 'ban' ? 'bans' : target === 'ally' ? 'your team' : 'the enemy'}`}
             value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} autoFocus autoComplete="off" spellCheck={false} enterKeyHint="done"
           />
+          <div className="cp-scan-row">
+            <button className="btn" onClick={() => fileRef.current?.click()}>Scan a champ select screenshot</button>
+            <span className="sub">or paste / drop an image here</span>
+            <input ref={fileRef} type="file" accept="image/*" hidden onChange={(e) => { takeImage(e.target.files); e.target.value = '' }} />
+          </div>
           {matches.length > 0 && (
             <div className="cp-results">
               {matches.map((c) => (
@@ -157,6 +192,30 @@ export default function CoPilot({ players, champs, byId }: Props) {
           )}
         </div>
       </section>
+
+      {scan && (
+        <section className="card cp-scan">
+          <div className="card-head">
+            <div><h2>Screenshot reader</h2><p className="sub">{scan.busy ? `${scan.msg} ${Math.round(scan.pct * 100)}%` : scan.err ? scan.err : scan.res && scan.res.ally.length + scan.res.enemy.length === 0 ? 'No champion names found. Try a sharper, full-screen screenshot.' : 'Check the champions, remove any wrong ones, then apply. Bans are not read yet.'}</p></div>
+            <div className="btns">
+              {scan.res && scan.res.ally.length + scan.res.enemy.length > 0 && <button className="btn gold" onClick={applyScan}>Apply to draft</button>}
+              <button className="btn" onClick={() => setScan(null)}>Close</button>
+            </div>
+          </div>
+          <div className="cp-scan-body">
+            <img src={scan.thumb} alt="" />
+            {scan.busy && <div className="bar"><i style={{ width: `${scan.pct * 100}%` }} /></div>}
+            {scan.res && (['ally', 'enemy'] as const).map((side) => (
+              <div key={side} className={`cp-team ${side === 'ally' ? 'a' : 'e'}`}>
+                <span className="stat-label">{side === 'ally' ? 'Left team' : 'Right team'}</span>
+                <div className="cp-slots">{scan.res![side].length === 0 && <em className="sub">none found</em>}{scan.res![side].map((f, i) => (
+                  <div key={f.id} className="cp-pick"><button className="pic" onClick={() => dropScan(side, i)} title={`${byId.get(f.id)?.name} - click to remove`}><img src={iconUrl(f.id)} alt="" /><i>×</i></button><span className="lane">{byId.get(f.id)?.name}</span></div>
+                ))}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="cp-teams">
         <TeamRow title="Enemy" cls="e" picks={enemy} byId={byId} onRemove={(i) => setEnemy((a) => a.filter((_, j) => j !== i))} onLane={(i) => cycleLane('enemy', i)} me={me} />
