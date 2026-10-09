@@ -55,7 +55,7 @@ function YouTube({ v }: { v: Video }) {
 }
 
 export default function Videos({ me, foe, meKey, foeKey, videos }: { me: ChampDetail; foe: ChampDetail; meKey: string; foeKey: string; videos: Video[] }) {
-  const [tab, setTab] = useState<'guides' | 'me' | 'foe'>(videos.length ? 'guides' : 'me')
+  const [tab, setTab] = useState<'guides' | 'me' | 'foe'>('guides')
   const q = encodeURIComponent(`${me.name} vs ${foe.name} laning`)
   return (
     <section className="card videos">
