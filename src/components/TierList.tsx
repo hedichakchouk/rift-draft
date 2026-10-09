@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Avatar from './Avatar'
 import { LaneIcon, Seg, rankCrestUrl } from './ui/kit'
 import { iconUrl } from '../lib/ddragon'
-import { kda, rankLine, rankWr, winrate, type RankInfo, type Stats } from '../lib/stats'
+import { kda, rankLine, rankWr, winrate, type FlexGame, type FlexPlayer, type RankInfo, type Stats } from '../lib/stats'
 import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
 interface Props { players: Player[]; byId: Map<string, Champion>; stats?: Stats | null }
@@ -152,25 +152,65 @@ export default function TierList({ players, byId, stats }: Props) {
 
       {view === 'games' && (
         <section className="card">
-          <div className="card-head"><div><h2>Last 5 flex games together</h2><p className="sub">Games where 4 or more of the squad queued on the same team.</p></div></div>
+          <div className="card-head"><div><h2>Last 5 flex games together</h2><p className="sub">Games where 4 or more of the squad queued on the same team. Scores are op.gg OP Score; the letter grade is S for the MVP/ACE or 7.5+, A 6+, B 4.5+, C 3+, D below.</p></div></div>
           {!stats?.flexGames?.length && <p className="empty">No squad flex games recorded yet.</p>}
           <div className="fg-list">
-            {(stats?.flexGames ?? []).slice(0, 5).map((g, i) => (
-              <div key={i} className={`fg ${g.win ? 'win' : 'loss'}`}>
-                <div className="fg-res"><b>{g.win ? 'Victory' : 'Defeat'}</b><small>{g.duration} · {g.age}</small></div>
-                <div className="fg-team">
-                  {g.members.map(([who, champ]) => (
-                    <div key={who} className="fg-m" title={`${who} · ${byId.get(champ)?.name ?? champ}`}>
-                      <img src={iconUrl(champ)} alt="" loading="lazy" /><span>{who}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {(stats?.flexGames ?? []).slice(0, 5).map((g, i) => <GameCard key={i} g={g} byId={byId} />)}
           </div>
           {(() => { const gs = (stats?.flexGames ?? []).slice(0, 5); const w = gs.filter((g) => g.win).length; return gs.length ? <p className="sub">Squad record: {w}W {gs.length - w}L</p> : null })()}
         </section>
       )}
     </div>
+  )
+}
+
+function Row({ p, byId }: { p: FlexPlayer; byId: Map<string, { name: string }> }) {
+  return (
+    <div className={`fgp ${p.squad ? 'squad' : ''}`}>
+      <img src={iconUrl(p.champ)} alt="" loading="lazy" />
+      <span className="fgp-n"><b>{p.name}</b><small>{byId.get(p.champ)?.name ?? p.champ}</small></span>
+      <span className="fgp-kda">{p.k}/{p.d}/{p.a}</span>
+      <span className="fgp-op">{p.op.toFixed(1)}</span>
+      <span className={`fgp-g g-${p.grade}`}>{p.grade}</span>
+      <span className={`fgp-pl ${p.place === 'MVP' ? 'mvp' : p.place === 'ACE' ? 'ace' : ''}`}>{p.place}</span>
+    </div>
+  )
+}
+
+function GameCard({ g, byId }: { g: FlexGame; byId: Map<string, { name: string }> }) {
+  const ours = g.ours ?? [], enemy = g.enemy ?? []
+  const squad = ours.filter((p) => p.squad)
+  return (
+    <details className={`fg ${g.win ? 'win' : 'loss'}`}>
+      <summary>
+        <div className="fg-top">
+          <div className="fg-res"><b>{g.win ? 'Victory' : 'Defeat'}</b><small>{g.duration} · {g.age}</small></div>
+          {g.kills && <div className="fg-score"><b>{g.kills[0]}</b><span>kills</span><b className="e">{g.kills[1]}</b></div>}
+          <div className="fg-awards">
+            {g.mvp && <span className={`aw mvp ${g.mvp.ours ? 'us' : ''}`}>MVP · {g.mvp.name} <small>{byId.get(g.mvp.champ)?.name ?? g.mvp.champ}</small></span>}
+            {g.ace && <span className={`aw ace ${g.ace.ours ? 'us' : ''}`}>ACE · {g.ace.name} <small>{byId.get(g.ace.champ)?.name ?? g.ace.champ}</small></span>}
+          </div>
+        </div>
+        <div className="fg-vs">
+          <div className="fg-team">
+            {squad.map((p) => (
+              <div key={p.name} className="fg-m" title={`${p.name} · ${byId.get(p.champ)?.name ?? p.champ} · ${p.k}/${p.d}/${p.a} · OP ${p.op}`}>
+                <span className="fg-ic"><img src={iconUrl(p.champ)} alt="" loading="lazy" /><i className={`g-${p.grade}`}>{p.grade}</i></span>
+                <span>{p.name}</span><small>{p.k}/{p.d}/{p.a}</small>
+              </div>
+            ))}
+          </div>
+          <span className="fg-x">vs</span>
+          <div className="fg-team en">
+            {enemy.map((p, j) => <img key={j} src={iconUrl(p.champ)} alt={byId.get(p.champ)?.name ?? p.champ} title={`${p.name} · ${byId.get(p.champ)?.name ?? p.champ}`} loading="lazy" />)}
+          </div>
+        </div>
+        <span className="fg-more">Full scoreboard</span>
+      </summary>
+      <div className="fg-board">
+        <div><h4>Our team</h4>{ours.map((p, j) => <Row key={j} p={p} byId={byId} />)}</div>
+        <div><h4>Enemy team</h4>{enemy.map((p, j) => <Row key={j} p={p} byId={byId} />)}</div>
+      </div>
+    </details>
   )
 }

@@ -29,20 +29,43 @@ const RANKS = {
 }
 const rk = (a) => (a ? { tier: a[0], division: a[1], lp: a[2], wins: a[3], losses: a[4] } : null)
 
-// Last 5 flex games the squad played together (4+ members on the same team), newest first. Read from op.gg match history.
-// Each member: [player, champion id]
-const FLEX_GAMES = [
-  { age: '5 days ago', win: true, duration: '32:00', members: [['Omar', 'Chogath'], ['Hama', 'Naafiri'], ['Rapo', 'Jinx'], ['Hach', 'Lulu']] },
-  { age: '5 days ago', win: false, duration: '26:27', members: [['Omar', 'Garen'], ['Aster', 'Ambessa'], ['Hama', 'Viktor'], ['Rapo', 'Sivir'], ['Hach', 'Alistar']] },
-  { age: '5 days ago', win: true, duration: '24:48', members: [['Omar', 'Pantheon'], ['Aster', 'Chogath'], ['Hama', 'Diana'], ['Rapo', 'Ezreal'], ['Hach', 'Leona']] },
-  { age: '5 days ago', win: true, duration: '37:22', members: [['Bullet', 'Sylas'], ['Aster', 'Ambessa'], ['Hama', 'Viktor'], ['Omar', 'Ezreal'], ['Hach', 'Milio']] },
-  { age: '5 days ago', win: true, duration: '33:16', members: [['Bullet', 'Jayce'], ['Aster', 'Ambessa'], ['Hama', 'Diana'], ['Omar', 'MissFortune'], ['Hach', 'Rell']] },
-]
 
 const SPECIAL = { Wukong: 'MonkeyKing', "Cho'Gath": 'Chogath', "Kha'Zix": 'Khazix', "Kai'Sa": 'Kaisa', "Rek'Sai": 'RekSai',
   "Bel'Veth": 'Belveth', "Vel'Koz": 'Velkoz', "Kog'Maw": 'KogMaw', "K'Sante": 'KSante', LeBlanc: 'Leblanc', 'Nunu & Willump': 'Nunu', 'Renata Glasc': 'Renata' }
 const toId = (n) => SPECIAL[n] ?? n.replace(/[^A-Za-z0-9]/g, '')
 const r1 = (x) => Math.round(x * 10) / 10
+
+const SQUAD = { 'Meat Grinder': 'Omar', BigBallsDragon: 'Aster', Skyvanat: 'Hama', Rapo: 'Rapo', hach: 'Hach', BulletProof: 'Bullet' }
+// Last 5 squad flex games, read from op.gg match detail. Each row: champion,summoner,OP score,placement (MVP/ACE/1st..10th),K/D/A
+const RAW_GAMES = [
+  { age: '5 days ago', win: true, duration: '32:00',
+    ours: "Cho'Gath,Meat Grinder,5.4,3rd,13/4/5;Kayn,Kayn S3ayed,5.6,MVP,13/5/8;Naafiri,Skyvanat,5.3,4th,14/9/7;Jinx,Rapo,3.6,8th,3/8/11;Lulu,hach,2.6,9th,1/14/18",
+    enemy: 'Nasus,Thiccstar123,2.5,10th,2/5/4;Rengar,frenchcore,4.9,6th,14/9/7;Annie,Benny,5.4,ACE,16/10/6;Jhin,ZiccL,4.1,7th,6/9/11;Janna,Yukato,5.1,5th,2/11/26' },
+  { age: '5 days ago', win: false, duration: '26:27',
+    ours: 'Garen,Meat Grinder,4.8,ACE,5/5/0;Ambessa,BigBallsDragon,1.4,10th,1/9/3;Viktor,Skyvanat,2.4,8th,0/6/2;Sivir,Rapo,4.4,7th,2/3/2;Alistar,hach,2.1,9th,0/6/4',
+    enemy: 'Renekton,LP EXCAVATOR 十,5.2,5th,3/3/4;Xin Zhao,Cangueco,10,MVP,6/0/16;Syndra,teumokis,10,3rd,11/1/5;Jinx,Khefu,9.6,4th,8/2/8;Thresh,Algorithm,10,2nd,1/2/20' },
+  { age: '5 days ago', win: true, duration: '24:48',
+    ours: "Pantheon,Meat Grinder,8.8,2nd,11/1/4;Cho'Gath,BigBallsDragon,6.3,4th,6/2/5;Diana,Skyvanat,8.3,3rd,8/1/6;Ezreal,Rapo,9.6,MVP,8/0/9;Leona,hach,5.8,5th,0/5/14",
+    enemy: "Sion,Flütenskum,1.5,10th,1/8/1;Kha'Zix,Ulbinus,2.6,7th,4/9/4;Viktor,Bergholdt,2.4,8th,0/6/4;Caitlyn,Svampen,4.2,ACE,4/4/2;Karma,GarenTheMountain,1.7,9th,0/6/4" },
+  { age: '5 days ago', win: true, duration: '37:22',
+    ours: 'Sylas,BulletProof,3.3,7th,6/10/7;Ambessa,BigBallsDragon,7.4,3rd,10/3/14;Viktor,Skyvanat,8,2nd,16/5/11;Ezreal,Meat Grinder,7.2,4th,9/3/15;Milio,hach,8.6,MVP,3/5/31',
+    enemy: "Malphite,selim5533,2.9,9th,2/10/10;Nocturne,lapo,3.2,8th,8/8/2;Vel'Koz,SQD Rumpel,1.8,10th,1/11/6;Tristana,Retus09,5.9,ACE,13/8/4;Lulu,Philae,4.1,6th,2/7/14" },
+  { age: '5 days ago', win: true, duration: '33:16',
+    ours: 'Jayce,BulletProof,7.6,MVP,11/5/11;Ambessa,BigBallsDragon,6.6,3rd,9/2/6;Diana,Skyvanat,7.3,2nd,10/9/13;Miss Fortune,Meat Grinder,3.9,7th,5/5/4;Rell,hach,6.2,4th,1/3/17',
+    enemy: 'Ahri,Morcille,3.8,8th,7/10/5;Lee Sin,SinZuo,4.5,6th,4/3/6;Kled,Syrôko,1.8,10th,3/12/4;Akshan,Frosch,5.5,ACE,7/6/8;Camille,Ρaprika,3.3,9th,2/5/7' },
+]
+const grade = (s) => (s >= 7.5 ? 'S' : s >= 6 ? 'A' : s >= 4.5 ? 'B' : s >= 3 ? 'C' : 'D')
+const parseRow = (r, mine) => { const [champ, name, op, place, kda] = r.split(','); const [k, d, a] = kda.split('/').map(Number)
+  const p = { champ: toId(champ), name: mine && SQUAD[name] ? SQUAD[name] : name, op: +op, place, grade: place === 'MVP' || place === 'ACE' ? 'S' : grade(+op), k, d, a }
+  if (mine && SQUAD[name]) p.squad = true
+  return p }
+const FLEX_GAMES = RAW_GAMES.map((g) => {
+  const ours = g.ours.split(';').map((r) => parseRow(r, true)), enemy = g.enemy.split(';').map((r) => parseRow(r, false))
+  const best = [...ours, ...enemy].find((p) => p.place === (g.win ? 'MVP' : 'ACE')) ?? null
+  const mvp = [...ours, ...enemy].find((p) => p.place === 'MVP') ?? null, ace = [...ours, ...enemy].find((p) => p.place === 'ACE') ?? null
+  return { age: g.age, win: g.win, duration: g.duration, ours, enemy, mvp: mvp && { name: mvp.name, champ: mvp.champ, ours: ours.includes(mvp) }, ace: ace && { name: ace.name, champ: ace.champ, ours: ours.includes(ace) },
+    kills: [ours, enemy].map((t) => t.reduce((s, p) => s + p.k, 0)), members: ours.filter((p) => p.squad).map((p) => [p.name, p.champ]) }
+})
 
 const out = { updated: new Date().toISOString(), source: 'op.gg (EUW ranked, current season)', flexGames: FLEX_GAMES, players: {} }
 for (const [name, p] of Object.entries(RAW)) {

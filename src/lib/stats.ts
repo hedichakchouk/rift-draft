@@ -12,7 +12,9 @@ export interface PlayerStats {
   champions: Record<string, ChampStat>
   mastery: { id: string; level: number; points: number }[]
 }
-export interface FlexGame { age: string; win: boolean; duration: string; members: [string, string][] }
+export interface FlexPlayer { champ: string; name: string; op: number; place: string; grade: string; k: number; d: number; a: number; squad?: boolean }
+export interface FlexAward { name: string; champ: string; ours: boolean }
+export interface FlexGame { age: string; win: boolean; duration: string; members: [string, string][]; ours?: FlexPlayer[]; enemy?: FlexPlayer[]; mvp?: FlexAward | null; ace?: FlexAward | null; kills?: [number, number] }
 export interface Stats { updated: string | null; patch?: string; players: Record<string, PlayerStats>; flexGames?: FlexGame[] }
 
 export async function loadStats(): Promise<Stats | null> {

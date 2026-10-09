@@ -1,11 +1,133 @@
 {
- "updated": "2026-10-09T11:41:45.565Z",
+ "updated": "2026-10-09T13:32:30.045Z",
  "source": "op.gg (EUW ranked, current season)",
  "flexGames": [
   {
    "age": "5 days ago",
    "win": true,
    "duration": "32:00",
+   "ours": [
+    {
+     "champ": "Chogath",
+     "name": "Omar",
+     "op": 5.4,
+     "place": "3rd",
+     "grade": "B",
+     "k": 13,
+     "d": 4,
+     "a": 5,
+     "squad": true
+    },
+    {
+     "champ": "Kayn",
+     "name": "Kayn S3ayed",
+     "op": 5.6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 13,
+     "d": 5,
+     "a": 8
+    },
+    {
+     "champ": "Naafiri",
+     "name": "Hama",
+     "op": 5.3,
+     "place": "4th",
+     "grade": "B",
+     "k": 14,
+     "d": 9,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Jinx",
+     "name": "Rapo",
+     "op": 3.6,
+     "place": "8th",
+     "grade": "C",
+     "k": 3,
+     "d": 8,
+     "a": 11,
+     "squad": true
+    },
+    {
+     "champ": "Lulu",
+     "name": "Hach",
+     "op": 2.6,
+     "place": "9th",
+     "grade": "D",
+     "k": 1,
+     "d": 14,
+     "a": 18,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Nasus",
+     "name": "Thiccstar123",
+     "op": 2.5,
+     "place": "10th",
+     "grade": "D",
+     "k": 2,
+     "d": 5,
+     "a": 4
+    },
+    {
+     "champ": "Rengar",
+     "name": "frenchcore",
+     "op": 4.9,
+     "place": "6th",
+     "grade": "B",
+     "k": 14,
+     "d": 9,
+     "a": 7
+    },
+    {
+     "champ": "Annie",
+     "name": "Benny",
+     "op": 5.4,
+     "place": "ACE",
+     "grade": "S",
+     "k": 16,
+     "d": 10,
+     "a": 6
+    },
+    {
+     "champ": "Jhin",
+     "name": "ZiccL",
+     "op": 4.1,
+     "place": "7th",
+     "grade": "C",
+     "k": 6,
+     "d": 9,
+     "a": 11
+    },
+    {
+     "champ": "Janna",
+     "name": "Yukato",
+     "op": 5.1,
+     "place": "5th",
+     "grade": "B",
+     "k": 2,
+     "d": 11,
+     "a": 26
+    }
+   ],
+   "mvp": {
+    "name": "Kayn S3ayed",
+    "champ": "Kayn",
+    "ours": true
+   },
+   "ace": {
+    "name": "Benny",
+    "champ": "Annie",
+    "ours": false
+   },
+   "kills": [
+    44,
+    40
+   ],
    "members": [
     [
      "Omar",
@@ -29,6 +151,129 @@
    "age": "5 days ago",
    "win": false,
    "duration": "26:27",
+   "ours": [
+    {
+     "champ": "Garen",
+     "name": "Omar",
+     "op": 4.8,
+     "place": "ACE",
+     "grade": "S",
+     "k": 5,
+     "d": 5,
+     "a": 0,
+     "squad": true
+    },
+    {
+     "champ": "Ambessa",
+     "name": "Aster",
+     "op": 1.4,
+     "place": "10th",
+     "grade": "D",
+     "k": 1,
+     "d": 9,
+     "a": 3,
+     "squad": true
+    },
+    {
+     "champ": "Viktor",
+     "name": "Hama",
+     "op": 2.4,
+     "place": "8th",
+     "grade": "D",
+     "k": 0,
+     "d": 6,
+     "a": 2,
+     "squad": true
+    },
+    {
+     "champ": "Sivir",
+     "name": "Rapo",
+     "op": 4.4,
+     "place": "7th",
+     "grade": "C",
+     "k": 2,
+     "d": 3,
+     "a": 2,
+     "squad": true
+    },
+    {
+     "champ": "Alistar",
+     "name": "Hach",
+     "op": 2.1,
+     "place": "9th",
+     "grade": "D",
+     "k": 0,
+     "d": 6,
+     "a": 4,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Renekton",
+     "name": "LP EXCAVATOR 十",
+     "op": 5.2,
+     "place": "5th",
+     "grade": "B",
+     "k": 3,
+     "d": 3,
+     "a": 4
+    },
+    {
+     "champ": "XinZhao",
+     "name": "Cangueco",
+     "op": 10,
+     "place": "MVP",
+     "grade": "S",
+     "k": 6,
+     "d": 0,
+     "a": 16
+    },
+    {
+     "champ": "Syndra",
+     "name": "teumokis",
+     "op": 10,
+     "place": "3rd",
+     "grade": "S",
+     "k": 11,
+     "d": 1,
+     "a": 5
+    },
+    {
+     "champ": "Jinx",
+     "name": "Khefu",
+     "op": 9.6,
+     "place": "4th",
+     "grade": "S",
+     "k": 8,
+     "d": 2,
+     "a": 8
+    },
+    {
+     "champ": "Thresh",
+     "name": "Algorithm",
+     "op": 10,
+     "place": "2nd",
+     "grade": "S",
+     "k": 1,
+     "d": 2,
+     "a": 20
+    }
+   ],
+   "mvp": {
+    "name": "Cangueco",
+    "champ": "XinZhao",
+    "ours": false
+   },
+   "ace": {
+    "name": "Omar",
+    "champ": "Garen",
+    "ours": true
+   },
+   "kills": [
+    8,
+    29
+   ],
    "members": [
     [
      "Omar",
@@ -56,6 +301,129 @@
    "age": "5 days ago",
    "win": true,
    "duration": "24:48",
+   "ours": [
+    {
+     "champ": "Pantheon",
+     "name": "Omar",
+     "op": 8.8,
+     "place": "2nd",
+     "grade": "S",
+     "k": 11,
+     "d": 1,
+     "a": 4,
+     "squad": true
+    },
+    {
+     "champ": "Chogath",
+     "name": "Aster",
+     "op": 6.3,
+     "place": "4th",
+     "grade": "A",
+     "k": 6,
+     "d": 2,
+     "a": 5,
+     "squad": true
+    },
+    {
+     "champ": "Diana",
+     "name": "Hama",
+     "op": 8.3,
+     "place": "3rd",
+     "grade": "S",
+     "k": 8,
+     "d": 1,
+     "a": 6,
+     "squad": true
+    },
+    {
+     "champ": "Ezreal",
+     "name": "Rapo",
+     "op": 9.6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 8,
+     "d": 0,
+     "a": 9,
+     "squad": true
+    },
+    {
+     "champ": "Leona",
+     "name": "Hach",
+     "op": 5.8,
+     "place": "5th",
+     "grade": "B",
+     "k": 0,
+     "d": 5,
+     "a": 14,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Sion",
+     "name": "Flütenskum",
+     "op": 1.5,
+     "place": "10th",
+     "grade": "D",
+     "k": 1,
+     "d": 8,
+     "a": 1
+    },
+    {
+     "champ": "Khazix",
+     "name": "Ulbinus",
+     "op": 2.6,
+     "place": "7th",
+     "grade": "D",
+     "k": 4,
+     "d": 9,
+     "a": 4
+    },
+    {
+     "champ": "Viktor",
+     "name": "Bergholdt",
+     "op": 2.4,
+     "place": "8th",
+     "grade": "D",
+     "k": 0,
+     "d": 6,
+     "a": 4
+    },
+    {
+     "champ": "Caitlyn",
+     "name": "Svampen",
+     "op": 4.2,
+     "place": "ACE",
+     "grade": "S",
+     "k": 4,
+     "d": 4,
+     "a": 2
+    },
+    {
+     "champ": "Karma",
+     "name": "GarenTheMountain",
+     "op": 1.7,
+     "place": "9th",
+     "grade": "D",
+     "k": 0,
+     "d": 6,
+     "a": 4
+    }
+   ],
+   "mvp": {
+    "name": "Rapo",
+    "champ": "Ezreal",
+    "ours": true
+   },
+   "ace": {
+    "name": "Svampen",
+    "champ": "Caitlyn",
+    "ours": false
+   },
+   "kills": [
+    33,
+    9
+   ],
    "members": [
     [
      "Omar",
@@ -83,6 +451,129 @@
    "age": "5 days ago",
    "win": true,
    "duration": "37:22",
+   "ours": [
+    {
+     "champ": "Sylas",
+     "name": "Bullet",
+     "op": 3.3,
+     "place": "7th",
+     "grade": "C",
+     "k": 6,
+     "d": 10,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Ambessa",
+     "name": "Aster",
+     "op": 7.4,
+     "place": "3rd",
+     "grade": "A",
+     "k": 10,
+     "d": 3,
+     "a": 14,
+     "squad": true
+    },
+    {
+     "champ": "Viktor",
+     "name": "Hama",
+     "op": 8,
+     "place": "2nd",
+     "grade": "S",
+     "k": 16,
+     "d": 5,
+     "a": 11,
+     "squad": true
+    },
+    {
+     "champ": "Ezreal",
+     "name": "Omar",
+     "op": 7.2,
+     "place": "4th",
+     "grade": "A",
+     "k": 9,
+     "d": 3,
+     "a": 15,
+     "squad": true
+    },
+    {
+     "champ": "Milio",
+     "name": "Hach",
+     "op": 8.6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 3,
+     "d": 5,
+     "a": 31,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Malphite",
+     "name": "selim5533",
+     "op": 2.9,
+     "place": "9th",
+     "grade": "D",
+     "k": 2,
+     "d": 10,
+     "a": 10
+    },
+    {
+     "champ": "Nocturne",
+     "name": "lapo",
+     "op": 3.2,
+     "place": "8th",
+     "grade": "C",
+     "k": 8,
+     "d": 8,
+     "a": 2
+    },
+    {
+     "champ": "Velkoz",
+     "name": "SQD Rumpel",
+     "op": 1.8,
+     "place": "10th",
+     "grade": "D",
+     "k": 1,
+     "d": 11,
+     "a": 6
+    },
+    {
+     "champ": "Tristana",
+     "name": "Retus09",
+     "op": 5.9,
+     "place": "ACE",
+     "grade": "S",
+     "k": 13,
+     "d": 8,
+     "a": 4
+    },
+    {
+     "champ": "Lulu",
+     "name": "Philae",
+     "op": 4.1,
+     "place": "6th",
+     "grade": "C",
+     "k": 2,
+     "d": 7,
+     "a": 14
+    }
+   ],
+   "mvp": {
+    "name": "Hach",
+    "champ": "Milio",
+    "ours": true
+   },
+   "ace": {
+    "name": "Retus09",
+    "champ": "Tristana",
+    "ours": false
+   },
+   "kills": [
+    44,
+    26
+   ],
    "members": [
     [
      "Bullet",
@@ -110,6 +601,129 @@
    "age": "5 days ago",
    "win": true,
    "duration": "33:16",
+   "ours": [
+    {
+     "champ": "Jayce",
+     "name": "Bullet",
+     "op": 7.6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 11,
+     "d": 5,
+     "a": 11,
+     "squad": true
+    },
+    {
+     "champ": "Ambessa",
+     "name": "Aster",
+     "op": 6.6,
+     "place": "3rd",
+     "grade": "A",
+     "k": 9,
+     "d": 2,
+     "a": 6,
+     "squad": true
+    },
+    {
+     "champ": "Diana",
+     "name": "Hama",
+     "op": 7.3,
+     "place": "2nd",
+     "grade": "A",
+     "k": 10,
+     "d": 9,
+     "a": 13,
+     "squad": true
+    },
+    {
+     "champ": "MissFortune",
+     "name": "Omar",
+     "op": 3.9,
+     "place": "7th",
+     "grade": "C",
+     "k": 5,
+     "d": 5,
+     "a": 4,
+     "squad": true
+    },
+    {
+     "champ": "Rell",
+     "name": "Hach",
+     "op": 6.2,
+     "place": "4th",
+     "grade": "A",
+     "k": 1,
+     "d": 3,
+     "a": 17,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Ahri",
+     "name": "Morcille",
+     "op": 3.8,
+     "place": "8th",
+     "grade": "C",
+     "k": 7,
+     "d": 10,
+     "a": 5
+    },
+    {
+     "champ": "LeeSin",
+     "name": "SinZuo",
+     "op": 4.5,
+     "place": "6th",
+     "grade": "B",
+     "k": 4,
+     "d": 3,
+     "a": 6
+    },
+    {
+     "champ": "Kled",
+     "name": "Syrôko",
+     "op": 1.8,
+     "place": "10th",
+     "grade": "D",
+     "k": 3,
+     "d": 12,
+     "a": 4
+    },
+    {
+     "champ": "Akshan",
+     "name": "Frosch",
+     "op": 5.5,
+     "place": "ACE",
+     "grade": "S",
+     "k": 7,
+     "d": 6,
+     "a": 8
+    },
+    {
+     "champ": "Camille",
+     "name": "Ρaprika",
+     "op": 3.3,
+     "place": "9th",
+     "grade": "C",
+     "k": 2,
+     "d": 5,
+     "a": 7
+    }
+   ],
+   "mvp": {
+    "name": "Bullet",
+    "champ": "Jayce",
+    "ours": true
+   },
+   "ace": {
+    "name": "Frosch",
+    "champ": "Akshan",
+    "ours": false
+   },
+   "kills": [
+    36,
+    23
+   ],
    "members": [
     [
      "Bullet",
