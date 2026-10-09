@@ -66,7 +66,17 @@ export default function Coach() {
   const [open, setOpen] = useState(false)
   const [teaser, setTeaser] = useState(false)
   const [online, setOnline] = useState<boolean | null>(null)
-  const [sound, setSound] = useState(false)
+  const [sound, setSoundState] = useState(() => { try { return localStorage.getItem('hd-coach-sound') !== '0' } catch { return true } })
+  const setSound = (v: boolean) => { setSoundState(v); try { localStorage.setItem('hd-coach-sound', v ? '1' : '0') } catch { /* ignore */ } if (!v) window.speechSynthesis?.cancel() }
+  const voiceLine = () => { const a = new Audio(threshVoice); a.volume = 0.6; a.play().catch(() => {}) }
+  const speak = (t: string) => {
+    const ss = window.speechSynthesis; if (!ss || !t) return
+    ss.cancel(); const u = new SpeechSynthesisUtterance(t.replace(/[*_`#>\[\]]/g, '').replace(/\s+/g, ' ').slice(0, 600))
+    u.rate = 0.95; u.pitch = 0.7; u.volume = 0.9
+    const v = ss.getVoices().find((x) => /^en/i.test(x.lang) && /male|daniel|alex|google uk english male/i.test(x.name)) ?? ss.getVoices().find((x) => /^en/i.test(x.lang))
+    if (v) u.voice = v
+    ss.speak(u)
+  }
   const [msgs, setMsgs] = useState<ChatMsg[]>(() => { try { return JSON.parse(sessionStorage.getItem(STORE) ?? '[]') } catch { return [] } })
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
@@ -94,7 +104,8 @@ export default function Coach() {
 
   const toggle = () => {
     setOpen((o) => !o); setTeaser(false)
-    if (!open && sound) { const a = new Audio(threshVoice); a.volume = 0.5; a.play().catch(() => {}) }
+    if (!open && sound) voiceLine()
+    if (open) window.speechSynthesis?.cancel()
     if (!open && !greeted.current && msgs.length === 0) { greeted.current = true; setMsgs([{ role: 'assistant', content: GREETING }]) }
   }
 
@@ -107,7 +118,7 @@ export default function Coach() {
     const context = ctx()
     if (!online) {
       await new Promise((r) => setTimeout(r, 650))
-      setMsgs([...next, { role: 'assistant', content: freeAnswer(q, context) }]); setBusy(false); return
+      const ans = freeAnswer(q, context); setMsgs([...next, { role: 'assistant', content: ans }]); setBusy(false); if (sound) speak(ans); return
     }
     abort.current = new AbortController()
     try {
@@ -151,7 +162,7 @@ export default function Coach() {
               <em className={online ? 'live' : 'off'}>{online == null ? '…' : online ? 'Pro coach online' : 'Free coach'}</em>
             </div>
             <div className="coach-tools">
-              <button onClick={() => setSound((s) => !s)} title={sound ? 'Mute voice' : 'Play voice on open'}>{sound ? Icon.sound : Icon.mute}</button>
+              <button onClick={() => { const v = !sound; setSound(v); if (v) voiceLine() }} title={sound ? 'Mute Thresh' : 'Unmute Thresh'}>{sound ? Icon.sound : Icon.mute}</button>
               <button onClick={() => { setMsgs([]); greeted.current = false }} title="New conversation">↺</button>
               <button onClick={toggle} title="Close">{Icon.close}</button>
             </div>
