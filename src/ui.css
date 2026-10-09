@@ -376,3 +376,74 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+/* ---------- Draft co-pilot ---------- */
+.mode-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.mode-bar .sub { margin: 0; }
+.copilot { display: flex; flex-direction: column; gap: 14px; }
+.cp-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 18px; }
+@media (max-width: 900px) { .cp-top { grid-template-columns: 1fr; } }
+.cp-who { display: flex; flex-direction: column; gap: 8px; }
+.cp-lanes, .cp-players, .cp-targets { display: flex; gap: 6px; flex-wrap: wrap; }
+.cp-lanes button, .cp-players button, .cp-targets button {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--text); background: rgba(255,255,255,.04); border: 1px solid var(--line2);
+  border-radius: 10px; padding: 8px 12px; cursor: pointer; font: 700 12px var(--display); letter-spacing: .06em; min-height: 40px; transition: .15s;
+}
+.cp-lanes button { flex: 1; justify-content: center; }
+.cp-players button { min-height: 34px; padding: 5px 10px; font-weight: 600; letter-spacing: 0; }
+.cp-lanes button.on, .cp-players button.on, .cp-targets button.on { border-color: var(--gold); background: rgba(200,170,110,.16); color: var(--gold2); }
+.cp-targets button.on.e { border-color: #ff6b6b; background: rgba(255,107,107,.14); }
+.cp-targets button.on.a { border-color: var(--teal); background: rgba(10,200,185,.14); }
+.cp-targets button.on.b { border-color: #b78bff; background: rgba(183,139,255,.14); }
+.cp-targets b { color: var(--muted); font-weight: 600; }
+.cp-targets .reset { margin-left: auto; opacity: .75; }
+.cp-add { display: flex; flex-direction: column; gap: 8px; position: relative; }
+.cp-search { font-size: 16px; padding: 12px 14px; }
+.cp-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(116px, 1fr)); gap: 6px; }
+.cp-results button { display: flex; align-items: center; gap: 8px; color: var(--text); background: rgba(255,255,255,.05); border: 1px solid var(--line2); border-radius: 10px; padding: 5px 8px 5px 5px; cursor: pointer; font: 600 12.5px var(--font); }
+.cp-results button:first-child { border-color: var(--gold); }
+.cp-results img { width: 34px; height: 34px; border-radius: 8px; }
+.cp-teams { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: stretch; }
+@media (max-width: 900px) { .cp-teams { grid-template-columns: 1fr; } }
+.cp-team, .cp-bans { background: var(--card); border: 1px solid var(--line2); border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.cp-team.e { border-color: rgba(255,107,107,.35); } .cp-team.a { border-color: rgba(10,200,185,.35); }
+.cp-slots { display: flex; gap: 8px; }
+.cp-pick { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.cp-pick .pic { position: relative; width: 52px; height: 52px; border-radius: 12px; border: 2px solid var(--line2); background: rgba(255,255,255,.04); padding: 0; overflow: hidden; cursor: pointer; display: block; }
+.cp-pick.blank .pic { border-style: dashed; cursor: default; }
+.cp-pick.mine .pic { border-color: var(--gold); box-shadow: 0 0 14px rgba(200,170,110,.5); }
+.cp-pick .pic img { width: 100%; height: 100%; display: block; }
+.cp-pick .pic i { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); font-style: normal; font-size: 20px; opacity: 0; transition: .15s; }
+.cp-pick .pic:hover i { opacity: 1; }
+.cp-pick .lane { display: inline-flex; align-items: center; gap: 3px; background: none; border: 0; color: var(--muted); font: 700 10px var(--display); letter-spacing: .08em; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+.cp-pick .lane:hover { color: var(--gold2); background: rgba(255,255,255,.06); }
+.cp-bans > div { display: flex; gap: 5px; flex-wrap: wrap; max-width: 210px; align-items: center; }
+.cp-bans .ban { width: 32px; height: 32px; padding: 0; border: 1px solid var(--line2); border-radius: 8px; overflow: hidden; background: none; cursor: pointer; filter: grayscale(1) brightness(.8); }
+.cp-bans .ban img { width: 100%; height: 100%; display: block; }
+.cp-main { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 900px) { .cp-main { grid-template-columns: 1fr; } }
+.cp-side { display: flex; flex-direction: column; gap: 14px; }
+.cp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cp-rec { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; color: var(--text); background: rgba(255,255,255,.04); border: 1px solid var(--line2); border-radius: 14px; padding: 10px 12px; cursor: pointer; transition: .15s; }
+.cp-rec:hover { border-color: var(--gold); transform: translateY(-1px); }
+.cp-list li.first .cp-rec { border-color: rgba(200,170,110,.55); background: linear-gradient(90deg, rgba(200,170,110,.14), rgba(255,255,255,.03)); }
+.cp-list li.locked .cp-rec { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal) inset; }
+.cp-rec .ic { width: 54px; height: 54px; border-radius: 12px; flex: none; }
+.cp-rec .body { flex: 1; min-width: 0; }
+.cp-rec .line1 { display: flex; gap: 8px; align-items: center; font-size: 15px; }
+.cp-rec .why { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 3px; font-size: 12px; }
+.cp-rec .score { text-align: center; flex: none; min-width: 48px; }
+.cp-rec .score strong { display: block; font: 800 22px var(--display); color: var(--gold2); line-height: 1; }
+.cp-rec .score small { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.badge-t { font: 800 10px var(--display); padding: 1px 6px; border-radius: 6px; background: rgba(200,170,110,.18); color: var(--gold2); }
+.why-good { color: #6fe3a8; } .why-bad { color: #ff8a8a; } .why-warn { color: #f0c36a; } .why-neutral { color: var(--muted); }
+.cp-banlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.cp-banlist button { width: 100%; display: flex; align-items: center; gap: 10px; color: var(--text); background: rgba(255,255,255,.04); border: 1px solid var(--line2); border-radius: 10px; padding: 6px 10px 6px 6px; cursor: pointer; text-align: left; }
+.cp-banlist button:hover { border-color: #b78bff; }
+.cp-banlist img { width: 36px; height: 36px; border-radius: 8px; }
+.cp-banlist div { flex: 1; min-width: 0; } .cp-banlist small { display: block; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cp-banlist .avg { color: #ff8a8a; font: 800 13px var(--display); }
+.cp-read .dmg { margin-bottom: 8px; }
+.cp-lines { margin: 8px 0 0; padding-left: 18px; font-size: 13px; display: flex; flex-direction: column; gap: 4px; }
+.cp-plan .cp-tip { margin: 0 0 10px; padding: 8px 12px; border-radius: 10px; background: rgba(200,170,110,.1); border: 1px solid var(--line); font-size: 13px; }
+@media (max-width: 600px) { .cp-pick .pic { width: 44px; height: 44px; } .cp-slots { gap: 6px; } .cp-rec .ic { width: 46px; height: 46px; } }

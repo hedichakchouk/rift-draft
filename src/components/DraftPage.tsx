@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import Avatar from './Avatar'
 import RiftMap from './RiftMap'
+import CoPilot from './CoPilot'
+import { Seg } from './ui/kit'
 import Verdict from './Verdict'
 import { winrate, type Stats } from '../lib/stats'
 import { setCoachContext } from '../lib/profile'
@@ -26,6 +28,22 @@ function initial(players: Player[]): Draft {
 }
 
 export default function DraftPage(props: Props) {
+  const [mode, setMode] = useState<'copilot' | 'board'>(() => (/[?&]d=/.test(location.hash) ? 'board' : 'copilot'))
+  return (
+    <>
+      <div className="mode-bar">
+        <Seg value={mode} onChange={setMode} size="lg" options={[
+          { id: 'copilot', label: 'Co-pilot', title: 'Live champ select helper' },
+          { id: 'board', label: 'Board', title: 'Plan a full draft on the map' },
+        ]} />
+        <p className="sub">{mode === 'copilot' ? 'Type the picks as they lock in. Get the best pick, bans and a build in seconds.' : 'Drag champions onto the map to plan a full draft.'}</p>
+      </div>
+      {mode === 'copilot' ? <CoPilot players={props.players} champs={props.champs} byId={props.byId} /> : <BoardMode {...props} />}
+    </>
+  )
+}
+
+function BoardMode(props: Props) {
   const { players } = props
   const [draft, setDraft] = useState<Draft>(() => initial(players))
   const [selected, setSelected] = useState<string | null>(null) // tap-to-place
