@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { iconUrl, loadDetail, loadSkins, loadSpells, soundUrl, spellUrl, splashUrl, type Skin } from '../lib/ddragon'
+import { abilityClip, iconUrl, loadDetail, loadSkins, loadSpells, soundUrl, spellUrl, splashUrl, type Skin } from '../lib/ddragon'
 import { loadChampData, type ChampFacts } from '../lib/champdata'
 import { LANE_SHORT, type Champion, type Lane, type Spell } from '../lib/types'
 import { LaneIcon, Pill } from './ui/kit'
 
-type Mode = 'splash' | 'skin' | 'spell' | 'sound' | 'clues'
+type Mode = 'splash' | 'skin' | 'spell' | 'sound' | 'sfx' | 'clues'
 const MODES: { id: Mode; label: string; icon: string; desc: string }[] = [
   { id: 'clues', label: 'Clues', icon: '🧩', desc: 'Region, gender, release date and lane' },
   { id: 'skin', label: 'Skin', icon: '🎭', desc: 'Name the champion from a skin' },
   { id: 'splash', label: 'Splash art', icon: '🖼️', desc: 'A zoomed-in piece of the splash' },
   { id: 'spell', label: 'Spell icon', icon: '✨', desc: 'One ability icon' },
-  { id: 'sound', label: 'Sound', icon: '🔊', desc: 'A champion voice line' },
+  { id: 'sound', label: 'Voice line', icon: '🔊', desc: 'A champion voice line' },
+  { id: 'sfx', label: 'Spell sound', icon: '💥', desc: 'Hear a random ability' },
 ]
 const pick = <T,>(a: T[]) => a[Math.floor(Math.random() * a.length)]
 const ZOOMS = [650, 380, 220]
@@ -21,10 +22,16 @@ const bestKey = (m: Mode) => `hd-best-${m}`
 const loadBest = (m: Mode) => { try { return Number(localStorage.getItem(bestKey(m)) ?? localStorage.getItem('hd-best') ?? 0) } catch { return 0 } }
 const saveBest = (m: Mode, n: number) => { try { localStorage.setItem(bestKey(m), String(n)) } catch { /* ignore */ } }
 
-interface Round { answer: Champion; options: Champion[]; spell?: Spell; skin?: Skin; at: { x: number; y: number } }
+interface Round { answer: Champion; options: Champion[]; spell?: Spell; skin?: Skin; slot?: 'Q' | 'W' | 'E' | 'R'; slotName?: string; at: { x: number; y: number } }
+
+const canLoad = (src: string) => new Promise<boolean>((res) => { const i = new Image(); const t = setTimeout(() => res(false), 6000); i.onload = () => { clearTimeout(t); res(true) }; i.onerror = () => { clearTimeout(t); res(false) }; i.src = src })
+// chroma entries look like "Skin Name (Ruby)" and have no splash art
+const isChroma = (n: string) => /\([^)]+\)\s*$/.test(n)
 
 export default function Guess({ champs }: { champs: Champion[] }) {
   const [mode, setMode] = useState<Mode>('clues')
+  const [typed, setTyped] = useState(() => { try { return localStorage.getItem('hd-typed') === '1' } catch { return false } })
+  const setT = (v: boolean) => { setTyped(v); try { localStorage.setItem('hd-typed', v ? '1' : '0') } catch { /* ignore */ } }
   return (
     <div className="guess-page">
       <div className="modes gx">
@@ -34,32 +41,54 @@ export default function Guess({ champs }: { champs: Champion[] }) {
           </button>
         ))}
       </div>
-      {mode === 'clues' ? <Clues champs={champs} /> : <Choice key={mode} mode={mode} champs={champs} />}
+      {mode !== 'clues' && (
+        <div className="gx-opts" role="group" aria-label="Answer style">
+          <span className="sub">Answers</span>
+          <div className="cl-toggle">
+            <button className={!typed ? 'on' : ''} onClick={() => setT(false)} title="Pick from 4 suggested champions">Suggestions</button>
+            <button className={typed ? 'on' : ''} onClick={() => setT(true)} title="Type the champion name, no hints">Type it</button>
+          </div>
+        </div>
+      )}
+      {mode === 'clues' ? <Clues champs={champs} /> : <Choice key={mode} mode={mode} champs={champs} typed={typed} />}
     </div>
   )
 }
 
 /* ---------- 4-choice modes: splash, skin, spell, sound ---------- */
-function Choice({ mode, champs }: { mode: Exclude<Mode, 'clues'>; champs: Champion[] }) {
+function Choice({ mode, champs, typed }: { mode: Exclude<Mode, 'clues'>; champs: Champion[]; typed: boolean }) {
   const [round, setRound] = useState<Round | null>(null)
   const [picked, setPicked] = useState<string | null>(null)
   const [hint, setHint] = useState(0)
   const [stat, setStat] = useState({ ok: 0, total: 0, streak: 0, best: loadBest(mode) })
   const [audioErr, setAudioErr] = useState(false)
   const audio = useRef<HTMLAudioElement>(null)
+  const clip = useRef<HTMLVideoElement>(null)
+  const [q, setQ] = useState('')
   const done = picked !== null
 
   const next = useCallback(async () => {
     if (champs.length < 4) return
-    setPicked(null); setHint(0); setAudioErr(false)
+    setPicked(null); setHint(0); setAudioErr(false); setQ(''); setRound(null)
     const answer = pick(champs)
     const options = [answer]
     while (options.length < 4) { const c = pick(champs); if (!options.includes(c)) options.push(c) }
     options.sort(() => Math.random() - 0.5)
     let spell: Spell | undefined, skin: Skin | undefined
     if (mode === 'spell') { try { spell = pick(await loadSpells(answer.id)) } catch { /* ignore */ } }
-    if (mode === 'skin') { try { const all = await loadSkins(answer.id); skin = pick(all.filter((s) => s.num !== 0)) ?? all[0] } catch { skin = { num: 0, name: answer.name } } }
-    setRound({ answer, options, spell, skin, at: { x: 15 + Math.random() * 70, y: 15 + Math.random() * 70 } })
+    let slot: Round['slot'], slotName: string | undefined
+    if (mode === 'skin') {
+      skin = { num: 0, name: answer.name }
+      try {
+        const all = (await loadSkins(answer.id)).filter((s) => s.num !== 0 && !isChroma(s.name)).sort(() => Math.random() - 0.5)
+        for (const c of all.slice(0, 5)) { if (await canLoad(splashUrl(answer.id, c.num))) { skin = c; break } }
+      } catch { /* default skin */ }
+    }
+    if (mode === 'sfx') {
+      slot = pick(['Q', 'W', 'E', 'R'] as const)
+      try { slotName = (await loadSpells(answer.id))['QWER'.indexOf(slot)]?.name } catch { /* ignore */ }
+    }
+    setRound({ answer, options, spell, skin, slot, slotName, at: { x: 15 + Math.random() * 70, y: 15 + Math.random() * 70 } })
   }, [champs, mode])
   useEffect(() => { next() }, [next])
 
@@ -78,13 +107,17 @@ function Choice({ mode, champs }: { mode: Exclude<Mode, 'clues'>; champs: Champi
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement)?.tagName === 'INPUT') return
-      if (e.key >= '1' && e.key <= '4' && round) guess(round.options[Number(e.key) - 1])
+      if (!typed && e.key >= '1' && e.key <= '4' && round) guess(round.options[Number(e.key) - 1])
       if (e.key === 'Enter' && done) next()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [round, done, guess, next])
+  }, [round, done, guess, next, typed])
 
+  const matches = useMemo(() => {
+    const n = norm(q)
+    return n ? champs.filter((c) => norm(c.name).startsWith(n) || norm(c.id).startsWith(n)).slice(0, 6) : []
+  }, [q, champs])
   const ok = round && picked === round.answer.id
   return (
     <section className="card guess-card">
@@ -106,20 +139,40 @@ function Choice({ mode, champs }: { mode: Exclude<Mode, 'clues'>; champs: Champi
                 {audioErr && <p className="err">Sound unavailable for this champion. Skip to the next one.</p>}
               </div>
             )}
+            {mode === 'sfx' && (
+              <div className="sound">
+                <video ref={clip} className={done ? 'sfx-video' : 'sfx-hidden'} playsInline preload="auto" controls={done} onError={() => setAudioErr(true)} key={`${round.answer.id}${round.slot}`}>
+                  <source src={abilityClip(round.answer.key, round.slot!, 'webm')} type="video/webm" />
+                  <source src={abilityClip(round.answer.key, round.slot!, 'mp4')} type="video/mp4" />
+                </video>
+                {!done && <button className="play" onClick={() => { if (clip.current) { clip.current.currentTime = 0; clip.current.play().catch(() => setAudioErr(true)) } }} aria-label="Play ability sound">▶</button>}
+                {!done && <p className="sub">Press play to hear one ability. Replay as often as you like.</p>}
+                {audioErr && <p className="err">No clip for this ability. Skip to the next one.</p>}
+              </div>
+            )}
             {done && (
               <div className={`reveal ${ok ? 'ok' : 'ko'}`}>
                 <img src={iconUrl(round.answer.id)} alt="" />
-                <span>{ok ? 'Correct!' : 'It was'} <b>{round.answer.name}</b>{mode === 'skin' && round.skin && round.skin.num !== 0 ? <small> · {round.skin.name}</small> : null}</span>
+                <span>{ok ? 'Correct!' : 'It was'} <b>{round.answer.name}</b>{mode === 'skin' && round.skin && round.skin.num !== 0 ? <small> · {round.skin.name}</small> : null}{mode === 'sfx' && round.slot ? <small> · {round.slot}{round.slotName ? ` · ${round.slotName}` : ''}</small> : null}</span>
               </div>
             )}
           </div>
-          <div className="options">
-            {round.options.map((o, i) => (
-              <button key={o.id} disabled={done} className={`opt ${done && o.id === round.answer.id ? 'good' : ''} ${done && o.id === picked && o.id !== round.answer.id ? 'bad' : ''}`} onClick={() => guess(o)}>
-                <kbd>{i + 1}</kbd>{o.name}
-              </button>
-            ))}
-          </div>
+          {typed ? (
+            !done && (
+              <div className="cl-input">
+                <input className="search" placeholder="Type the champion…" value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && matches[0]) guess(matches[0]) }} autoComplete="off" spellCheck={false} autoFocus />
+                {matches.length > 0 && <div className="cp-results">{matches.map((c) => <button key={c.id} onClick={() => guess(c)}><img src={iconUrl(c.id)} alt="" /><span>{c.name}</span></button>)}</div>}
+              </div>
+            )
+          ) : (
+            <div className="options">
+              {round.options.map((o, i) => (
+                <button key={o.id} disabled={done} className={`opt ${done && o.id === round.answer.id ? 'good' : ''} ${done && o.id === picked && o.id !== round.answer.id ? 'bad' : ''}`} onClick={() => guess(o)}>
+                  <kbd>{i + 1}</kbd>{o.name}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="actions">
             {(mode === 'splash' || mode === 'skin') && !done && hint < ZOOMS.length - 1 && (
               <button className="btn" onClick={() => setHint(hint + 1)}>{mode === 'skin' ? 'Sharpen (hint)' : 'Zoom out (hint)'}</button>

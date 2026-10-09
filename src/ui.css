@@ -506,3 +506,6 @@ details.more[open] summary { color: var(--gold2); }
 .cl-cell.part { background: rgba(240,195,106,.2); border-color: #f0c36a; color: #f8e2b0; }
 .cl-cell.no { background: rgba(255,107,107,.14); border-color: rgba(255,107,107,.5); color: #ffb3b3; }
 @keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: none; opacity: 1; } }
+.gx-opts { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.sfx-hidden { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.sfx-video { width: min(560px, 100%); border-radius: 12px; }
