@@ -18,12 +18,33 @@ const RAW = {
     champs: 'Ezreal,191,99,6.2,4.4,6.9;Caitlyn,174,90,7.4,5.7,6.4;Jinx,169,100,7.2,4.8,6.8;Aurora,150,83,6.9,4.1,6.5;Tristana,147,71,7.7,5.4,5.2;Kai\'Sa,100,54,8.5,5.2,6.2;Corki,74,37,8.3,5.3,6.7;Yunara,69,36,7.1,5.7,6;Syndra,65,32,5.1,4.9,6.6;Senna,44,19,4.3,5.6,14.3;Ashe,31,16,5.5,5.8,8.4;Varus,27,15,7.5,4.8,5.6;Sivir,23,12,5.1,4.9,8.4;Ziggs,22,13,5.1,5,7.7;Gnar,22,6,3.1,4.2,4;Jarvan IV,16,7,4.7,5.1,11.1;Smolder,13,5,6.2,5.8,5.8;Aphelios,13,4,4.8,6.8,4.5;Lucian,10,6,6.6,6.8,8.9;Xayah,9,4,8,5.7,5.8;Zeri,4,2,8.5,7,5.8;Rakan,3,1,0.7,6.7,17.7;Graves,3,1,8.7,5.3,4;Miss Fortune,2,0,11,7.5,2' },
 }
 
+// Current-season queues from op.gg (Ranked Solo/Duo, Ranked Flex, Ranked 5s). [tier, division, lp, wins, losses]
+const RANKS = {
+  Hach: { solo: ['DIAMOND', 'I', 50, 161, 153], flex: ['MASTER', '', 312, 101, 79], fives: ['DIAMOND', 'I', 6, 10, 9] },
+  Bullet: { solo: ['DIAMOND', 'II', 50, 89, 69], flex: ['MASTER', '', 541, 135, 111], fives: ['DIAMOND', 'II', 60, 13, 13] },
+  Aster: { solo: ['DIAMOND', 'II', 58, 144, 136], flex: ['GRANDMASTER', '', 736, 131, 112], fives: ['DIAMOND', 'II', 88, 13, 13] },
+  Hama: { solo: ['MASTER', '', 0, 216, 210], flex: ['GRANDMASTER', '', 730, 125, 91], fives: null },
+  Omar: { solo: ['MASTER', '', 263, 981, 1016], flex: ['DIAMOND', 'I', 76, 75, 74], fives: null },
+  Rapo: { solo: ['MASTER', '', 999, 644, 623], flex: ['MASTER', '', 30, 59, 48], fives: ['DIAMOND', 'II', 8, 12, 13] },
+}
+const rk = (a) => (a ? { tier: a[0], division: a[1], lp: a[2], wins: a[3], losses: a[4] } : null)
+
+// Last 5 flex games the squad played together (4+ members on the same team), newest first. Read from op.gg match history.
+// Each member: [player, champion id]
+const FLEX_GAMES = [
+  { age: '5 days ago', win: true, duration: '32:00', members: [['Omar', 'Chogath'], ['Hama', 'Naafiri'], ['Rapo', 'Jinx'], ['Hach', 'Lulu']] },
+  { age: '5 days ago', win: false, duration: '26:27', members: [['Omar', 'Garen'], ['Aster', 'Ambessa'], ['Hama', 'Viktor'], ['Rapo', 'Sivir'], ['Hach', 'Alistar']] },
+  { age: '5 days ago', win: true, duration: '24:48', members: [['Omar', 'Pantheon'], ['Aster', 'Chogath'], ['Hama', 'Diana'], ['Rapo', 'Ezreal'], ['Hach', 'Leona']] },
+  { age: '5 days ago', win: true, duration: '37:22', members: [['Bullet', 'Sylas'], ['Aster', 'Ambessa'], ['Hama', 'Viktor'], ['Omar', 'Ezreal'], ['Hach', 'Milio']] },
+  { age: '5 days ago', win: true, duration: '33:16', members: [['Bullet', 'Jayce'], ['Aster', 'Ambessa'], ['Hama', 'Diana'], ['Omar', 'MissFortune'], ['Hach', 'Rell']] },
+]
+
 const SPECIAL = { Wukong: 'MonkeyKing', "Cho'Gath": 'Chogath', "Kha'Zix": 'Khazix', "Kai'Sa": 'Kaisa', "Rek'Sai": 'RekSai',
   "Bel'Veth": 'Belveth', "Vel'Koz": 'Velkoz', "Kog'Maw": 'KogMaw', "K'Sante": 'KSante', LeBlanc: 'Leblanc', 'Nunu & Willump': 'Nunu', 'Renata Glasc': 'Renata' }
 const toId = (n) => SPECIAL[n] ?? n.replace(/[^A-Za-z0-9]/g, '')
 const r1 = (x) => Math.round(x * 10) / 10
 
-const out = { updated: new Date().toISOString(), source: 'op.gg (EUW ranked, current season)', players: {} }
+const out = { updated: new Date().toISOString(), source: 'op.gg (EUW ranked, current season)', flexGames: FLEX_GAMES, players: {} }
 for (const [name, p] of Object.entries(RAW)) {
   const champions = {}
   for (const row of p.champs.split(';')) {
@@ -34,7 +55,7 @@ for (const [name, p] of Object.entries(RAW)) {
   const [tier, division, lp] = p.rank
   out.players[name] = {
     riotId: p.riotId, level: null,
-    solo: { tier, division, lp, wins: p.total[1], losses: p.total[0] - p.total[1] }, flex: null,
+    solo: rk(RANKS[name].solo), flex: rk(RANKS[name].flex), fives: rk(RANKS[name].fives),
     games: p.total[0], wins: p.total[1], lanes: {}, champions, mastery: [],
   }
 }

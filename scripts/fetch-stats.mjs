@@ -73,6 +73,7 @@ for (const p of players) {
     out.players[p.name] = {
       riotId: p.riotId, level: summ?.summonerLevel ?? null, icon: summ?.profileIconId ?? null,
       solo: toRank(q('RANKED_SOLO_5x5')) ?? null, flex: toRank(q('RANKED_FLEX_SR')) ?? null,
+      fives: prev.players?.[p.name]?.fives ?? null, // Ranked 5s is not in the public API: keep the op.gg snapshot
       games, wins, lanes, champions, mastery,
     }
     console.log(`  ${games} ranked games, ${Object.keys(champions).length} champions`)
@@ -81,5 +82,6 @@ for (const p of players) {
     if (prev.players?.[p.name]) out.players[p.name] = prev.players[p.name] // keep last good data
   }
 }
+if (prev.flexGames) out.flexGames = prev.flexGames // squad history comes from op.gg (scripts/import-opgg.mjs)
 writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n')
 console.log('wrote', OUT)

@@ -1,6 +1,139 @@
 {
- "updated": "2026-10-08T16:54:03.615Z",
+ "updated": "2026-10-09T11:41:45.565Z",
  "source": "op.gg (EUW ranked, current season)",
+ "flexGames": [
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "32:00",
+   "members": [
+    [
+     "Omar",
+     "Chogath"
+    ],
+    [
+     "Hama",
+     "Naafiri"
+    ],
+    [
+     "Rapo",
+     "Jinx"
+    ],
+    [
+     "Hach",
+     "Lulu"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": false,
+   "duration": "26:27",
+   "members": [
+    [
+     "Omar",
+     "Garen"
+    ],
+    [
+     "Aster",
+     "Ambessa"
+    ],
+    [
+     "Hama",
+     "Viktor"
+    ],
+    [
+     "Rapo",
+     "Sivir"
+    ],
+    [
+     "Hach",
+     "Alistar"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "24:48",
+   "members": [
+    [
+     "Omar",
+     "Pantheon"
+    ],
+    [
+     "Aster",
+     "Chogath"
+    ],
+    [
+     "Hama",
+     "Diana"
+    ],
+    [
+     "Rapo",
+     "Ezreal"
+    ],
+    [
+     "Hach",
+     "Leona"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "37:22",
+   "members": [
+    [
+     "Bullet",
+     "Sylas"
+    ],
+    [
+     "Aster",
+     "Ambessa"
+    ],
+    [
+     "Hama",
+     "Viktor"
+    ],
+    [
+     "Omar",
+     "Ezreal"
+    ],
+    [
+     "Hach",
+     "Milio"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "33:16",
+   "members": [
+    [
+     "Bullet",
+     "Jayce"
+    ],
+    [
+     "Aster",
+     "Ambessa"
+    ],
+    [
+     "Hama",
+     "Diana"
+    ],
+    [
+     "Omar",
+     "MissFortune"
+    ],
+    [
+     "Hach",
+     "Rell"
+    ]
+   ]
+  }
+ ],
  "players": {
   "Hach": {
    "riotId": "hach#1710",
@@ -9,10 +142,23 @@
     "tier": "DIAMOND",
     "division": "I",
     "lp": 50,
-    "wins": 272,
-    "losses": 240
+    "wins": 161,
+    "losses": 153
    },
-   "flex": null,
+   "flex": {
+    "tier": "MASTER",
+    "division": "",
+    "lp": 312,
+    "wins": 101,
+    "losses": 79
+   },
+   "fives": {
+    "tier": "DIAMOND",
+    "division": "I",
+    "lp": 6,
+    "wins": 10,
+    "losses": 9
+   },
    "games": 512,
    "wins": 272,
    "lanes": {},
@@ -333,10 +479,23 @@
     "tier": "DIAMOND",
     "division": "II",
     "lp": 50,
-    "wins": 237,
-    "losses": 189
+    "wins": 89,
+    "losses": 69
    },
-   "flex": null,
+   "flex": {
+    "tier": "MASTER",
+    "division": "",
+    "lp": 541,
+    "wins": 135,
+    "losses": 111
+   },
+   "fives": {
+    "tier": "DIAMOND",
+    "division": "II",
+    "lp": 60,
+    "wins": 13,
+    "losses": 13
+   },
    "games": 426,
    "wins": 237,
    "lanes": {},
@@ -585,10 +744,23 @@
     "tier": "DIAMOND",
     "division": "II",
     "lp": 58,
-    "wins": 288,
-    "losses": 259
+    "wins": 144,
+    "losses": 136
    },
-   "flex": null,
+   "flex": {
+    "tier": "GRANDMASTER",
+    "division": "",
+    "lp": 736,
+    "wins": 131,
+    "losses": 112
+   },
+   "fives": {
+    "tier": "DIAMOND",
+    "division": "II",
+    "lp": 88,
+    "wins": 13,
+    "losses": 13
+   },
    "games": 547,
    "wins": 288,
    "lanes": {},
@@ -889,12 +1061,19 @@
    "level": null,
    "solo": {
     "tier": "MASTER",
-    "division": "I",
+    "division": "",
     "lp": 0,
-    "wins": 342,
-    "losses": 301
+    "wins": 216,
+    "losses": 210
    },
-   "flex": null,
+   "flex": {
+    "tier": "GRANDMASTER",
+    "division": "",
+    "lp": 730,
+    "wins": 125,
+    "losses": 91
+   },
+   "fives": null,
    "games": 643,
    "wins": 342,
    "lanes": {},
@@ -1186,12 +1365,19 @@
    "level": null,
    "solo": {
     "tier": "MASTER",
-    "division": "I",
+    "division": "",
     "lp": 263,
-    "wins": 1056,
-    "losses": 1084
+    "wins": 981,
+    "losses": 1016
    },
-   "flex": null,
+   "flex": {
+    "tier": "DIAMOND",
+    "division": "I",
+    "lp": 76,
+    "wins": 75,
+    "losses": 74
+   },
+   "fives": null,
    "games": 2140,
    "wins": 1056,
    "lanes": {},
@@ -1564,12 +1750,25 @@
    "level": null,
    "solo": {
     "tier": "MASTER",
-    "division": "I",
+    "division": "",
     "lp": 999,
-    "wins": 715,
-    "losses": 673
+    "wins": 644,
+    "losses": 623
    },
-   "flex": null,
+   "flex": {
+    "tier": "MASTER",
+    "division": "",
+    "lp": 30,
+    "wins": 59,
+    "losses": 48
+   },
+   "fives": {
+    "tier": "DIAMOND",
+    "division": "II",
+    "lp": 8,
+    "wins": 12,
+    "losses": 13
+   },
    "games": 1388,
    "wins": 715,
    "lanes": {},
