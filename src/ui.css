@@ -565,3 +565,13 @@ details.more[open] summary { color: var(--gold2); }
 .fgp-g { width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; font-weight: 800; font-size: 12px; color: #10131c; }
 .fgp-pl { font-size: 11px; color: var(--muted); text-align: right; } .fgp-pl.mvp { color: #f0c36a; font-weight: 800; } .fgp-pl.ace { color: #a58bff; font-weight: 800; }
 @media (max-width: 760px) { .fg-board { grid-template-columns: 1fr; } .fg-awards { margin-left: 0; } }
+
+/* Game clips */
+.fg-clips { padding: 0 18px 18px; } .fg-clips h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.fg-clipgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin: 10px 0 14px; }
+.fg-clip { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line2); background: rgba(5,9,17,.7); }
+.fg-clip iframe, .fg-clip video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+.fg-clip figcaption { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; }
+.fg-clip figcaption button { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 12px; }
+.fg-clip .btn { margin: 20px; }
+.fg-add { display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; margin: 8px 0; } @media (max-width: 640px) { .fg-add { grid-template-columns: 1fr; } }

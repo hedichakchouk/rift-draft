@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Avatar from './Avatar'
 import { LaneIcon, Seg, rankCrestUrl } from './ui/kit'
 import { iconUrl } from '../lib/ddragon'
+import { gameKey, toEmbed, useClips, type Clip } from '../lib/clips'
 import { kda, rankLine, rankWr, winrate, type FlexGame, type FlexPlayer, type RankInfo, type Stats } from '../lib/stats'
 import { LANE_LABEL, LANES, TIERS, TIER_HINT, type Champion, type Player } from '../lib/types'
 
@@ -19,6 +20,7 @@ function Crest({ r, size = 30 }: { r?: RankInfo | null; size?: number }) {
 }
 
 export default function TierList({ players, byId, stats }: Props) {
+  const clips = useClips()
   const [view, setView] = useState<View>('tiers')
   const [name, setName] = useState(players[0]?.name)
   const groups = LANES.map((l) => players.filter((x) => x.lane === l)).filter((g) => g.length)
@@ -155,7 +157,7 @@ export default function TierList({ players, byId, stats }: Props) {
           <div className="card-head"><div><h2>Last 10 flex games together</h2><p className="sub">Games where 4 or more of the squad queued on the same team. Scores are op.gg OP Score; the letter grade is S for the MVP/ACE or 7.5+, A 6+, B 4.5+, C 3+, D below.</p></div></div>
           {!stats?.flexGames?.length && <p className="empty">No squad flex games recorded yet.</p>}
           <div className="fg-list">
-            {(stats?.flexGames ?? []).slice(0, 10).map((g, i) => <GameCard key={i} g={g} byId={byId} />)}
+            {(stats?.flexGames ?? []).slice(0, 10).map((g, i) => <GameCard key={i} g={g} byId={byId} clips={clips} />)}
           </div>
           {(() => { const gs = (stats?.flexGames ?? []).slice(0, 10); const w = gs.filter((g) => g.win).length; return gs.length ? <p className="sub">Squad record: {w}W {gs.length - w}L</p> : null })()}
         </section>
@@ -177,7 +179,34 @@ function Row({ p, byId }: { p: FlexPlayer; byId: Map<string, { name: string }> }
   )
 }
 
-function GameCard({ g, byId }: { g: FlexGame; byId: Map<string, { name: string }> }) {
+function ClipBox({ id, clips }: { id: string; clips: ReturnType<typeof useClips> }) {
+  const [url, setUrl] = useState(''), [title, setTitle] = useState('')
+  const list = clips.get(id)
+  const add = () => { if (!/^https?:\/\//i.test(url.trim())) return; clips.add(id, { title: title.trim() || 'Clip', url: url.trim() }); setUrl(''); setTitle('') }
+  return (
+    <div className="fg-clips">
+      <h4>Clips</h4>
+      {!list.length && <p className="sub">No clips for this game yet. Paste a YouTube, Streamable, Twitch clip or .mp4 link below.</p>}
+      <div className="fg-clipgrid">
+        {list.map((c: Clip & { mine: boolean }) => { const e = toEmbed(c.url); return (
+          <figure key={c.url} className="fg-clip">
+            {e.kind === 'iframe' && <iframe src={e.src} title={c.title} loading="lazy" allowFullScreen allow="autoplay; fullscreen; picture-in-picture" />}
+            {e.kind === 'video' && <video src={e.src} controls preload="metadata" playsInline />}
+            {e.kind === 'link' && <a className="btn" href={c.url} target="_blank" rel="noreferrer">Open clip</a>}
+            <figcaption><span>{c.title}</span>{c.mine && <button onClick={() => clips.remove(id, c.url)} title="Remove (only on this browser)">Remove</button>}</figcaption>
+          </figure>) })}
+      </div>
+      <div className="fg-add">
+        <input className="search" placeholder="Clip link (YouTube, Streamable, Twitch, .mp4)" value={url} onChange={(e) => setUrl(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
+        <input className="search" placeholder="Title (optional)" value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && add()} />
+        <button className="btn gold" onClick={add}>Add clip</button>
+      </div>
+      <p className="sub">Clips you add show only in this browser. To show a clip to everyone, add it to clips.json under <code>{id}</code>.</p>
+    </div>
+  )
+}
+
+function GameCard({ g, byId, clips }: { g: FlexGame; byId: Map<string, { name: string }>; clips: ReturnType<typeof useClips> }) {
   const ours = g.ours ?? [], enemy = g.enemy ?? []
   const squad = ours.filter((p) => p.squad)
   return (
@@ -205,12 +234,13 @@ function GameCard({ g, byId }: { g: FlexGame; byId: Map<string, { name: string }
             {enemy.map((p, j) => <img key={j} src={iconUrl(p.champ)} alt={byId.get(p.champ)?.name ?? p.champ} title={`${p.name} · ${byId.get(p.champ)?.name ?? p.champ}`} loading="lazy" />)}
           </div>
         </div>
-        <span className="fg-more">Full scoreboard</span>
+        <span className="fg-more">Scoreboard and clips{clips.get(gameKey(g)).length ? ` (${clips.get(gameKey(g)).length})` : ''}</span>
       </summary>
       <div className="fg-board">
         <div><h4>Our team</h4>{ours.map((p, j) => <Row key={j} p={p} byId={byId} />)}</div>
         <div><h4>Enemy team</h4>{enemy.map((p, j) => <Row key={j} p={p} byId={byId} />)}</div>
       </div>
+      <ClipBox id={gameKey(g)} clips={clips} />
     </details>
   )
 }
