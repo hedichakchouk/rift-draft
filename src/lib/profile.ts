@@ -61,3 +61,15 @@ let coachContext = ''
 const ctxSubs = new Set<() => void>()
 export const setCoachContext = (s: string) => { coachContext = s; ctxSubs.forEach((f) => f()) }
 export const getCoachContext = () => coachContext
+
+/** Structured snapshot of the current page, read by the free built-in coach. */
+export interface CoachData {
+  recs?: { name: string; score: number; why: string[] }[]
+  bans?: { name: string; why: string }[]
+  enemyLines?: string[]; allyLines?: string[]
+  lane?: string; player?: string; foe?: string; mine?: string
+  buildNote?: string
+}
+let coachData: CoachData = {}
+export const setCoachData = (d: CoachData) => { coachData = d }
+export const getCoachData = () => coachData

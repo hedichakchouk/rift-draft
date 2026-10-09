@@ -5,7 +5,7 @@ import { LaneIcon, MetaTier } from './ui/kit'
 import { iconUrl, loadDetail, type ChampDetail } from '../lib/ddragon'
 import { loadChampMeta, loadMetaIndex, type ChampMeta, type MetaIndex } from '../lib/meta'
 import { banSuggestions, candidateIds, guessLane, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
-import { setCoachContext } from '../lib/profile'
+import { setCoachContext, setCoachData } from '../lib/profile'
 import { LANES, LANE_SHORT, type Champion, type Lane, type Player } from '../lib/types'
 
 interface Props { players: Player[]; champs: Champion[]; byId: Map<string, Champion> }
@@ -54,6 +54,8 @@ export default function CoPilot({ players, champs, byId }: Props) {
     return () => { live = false }
   }, [wanted]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const myPick = locked ?? ally.find((p) => p.lane === me)?.id ?? null
+  const foe = enemy.find((p) => p.lane === me)
   const recs = useMemo(() => recommend(state, idx, metas, byId), [me, player, ally, enemy, bans, idx, metas, byId]) // eslint-disable-line react-hooks/exhaustive-deps
   const banRecs = useMemo(() => banSuggestions(state, idx, metas, byId), [me, player, ally, enemy, bans, idx, metas, byId]) // eslint-disable-line react-hooks/exhaustive-deps
   const enemyRead = useMemo(() => readTeam(enemy, byId, true), [enemy, byId])
@@ -62,7 +64,14 @@ export default function CoPilot({ players, champs, byId }: Props) {
   useEffect(() => {
     const top = recs.slice(0, 3).map((r) => byId.get(r.id)?.name).filter(Boolean).join(', ')
     setCoachContext(`Page: Draft co-pilot. User plays ${me}${player ? ` as ${player.name}` : ''}. Enemy picks: ${enemy.map((p) => `${byId.get(p.id)?.name} (${p.lane})`).join(', ') || 'none'}. Allies: ${ally.map((p) => `${byId.get(p.id)?.name} (${p.lane})`).join(', ') || 'none'}. Bans: ${bans.map((b) => byId.get(b)?.name).join(', ') || 'none'}. Top suggestions: ${top || 'none'}.`)
-  }, [recs, enemy, ally, bans, me, player, byId])
+    setCoachData({
+      lane: me, player: player?.name, foe: foe ? byId.get(foe.id)?.name : undefined, mine: myPick ? byId.get(myPick)?.name : undefined,
+      recs: recs.slice(0, 5).map((r) => ({ name: byId.get(r.id)?.name ?? r.id, score: r.score, why: r.reasons.slice(0, 4).map((x) => x.text) })),
+      bans: banRecs.slice(0, 4).map((b) => ({ name: byId.get(b.id)?.name ?? b.id, why: b.beats > 0 ? `beats ${b.beats}/${b.of} of the pool (${b.names.slice(0, 3).join(', ')})` : `${b.avg}% average against the pool` })),
+      enemyLines: enemyRead.lines.map((l) => l.text), allyLines: allyRead.lines.map((l) => l.text),
+    })
+    return () => setCoachData({})
+  }, [recs, banRecs, enemyRead, allyRead, enemy, ally, bans, me, player, byId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const taken = new Set([...ally.map((p) => p.id), ...enemy.map((p) => p.id), ...bans])
   const matches = useMemo(() => {
@@ -110,8 +119,6 @@ export default function CoPilot({ players, champs, byId }: Props) {
     if (e.key === 'Escape') setQ('')
   }
 
-  const myPick = locked ?? ally.find((p) => p.lane === me)?.id ?? null
-  const foe = enemy.find((p) => p.lane === me)
   const top = recs.slice(0, 6)
 
   return (

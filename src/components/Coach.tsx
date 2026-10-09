@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent as RPE, type ReactNode } from 'react'
 import { apiUrl, streamChat, type ChatMsg } from '../lib/api'
+import { freeAnswer } from '../lib/brain'
 import { loadingUrl, splashUrl } from '../lib/ddragon'
 import { getCoachContext, useVisitor } from '../lib/profile'
 import { Icon, threshVoice } from './ui/kit'
@@ -60,16 +61,6 @@ function Wisps({ count = 34 }: { count?: number }) {
   return <canvas ref={ref} className="wisps" aria-hidden />
 }
 
-// ---------- offline answers (no AI connected) ----------
-function offlineAnswer(q: string, ctx: string): string {
-  const s = q.toLowerCase()
-  if (/site|how (do|to) (i )?use|what can|help me use|features?|tab/.test(s))
-    return "Here is the Rift as this site maps it:\n- **Draft**: drag champions onto Summoner's Rift, swap lanes, and get a comp verdict that uses each player's tier list and op.gg stats.\n- **Tier Lists**: every Chabeb player's pool from Z to C, with rank and win rates.\n- **Laning**: pick your lane, your champion and the enemy. You get the real matchup win rate, a meta check with better picks, the build, a phase-by-phase plan and videos. Bot lane is a full 2v2.\n- **Guess the Champ**: test yourself on splashes, spells and voice lines.\nClick your name at the top to connect your Riot ID and I will tailor the picks to you."
-  if (ctx && /matchup|lane|win|beat|vs|counter|build|item|rune/.test(s))
-    return `What I see on your screen: ${ctx}\n\nMy full voice is not connected yet, so I can only read the data. Open the **Laning** tab: the meta check and the phase plan turn these numbers into a plan.`
-  return "My full voice is not connected yet (the site owner still has to switch on the AI). Until then I can explain the site and read the matchup data on your screen. Try **What can this site do?** or open the Laning tab and ask me about your matchup."
-}
-
 export default function Coach() {
   const visitor = useVisitor()
   const [open, setOpen] = useState(false)
@@ -98,7 +89,7 @@ export default function Coach() {
     const c = getCoachContext()
     const m = c.match(/You: ([^(]+) \(/), e = c.match(/Enemy: ([^(]+) \(/)
     const list = m && e ? [`How do I win ${m[1].trim()} vs ${e[1].trim()}?`, 'When can I all-in?', 'What do I change if I fall behind?'] : []
-    return [...list, 'How does wave management work?', 'How do I carry from my role?', 'What can this site do?'].slice(0, 4)
+    return [...list, 'What should I pick?', 'Which champions should I ban?', 'How does wave management work?', 'What can this site do?'].slice(0, 4)
   }, [open, msgs.length])
 
   const toggle = () => {
@@ -116,13 +107,13 @@ export default function Coach() {
     const context = ctx()
     if (!online) {
       await new Promise((r) => setTimeout(r, 650))
-      setMsgs([...next, { role: 'assistant', content: offlineAnswer(q, context) }]); setBusy(false); return
+      setMsgs([...next, { role: 'assistant', content: freeAnswer(q, context) }]); setBusy(false); return
     }
     abort.current = new AbortController()
     try {
       await streamChat(next.filter((m) => m.content && m.content !== GREETING), context, (t) => setMsgs([...next, { role: 'assistant', content: t }]), abort.current.signal)
     } catch (e: any) {
-      setMsgs([...next, { role: 'assistant', content: e?.name === 'AbortError' ? '(stopped)' : `The chains slipped: ${e?.message ?? e}. ${offlineAnswer(q, context)}` }])
+      setMsgs([...next, { role: 'assistant', content: e?.name === 'AbortError' ? '(stopped)' : `The chains slipped: ${e?.message ?? e}. ${freeAnswer(q, context)}` }])
     }
     setBusy(false)
   }
@@ -157,7 +148,7 @@ export default function Coach() {
             <div className="coach-title">
               <strong>Thresh</strong>
               <span>The Chain Warden · your coach</span>
-              <em className={online ? 'live' : 'off'}>{online == null ? '…' : online ? 'Pro coach online' : 'Offline mode'}</em>
+              <em className={online ? 'live' : 'off'}>{online == null ? '…' : online ? 'Pro coach online' : 'Free coach'}</em>
             </div>
             <div className="coach-tools">
               <button onClick={() => setSound((s) => !s)} title={sound ? 'Mute voice' : 'Play voice on open'}>{sound ? Icon.sound : Icon.mute}</button>
