@@ -453,3 +453,13 @@
 .cp-scan-body .bar { grid-column: 2 / 4; height: 8px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; align-self: center; }
 .cp-scan-body .bar i { display: block; height: 100%; background: var(--gold); transition: width .3s; }
 @media (max-width: 800px) { .cp-scan-body { grid-template-columns: 1fr; } .cp-scan-body .bar { grid-column: auto; } }
+.mypool { max-width: 560px; }
+.mp-chosen { display: flex; flex-wrap: wrap; gap: 8px; }
+.mp-pick { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.mp-pick .pic { width: 42px; height: 42px; padding: 0; border: 2px solid var(--gold); border-radius: 10px; overflow: hidden; background: none; cursor: pointer; }
+.mp-pick .pic img { width: 100%; height: 100%; display: block; }
+.mp-pick .badge-t { border: 0; cursor: pointer; }
+.mp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 6px; max-height: 240px; overflow: auto; padding: 2px; }
+.mp-tile { padding: 0; border: 2px solid transparent; border-radius: 10px; overflow: hidden; background: none; cursor: pointer; opacity: .55; }
+.mp-tile.on { opacity: 1; border-color: var(--teal); }
+.mp-tile img { width: 100%; display: block; }

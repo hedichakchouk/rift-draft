@@ -7,7 +7,7 @@ import { loadChampMeta, loadMetaIndex, type ChampMeta, type MetaIndex } from '..
 import { renderPlan } from '../lib/planImage'
 import { scanScreenshot, type ScanResult } from '../lib/scan'
 import { assignLanes, banSuggestions, candidateIds, readTeam, recommend, type CoState, type Pick } from '../lib/copilot'
-import { setCoachContext, setCoachData } from '../lib/profile'
+import { setCoachContext, setCoachData, useMyPool } from '../lib/profile'
 import { LANES, LANE_SHORT, type Champion, type Lane, type Player } from '../lib/types'
 
 interface Props { players: Player[]; champs: Champion[]; byId: Map<string, Champion> }
@@ -18,7 +18,9 @@ const store = {
   set: (k: string, v: string) => { try { localStorage.setItem(k, v) } catch { /* ignore */ } },
 }
 
-export default function CoPilot({ players, champs, byId }: Props) {
+export default function CoPilot({ players: squad, champs, byId }: Props) {
+  const mine = useMyPool()
+  const players = useMemo<Player[]>(() => (mine ? [...squad, { name: mine.name || 'Me', lane: mine.lane, champions: mine.champions }] : squad), [squad, mine])
   const [idx, setIdx] = useState<MetaIndex | null>(null)
   const [metas, setMetas] = useState<Map<string, ChampMeta>>(new Map())
   const [me, setMe] = useState<Lane>(() => (LANES as string[]).includes(store.get('cp.lane') ?? '') ? (store.get('cp.lane') as Lane) : 'mid')

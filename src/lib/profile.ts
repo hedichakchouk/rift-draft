@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchPlayer, type RemoteProfile } from './api'
+import type { Lane, Tier } from './types'
 
 export const REGIONS: { id: string; label: string }[] = [
   { id: 'euw1', label: 'EUW' }, { id: 'eun1', label: 'EUNE' }, { id: 'na1', label: 'NA' }, { id: 'kr', label: 'KR' },
@@ -73,3 +74,20 @@ export interface CoachData {
 let coachData: CoachData = {}
 export const setCoachData = (d: CoachData) => { coachData = d }
 export const getCoachData = () => coachData
+
+// ---- "My pool": the visitor's own champions, stored on this device only (no account, no API) ----
+export interface MyPool { name: string; lane: Lane; champions: { id: string; tier: Tier }[] }
+const POOL_KEY = 'hach.mypool.v1'
+const readPool = (): MyPool | null => { try { return JSON.parse(localStorage.getItem(POOL_KEY) ?? 'null') } catch { return null } }
+let pool: MyPool | null = readPool()
+const poolSubs = new Set<(p: MyPool | null) => void>()
+export const setMyPool = (p: MyPool | null) => {
+  pool = p
+  try { p ? localStorage.setItem(POOL_KEY, JSON.stringify(p)) : localStorage.removeItem(POOL_KEY) } catch { /* private mode */ }
+  poolSubs.forEach((f) => f(pool))
+}
+export function useMyPool() {
+  const [p, setP] = useState<MyPool | null>(pool)
+  useEffect(() => { poolSubs.add(setP); return () => { poolSubs.delete(setP) } }, [])
+  return p
+}
