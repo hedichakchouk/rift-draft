@@ -7,6 +7,7 @@ import TierList from './components/TierList'
 import DraftPage from './components/DraftPage'
 import Guess from './components/Guess'
 import Highlights from './components/Highlights'
+import Support from './components/Support'
 import Laning from './components/laning/Laning'
 import Coach from './components/Coach'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -96,6 +97,7 @@ export default function App() {
         {page === 'clips' && <Highlights />}
         {page === 'guess' && <Guess champs={champs} />}
       </ErrorBoundary></main>
+      <Support />
       <footer>Hach Draft · Champion data &amp; art © Riot Games · Matchup data from lolalytics · Not affiliated with Riot Games</footer>
       <ErrorBoundary label="the coach"><Coach /></ErrorBoundary>
       <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} players={players} champs={champs} />

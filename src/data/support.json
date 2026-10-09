@@ -1,0 +1,5 @@
+{
+  "paypal": "",
+  "currency": "EUR",
+  "amounts": [3, 5, 10]
+}
