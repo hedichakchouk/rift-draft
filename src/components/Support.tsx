@@ -8,8 +8,8 @@ export default function Support() {
   const [open, setOpen] = useState(false)
   const base = (cfg.paypal ?? '').trim()
   if (!/^https:\/\//i.test(base)) return null
-  const isMe = /paypal\.me\//i.test(base)
-  const link = (amt?: number) => (isMe && amt ? `${base.replace(/\/+$/, '')}/${amt}${cfg.currency}` : base)
+  const isMe = /paypal\.me\//i.test(base), isDonate = /paypal\.com\/donate/i.test(base)
+  const link = (amt?: number) => (!amt ? base : isMe ? `${base.replace(/\/+$/, '')}/${amt}${cfg.currency}` : isDonate ? `${base}&amount=${amt}` : base)
   return (
     <div className={`support ${open ? 'open' : ''}`}>
       {open && (
@@ -17,12 +17,12 @@ export default function Support() {
           <button className="support-x" onClick={() => setOpen(false)} aria-label="Close">×</button>
           <h3>Support Hach</h3>
           <p>Enjoying the site, the draft tools or the clips? A small tip keeps it free and helps me build more.</p>
-          {isMe && (
+          {(isMe || isDonate) && (
             <div className="support-amts">
               {cfg.amounts.map((a) => <a key={a} className="btn" href={link(a)} target="_blank" rel="noreferrer noopener">{a} {cfg.currency === 'EUR' ? '€' : cfg.currency}</a>)}
             </div>
           )}
-          <a className="btn gold support-go" href={link()} target="_blank" rel="noreferrer noopener">{isMe ? 'Other amount on PayPal' : 'Tip on PayPal'}</a>
+          <a className="btn gold support-go" href={link()} target="_blank" rel="noreferrer noopener">{isMe || isDonate ? 'Other amount on PayPal' : 'Tip on PayPal'}</a>
           <small>Optional. Opens PayPal in a new tab. Thank you!</small>
         </div>
       )}

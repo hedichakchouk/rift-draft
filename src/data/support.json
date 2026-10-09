@@ -1,5 +1,5 @@
 {
-  "paypal": "",
+  "paypal": "https://www.paypal.com/donate/?business=hedichakchouk%40gmail.com&item_name=Support%20Hach&currency_code=EUR",
   "currency": "EUR",
   "amounts": [3, 5, 10]
 }
