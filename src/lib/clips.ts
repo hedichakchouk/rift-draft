@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { FlexGame } from './stats'
 
-export interface Clip { title: string; url: string }
+export interface Clip { title: string; url: string; thumb?: string }
 const LOCAL = 'hd-clips-v1'
 
 /** Stable id of a game: duration + the champion Hach (or the first member) played. */

@@ -192,7 +192,9 @@ export function ClipBox({ id, clips }: { id: string; clips: ReturnType<typeof us
           <figure key={c.url} className="fg-clip">
             {e.kind === 'iframe' && <iframe src={e.src} title={c.title} loading="lazy" allowFullScreen allow="autoplay; fullscreen; picture-in-picture" />}
             {e.kind === 'video' && <video src={e.src} controls preload="metadata" playsInline />}
-            {e.kind === 'link' && <a className="btn" href={c.url} target="_blank" rel="noreferrer">Open clip</a>}
+            {e.kind === 'link' && (c.thumb
+              ? <a className="fg-thumb" href={c.url} target="_blank" rel="noreferrer" title="Watch on Kick"><img src={c.thumb} alt={c.title} loading="lazy" /><span className="fg-play">▶</span><small>Watch on Kick</small></a>
+              : <a className="btn" href={c.url} target="_blank" rel="noreferrer">Open clip</a>)}
             <figcaption><span>{c.title}</span>{c.mine && <button onClick={() => clips.remove(id, c.url)} title="Remove (only on this browser)">Remove</button>}</figcaption>
           </figure>) })}
       </div>
