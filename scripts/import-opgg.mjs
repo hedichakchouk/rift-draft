@@ -53,6 +53,21 @@ const RAW_GAMES = [
   { age: '5 days ago', win: true, duration: '33:16',
     ours: 'Jayce,BulletProof,7.6,MVP,11/5/11;Ambessa,BigBallsDragon,6.6,3rd,9/2/6;Diana,Skyvanat,7.3,2nd,10/9/13;Miss Fortune,Meat Grinder,3.9,7th,5/5/4;Rell,hach,6.2,4th,1/3/17',
     enemy: 'Ahri,Morcille,3.8,8th,7/10/5;Lee Sin,SinZuo,4.5,6th,4/3/6;Kled,Syrôko,1.8,10th,3/12/4;Akshan,Frosch,5.5,ACE,7/6/8;Camille,Ρaprika,3.3,9th,2/5/7' },
+  { age: '5 days ago', win: true, duration: '27:49',
+    ours: 'Jayce,BulletProof,5.1,5th,10/9/8;Ambessa,Kayn S3ayed,5.5,4th,4/3/12;Diana,Skyvanat,6.4,3rd,12/7/9;Lucian,Rapo,6.5,2nd,11/4/9;Nami,hach,7,MVP,3/3/21',
+    enemy: 'Swain,당신은 괴물이에요,2.7,10th,2/10/9;Lee Sin,Canyon,3.5,8th,8/12/9;Kennen,JuStFiXeDmEnT4L,4.4,7th,5/7/10;Tristana,c0raw,4.9,ACE,10/6/3;Milio,The Magical Cat,3.1,9th,1/5/10' },
+  { age: '5 days ago', win: true, duration: '24:12',
+    ours: 'Jax,BulletProof,5,6th,7/2/3;Ambessa,Kayn S3ayed,6.8,2nd,5/1/10;Akali,Skyvanat,8.7,MVP,17/3/5;Lucian,Rapo,5.5,3rd,8/8/9;Milio,hach,5.5,4th,0/5/18',
+    enemy: 'Tryndamere,Ultramanodyna,2.1,9th,3/6/0;Hecarim,草莓牛奶,2.7,8th,4/7/3;Yone,Olive Leaf,0.1,10th,0/10/0;Yunara,Lee Sin nob,3.9,7th,7/9/5;Yuumi,落日晚风,5,ACE,5/5/10' },
+  { age: '5 days ago', win: false, duration: '25:43',
+    ours: 'Camille,BulletProof,3.6,9th,4/9/4;Diana,BigBallsDragon,5.4,ACE,6/5/6;Yasuo,Skyvanat,3.7,8th,4/5/3;Yunara,Rapo,4.1,7th,6/8/3;Lulu,hach,4.6,6th,0/5/12',
+    enemy: 'Sion,당신은 괴물이에요,6.5,4th,4/6/14;Talon,Canyon,8.5,3rd,7/4/14;Kennen,JuStFiXeDmEnT4L,3.5,10th,4/8/4;Tristana,c0raw,10,MVP,17/1/6;Yuumi,The Magical Cat,9.7,2nd,0/1/24' },
+  { age: '5 days ago', win: false, duration: '32:16',
+    ours: "Zaahen,BulletProof,3,10th,5/8/5;Cho'Gath,BigBallsDragon,5,ACE,8/5/7;Zed,Skyvanat,3.5,8th,5/7/6;Aphelios,Rapo,4.1,7th,6/7/7;Thresh,hach,3.2,9th,1/7/12",
+    enemy: 'Olaf,AngryMThaii,5,5th,6/6/9;Hecarim,TranLoi,6.6,2nd,8/5/12;Zoe,m chan bố m đi,6.6,MVP,12/4/8;Caitlyn,Kos Subin,6.4,3rd,6/4/12;Alistar,Hi Im Quânn,6.3,4th,2/6/21' },
+  { age: '6 days ago', win: true, duration: '50:01',
+    ours: 'Urgot,Meat Grinder,6,MVP,24/12/7;Kayn,BigBallsDragon,4.1,8th,10/13/11;Viktor,Skyvanat,5.8,3rd,11/8/15;Tristana,Rapo,3,10th,6/14/7;Janna,hach,3.6,9th,0/10/21',
+    enemy: 'Gnar,Arhi COMAGIQUE,4.8,7th,12/12/13;Shaco,ExDaMiR,4.9,6th,8/9/16;Zed,Funky,5.1,5th,19/13/7;Syndra,Khefu,6.1,ACE,17/7/11;Thresh,Samo el fuego,5.2,4th,1/10/30' },
 ]
 const grade = (s) => (s >= 7.5 ? 'S' : s >= 6 ? 'A' : s >= 4.5 ? 'B' : s >= 3 ? 'C' : 'D')
 const parseRow = (r, mine) => { const [champ, name, op, place, kda] = r.split(','); const [k, d, a] = kda.split('/').map(Number)

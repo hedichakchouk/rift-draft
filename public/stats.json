@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-09T13:32:30.045Z",
+ "updated": "2026-10-09T13:35:01.289Z",
  "source": "op.gg (EUW ranked, current season)",
  "flexGames": [
   {
@@ -744,6 +744,746 @@
     [
      "Hach",
      "Rell"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "27:49",
+   "ours": [
+    {
+     "champ": "Jayce",
+     "name": "Bullet",
+     "op": 5.1,
+     "place": "5th",
+     "grade": "B",
+     "k": 10,
+     "d": 9,
+     "a": 8,
+     "squad": true
+    },
+    {
+     "champ": "Ambessa",
+     "name": "Kayn S3ayed",
+     "op": 5.5,
+     "place": "4th",
+     "grade": "B",
+     "k": 4,
+     "d": 3,
+     "a": 12
+    },
+    {
+     "champ": "Diana",
+     "name": "Hama",
+     "op": 6.4,
+     "place": "3rd",
+     "grade": "A",
+     "k": 12,
+     "d": 7,
+     "a": 9,
+     "squad": true
+    },
+    {
+     "champ": "Lucian",
+     "name": "Rapo",
+     "op": 6.5,
+     "place": "2nd",
+     "grade": "A",
+     "k": 11,
+     "d": 4,
+     "a": 9,
+     "squad": true
+    },
+    {
+     "champ": "Nami",
+     "name": "Hach",
+     "op": 7,
+     "place": "MVP",
+     "grade": "S",
+     "k": 3,
+     "d": 3,
+     "a": 21,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Swain",
+     "name": "당신은 괴물이에요",
+     "op": 2.7,
+     "place": "10th",
+     "grade": "D",
+     "k": 2,
+     "d": 10,
+     "a": 9
+    },
+    {
+     "champ": "LeeSin",
+     "name": "Canyon",
+     "op": 3.5,
+     "place": "8th",
+     "grade": "C",
+     "k": 8,
+     "d": 12,
+     "a": 9
+    },
+    {
+     "champ": "Kennen",
+     "name": "JuStFiXeDmEnT4L",
+     "op": 4.4,
+     "place": "7th",
+     "grade": "C",
+     "k": 5,
+     "d": 7,
+     "a": 10
+    },
+    {
+     "champ": "Tristana",
+     "name": "c0raw",
+     "op": 4.9,
+     "place": "ACE",
+     "grade": "S",
+     "k": 10,
+     "d": 6,
+     "a": 3
+    },
+    {
+     "champ": "Milio",
+     "name": "The Magical Cat",
+     "op": 3.1,
+     "place": "9th",
+     "grade": "C",
+     "k": 1,
+     "d": 5,
+     "a": 10
+    }
+   ],
+   "mvp": {
+    "name": "Hach",
+    "champ": "Nami",
+    "ours": true
+   },
+   "ace": {
+    "name": "c0raw",
+    "champ": "Tristana",
+    "ours": false
+   },
+   "kills": [
+    40,
+    26
+   ],
+   "members": [
+    [
+     "Bullet",
+     "Jayce"
+    ],
+    [
+     "Hama",
+     "Diana"
+    ],
+    [
+     "Rapo",
+     "Lucian"
+    ],
+    [
+     "Hach",
+     "Nami"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": true,
+   "duration": "24:12",
+   "ours": [
+    {
+     "champ": "Jax",
+     "name": "Bullet",
+     "op": 5,
+     "place": "6th",
+     "grade": "B",
+     "k": 7,
+     "d": 2,
+     "a": 3,
+     "squad": true
+    },
+    {
+     "champ": "Ambessa",
+     "name": "Kayn S3ayed",
+     "op": 6.8,
+     "place": "2nd",
+     "grade": "A",
+     "k": 5,
+     "d": 1,
+     "a": 10
+    },
+    {
+     "champ": "Akali",
+     "name": "Hama",
+     "op": 8.7,
+     "place": "MVP",
+     "grade": "S",
+     "k": 17,
+     "d": 3,
+     "a": 5,
+     "squad": true
+    },
+    {
+     "champ": "Lucian",
+     "name": "Rapo",
+     "op": 5.5,
+     "place": "3rd",
+     "grade": "B",
+     "k": 8,
+     "d": 8,
+     "a": 9,
+     "squad": true
+    },
+    {
+     "champ": "Milio",
+     "name": "Hach",
+     "op": 5.5,
+     "place": "4th",
+     "grade": "B",
+     "k": 0,
+     "d": 5,
+     "a": 18,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Tryndamere",
+     "name": "Ultramanodyna",
+     "op": 2.1,
+     "place": "9th",
+     "grade": "D",
+     "k": 3,
+     "d": 6,
+     "a": 0
+    },
+    {
+     "champ": "Hecarim",
+     "name": "草莓牛奶",
+     "op": 2.7,
+     "place": "8th",
+     "grade": "D",
+     "k": 4,
+     "d": 7,
+     "a": 3
+    },
+    {
+     "champ": "Yone",
+     "name": "Olive Leaf",
+     "op": 0.1,
+     "place": "10th",
+     "grade": "D",
+     "k": 0,
+     "d": 10,
+     "a": 0
+    },
+    {
+     "champ": "Yunara",
+     "name": "Lee Sin nob",
+     "op": 3.9,
+     "place": "7th",
+     "grade": "C",
+     "k": 7,
+     "d": 9,
+     "a": 5
+    },
+    {
+     "champ": "Yuumi",
+     "name": "落日晚风",
+     "op": 5,
+     "place": "ACE",
+     "grade": "S",
+     "k": 5,
+     "d": 5,
+     "a": 10
+    }
+   ],
+   "mvp": {
+    "name": "Hama",
+    "champ": "Akali",
+    "ours": true
+   },
+   "ace": {
+    "name": "落日晚风",
+    "champ": "Yuumi",
+    "ours": false
+   },
+   "kills": [
+    37,
+    19
+   ],
+   "members": [
+    [
+     "Bullet",
+     "Jax"
+    ],
+    [
+     "Hama",
+     "Akali"
+    ],
+    [
+     "Rapo",
+     "Lucian"
+    ],
+    [
+     "Hach",
+     "Milio"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": false,
+   "duration": "25:43",
+   "ours": [
+    {
+     "champ": "Camille",
+     "name": "Bullet",
+     "op": 3.6,
+     "place": "9th",
+     "grade": "C",
+     "k": 4,
+     "d": 9,
+     "a": 4,
+     "squad": true
+    },
+    {
+     "champ": "Diana",
+     "name": "Aster",
+     "op": 5.4,
+     "place": "ACE",
+     "grade": "S",
+     "k": 6,
+     "d": 5,
+     "a": 6,
+     "squad": true
+    },
+    {
+     "champ": "Yasuo",
+     "name": "Hama",
+     "op": 3.7,
+     "place": "8th",
+     "grade": "C",
+     "k": 4,
+     "d": 5,
+     "a": 3,
+     "squad": true
+    },
+    {
+     "champ": "Yunara",
+     "name": "Rapo",
+     "op": 4.1,
+     "place": "7th",
+     "grade": "C",
+     "k": 6,
+     "d": 8,
+     "a": 3,
+     "squad": true
+    },
+    {
+     "champ": "Lulu",
+     "name": "Hach",
+     "op": 4.6,
+     "place": "6th",
+     "grade": "B",
+     "k": 0,
+     "d": 5,
+     "a": 12,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Sion",
+     "name": "당신은 괴물이에요",
+     "op": 6.5,
+     "place": "4th",
+     "grade": "A",
+     "k": 4,
+     "d": 6,
+     "a": 14
+    },
+    {
+     "champ": "Talon",
+     "name": "Canyon",
+     "op": 8.5,
+     "place": "3rd",
+     "grade": "S",
+     "k": 7,
+     "d": 4,
+     "a": 14
+    },
+    {
+     "champ": "Kennen",
+     "name": "JuStFiXeDmEnT4L",
+     "op": 3.5,
+     "place": "10th",
+     "grade": "C",
+     "k": 4,
+     "d": 8,
+     "a": 4
+    },
+    {
+     "champ": "Tristana",
+     "name": "c0raw",
+     "op": 10,
+     "place": "MVP",
+     "grade": "S",
+     "k": 17,
+     "d": 1,
+     "a": 6
+    },
+    {
+     "champ": "Yuumi",
+     "name": "The Magical Cat",
+     "op": 9.7,
+     "place": "2nd",
+     "grade": "S",
+     "k": 0,
+     "d": 1,
+     "a": 24
+    }
+   ],
+   "mvp": {
+    "name": "c0raw",
+    "champ": "Tristana",
+    "ours": false
+   },
+   "ace": {
+    "name": "Aster",
+    "champ": "Diana",
+    "ours": true
+   },
+   "kills": [
+    20,
+    32
+   ],
+   "members": [
+    [
+     "Bullet",
+     "Camille"
+    ],
+    [
+     "Aster",
+     "Diana"
+    ],
+    [
+     "Hama",
+     "Yasuo"
+    ],
+    [
+     "Rapo",
+     "Yunara"
+    ],
+    [
+     "Hach",
+     "Lulu"
+    ]
+   ]
+  },
+  {
+   "age": "5 days ago",
+   "win": false,
+   "duration": "32:16",
+   "ours": [
+    {
+     "champ": "Zaahen",
+     "name": "Bullet",
+     "op": 3,
+     "place": "10th",
+     "grade": "C",
+     "k": 5,
+     "d": 8,
+     "a": 5,
+     "squad": true
+    },
+    {
+     "champ": "Chogath",
+     "name": "Aster",
+     "op": 5,
+     "place": "ACE",
+     "grade": "S",
+     "k": 8,
+     "d": 5,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Zed",
+     "name": "Hama",
+     "op": 3.5,
+     "place": "8th",
+     "grade": "C",
+     "k": 5,
+     "d": 7,
+     "a": 6,
+     "squad": true
+    },
+    {
+     "champ": "Aphelios",
+     "name": "Rapo",
+     "op": 4.1,
+     "place": "7th",
+     "grade": "C",
+     "k": 6,
+     "d": 7,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Thresh",
+     "name": "Hach",
+     "op": 3.2,
+     "place": "9th",
+     "grade": "C",
+     "k": 1,
+     "d": 7,
+     "a": 12,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Olaf",
+     "name": "AngryMThaii",
+     "op": 5,
+     "place": "5th",
+     "grade": "B",
+     "k": 6,
+     "d": 6,
+     "a": 9
+    },
+    {
+     "champ": "Hecarim",
+     "name": "TranLoi",
+     "op": 6.6,
+     "place": "2nd",
+     "grade": "A",
+     "k": 8,
+     "d": 5,
+     "a": 12
+    },
+    {
+     "champ": "Zoe",
+     "name": "m chan bố m đi",
+     "op": 6.6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 12,
+     "d": 4,
+     "a": 8
+    },
+    {
+     "champ": "Caitlyn",
+     "name": "Kos Subin",
+     "op": 6.4,
+     "place": "3rd",
+     "grade": "A",
+     "k": 6,
+     "d": 4,
+     "a": 12
+    },
+    {
+     "champ": "Alistar",
+     "name": "Hi Im Quânn",
+     "op": 6.3,
+     "place": "4th",
+     "grade": "A",
+     "k": 2,
+     "d": 6,
+     "a": 21
+    }
+   ],
+   "mvp": {
+    "name": "m chan bố m đi",
+    "champ": "Zoe",
+    "ours": false
+   },
+   "ace": {
+    "name": "Aster",
+    "champ": "Chogath",
+    "ours": true
+   },
+   "kills": [
+    25,
+    34
+   ],
+   "members": [
+    [
+     "Bullet",
+     "Zaahen"
+    ],
+    [
+     "Aster",
+     "Chogath"
+    ],
+    [
+     "Hama",
+     "Zed"
+    ],
+    [
+     "Rapo",
+     "Aphelios"
+    ],
+    [
+     "Hach",
+     "Thresh"
+    ]
+   ]
+  },
+  {
+   "age": "6 days ago",
+   "win": true,
+   "duration": "50:01",
+   "ours": [
+    {
+     "champ": "Urgot",
+     "name": "Omar",
+     "op": 6,
+     "place": "MVP",
+     "grade": "S",
+     "k": 24,
+     "d": 12,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Kayn",
+     "name": "Aster",
+     "op": 4.1,
+     "place": "8th",
+     "grade": "C",
+     "k": 10,
+     "d": 13,
+     "a": 11,
+     "squad": true
+    },
+    {
+     "champ": "Viktor",
+     "name": "Hama",
+     "op": 5.8,
+     "place": "3rd",
+     "grade": "B",
+     "k": 11,
+     "d": 8,
+     "a": 15,
+     "squad": true
+    },
+    {
+     "champ": "Tristana",
+     "name": "Rapo",
+     "op": 3,
+     "place": "10th",
+     "grade": "C",
+     "k": 6,
+     "d": 14,
+     "a": 7,
+     "squad": true
+    },
+    {
+     "champ": "Janna",
+     "name": "Hach",
+     "op": 3.6,
+     "place": "9th",
+     "grade": "C",
+     "k": 0,
+     "d": 10,
+     "a": 21,
+     "squad": true
+    }
+   ],
+   "enemy": [
+    {
+     "champ": "Gnar",
+     "name": "Arhi COMAGIQUE",
+     "op": 4.8,
+     "place": "7th",
+     "grade": "B",
+     "k": 12,
+     "d": 12,
+     "a": 13
+    },
+    {
+     "champ": "Shaco",
+     "name": "ExDaMiR",
+     "op": 4.9,
+     "place": "6th",
+     "grade": "B",
+     "k": 8,
+     "d": 9,
+     "a": 16
+    },
+    {
+     "champ": "Zed",
+     "name": "Funky",
+     "op": 5.1,
+     "place": "5th",
+     "grade": "B",
+     "k": 19,
+     "d": 13,
+     "a": 7
+    },
+    {
+     "champ": "Syndra",
+     "name": "Khefu",
+     "op": 6.1,
+     "place": "ACE",
+     "grade": "S",
+     "k": 17,
+     "d": 7,
+     "a": 11
+    },
+    {
+     "champ": "Thresh",
+     "name": "Samo el fuego",
+     "op": 5.2,
+     "place": "4th",
+     "grade": "B",
+     "k": 1,
+     "d": 10,
+     "a": 30
+    }
+   ],
+   "mvp": {
+    "name": "Omar",
+    "champ": "Urgot",
+    "ours": true
+   },
+   "ace": {
+    "name": "Khefu",
+    "champ": "Syndra",
+    "ours": false
+   },
+   "kills": [
+    51,
+    57
+   ],
+   "members": [
+    [
+     "Omar",
+     "Urgot"
+    ],
+    [
+     "Aster",
+     "Kayn"
+    ],
+    [
+     "Hama",
+     "Viktor"
+    ],
+    [
+     "Rapo",
+     "Tristana"
+    ],
+    [
+     "Hach",
+     "Janna"
     ]
    ]
   }

@@ -152,12 +152,12 @@ export default function TierList({ players, byId, stats }: Props) {
 
       {view === 'games' && (
         <section className="card">
-          <div className="card-head"><div><h2>Last 5 flex games together</h2><p className="sub">Games where 4 or more of the squad queued on the same team. Scores are op.gg OP Score; the letter grade is S for the MVP/ACE or 7.5+, A 6+, B 4.5+, C 3+, D below.</p></div></div>
+          <div className="card-head"><div><h2>Last 10 flex games together</h2><p className="sub">Games where 4 or more of the squad queued on the same team. Scores are op.gg OP Score; the letter grade is S for the MVP/ACE or 7.5+, A 6+, B 4.5+, C 3+, D below.</p></div></div>
           {!stats?.flexGames?.length && <p className="empty">No squad flex games recorded yet.</p>}
           <div className="fg-list">
-            {(stats?.flexGames ?? []).slice(0, 5).map((g, i) => <GameCard key={i} g={g} byId={byId} />)}
+            {(stats?.flexGames ?? []).slice(0, 10).map((g, i) => <GameCard key={i} g={g} byId={byId} />)}
           </div>
-          {(() => { const gs = (stats?.flexGames ?? []).slice(0, 5); const w = gs.filter((g) => g.win).length; return gs.length ? <p className="sub">Squad record: {w}W {gs.length - w}L</p> : null })()}
+          {(() => { const gs = (stats?.flexGames ?? []).slice(0, 10); const w = gs.filter((g) => g.win).length; return gs.length ? <p className="sub">Squad record: {w}W {gs.length - w}L</p> : null })()}
         </section>
       )}
     </div>
