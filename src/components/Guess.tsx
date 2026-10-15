@@ -119,6 +119,12 @@ function Choice({ mode, champs, typed }: { mode: Exclude<Mode, 'clues'>; champs:
     return n ? champs.filter((c) => norm(c.name).startsWith(n) || norm(c.id).startsWith(n)).slice(0, 6) : []
   }, [q, champs])
   const ok = round && picked === round.answer.id
+  // right answer: show it for a moment, then move on by itself
+  useEffect(() => {
+    if (!ok) return
+    const t = setTimeout(() => { next() }, 1400)
+    return () => clearTimeout(t)
+  }, [ok, round, next])
   return (
     <section className="card guess-card">
       <Scoreboard ok={stat.ok} total={stat.total} streak={stat.streak} best={stat.best} />
@@ -232,6 +238,11 @@ function Clues({ champs }: { champs: Champion[] }) {
 
   const won = !!answer && guesses.some((g) => g.id === answer.id)
   const over = won || giveUp
+  useEffect(() => {
+    if (!won || daily) return
+    const t = setTimeout(() => newRound(), 3500)
+    return () => clearTimeout(t)
+  }, [won, daily]) // eslint-disable-line react-hooks/exhaustive-deps
   const matches = useMemo(() => {
     const n = norm(q)
     if (!n) return []
