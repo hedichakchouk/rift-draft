@@ -46,9 +46,9 @@ function MainNav({ page, go }: { page: Page; go: (p: Page) => void }) {
   const [ind, setInd] = useState<{ x: number; w: number } | null>(null)
   const measure = () => {
     const el = ref.current?.querySelector<HTMLButtonElement>(`[data-page="${page}"]`)
-    if (el) setInd((p) => (p && p.x === el.offsetLeft && p.w === el.offsetWidth ? p : { x: el.offsetLeft, w: el.offsetWidth }))
+    if (el) setInd((p) => (p && Math.abs(p.x - el.offsetLeft) < 2 && Math.abs(p.w - el.offsetWidth) < 2 ? p : { x: el.offsetLeft, w: el.offsetWidth }))
   }
-  useLayoutEffect(measure)
+  useLayoutEffect(measure, [page]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { window.addEventListener('resize', measure); document.fonts?.ready.then(measure); return () => window.removeEventListener('resize', measure) }, [page])
   return (
     <nav className="mainnav" ref={ref} aria-label="Main">
